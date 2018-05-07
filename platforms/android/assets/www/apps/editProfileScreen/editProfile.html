@@ -22,14 +22,38 @@
 
 <body>
 
+  <div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+
+      <h5 class="text-white h4" align="center">Welcome, <span id="userNameSpan"></span></h5>
+      <h5 class="text-white h4" align="center"><span id="userEmailSpan"></span></h5>
+
+      <br>
+      <button type="button" class="btn btn-secondary btn-lg btn-block"  onclick="window.location.href='../editProfileScreen/editProfile.html';">Edit Profile</button>
+      <button type="button" class="btn btn-warning btn-lg btn-block" onclick="logOut()">Log Out</button>
+      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitFromApp()">Exit (X)</button>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+
+      <span class="navbar-toggler-icon"></span>
+      <span class="text-muted">Statistic Management System</span>
+
+    </button>
+  </nav>
+
+  </div>
+
+
 
   <div class="pos-f-t">
 
   <nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="text-muted">Edit Profile</span>
 
-    </button>
 
     <button ng-disabled="isDisabled" type="button" class="btn btn-info" onclick="window.location.href='../menuScreen/menu.html';">Back</button>
 
@@ -76,11 +100,6 @@
 
 
 </body>
-
-<script type="text/javascript" src="../cordova.js"></script>
-<script type="text/javascript">
-    app.initialize();
-</script>
 
 
 
