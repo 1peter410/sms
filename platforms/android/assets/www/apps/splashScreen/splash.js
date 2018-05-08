@@ -43,7 +43,7 @@ $(window).on('resize', function resize()  {
 function loginCheck(){
   document.body.style.opacity='1';
 
-  if(localStorage.getItem("login")!=null){
+  if(localStorage.getItem("loginData")!=null){
 
     setTimeout(function(){
       window.location.href='../menuScreen/menu.html'

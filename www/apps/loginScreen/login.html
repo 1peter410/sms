@@ -20,7 +20,7 @@
 </head>
 
 
-<body>
+<body ng-controller="loginController">
 
 
   <div class="pos-f-t">
@@ -32,12 +32,12 @@
       <br>
       <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="window.location.href='../registerScreen/register.html';" >Register</button>
       <button type="button" class="btn btn-warning btn-lg btn-block" onclick="window.location.href='../forgetPasswordScreen/forgetPassword.html';">Forget Password</button>
-      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitFromApp()">Exit (X)</button>
+      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp()">Exit (X)</button>
     </div>
   </div>
 
   <nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button ng-disabled="isDisabled" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 
       <span class="navbar-toggler-icon"></span>
       <span class="text-muted">Login</span>
@@ -49,7 +49,7 @@
 
   <br>
 
-  <form name="loginForm" class="container" align="center" ng-controller="loginController" novalidate>
+  <form name="loginForm" class="container" align="center" novalidate>
 
     <img src="../img/logo.png" srcset="../../img/logo.png 500w, ../../img/logo.png 1000w">
 
@@ -57,11 +57,11 @@
 
     <div class="form-group">
       <label for="emailInput" class="text-dark"><b>Email:</b></label>
-      <input ng-disabled="isDisabled" ng-model="emailInput" type="email" class="form-control" id="emailInput" name="emailInput" required style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" class="form-control" id="emailInput" name="emailInput" required style="text-align: center" ng-pattern="/\S+@\S+\.\S+/">
 
       <div ng-show="!loginForm.emailInput.$pristine" >
       <span ng-show="loginForm.emailInput.$error.required" style="color:red">Please enter your email.</span>
-      <span ng-show="loginForm.emailInput.$error.email" style="color:red">This is not a valid email.</span>
+      <span ng-show="loginForm.emailInput.$error.pattern" style="color:red">This is not a valid email.</span>
       </div>
 
     </div>

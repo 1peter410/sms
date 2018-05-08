@@ -13,7 +13,12 @@
 
   <script src="./menu.js"></script>
 
-    <title>Menu Screen</title>
+  <script type="text/javascript" src="../../cordova.js"></script>
+  <script type="text/javascript">
+      app.initialize();
+  </script>
+
+    <title>Menu</title>
 
 
 
@@ -29,8 +34,8 @@
       <h5 class="text-white h4" align="center"><span id="userEmailSpan"></span></h5>
 
       <br>
-      <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="window.location.href='viewRecipe.html';" >Edit Profile</button>
-      <button type="button" class="btn btn-warning btn-lg btn-block" onclick="logOut()">Log Out</button>
+      <button type="button" class="btn btn-secondary btn-lg btn-block"  onclick="window.location.href='../editProfileScreen/editProfile.html';">Edit Profile</button>
+      <button type="button" class="btn btn-warning btn-lg btn-block" onclick="window.location.href='../loginScreen/login.html';">Log Out</button>
       <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitFromApp()">Exit (X)</button>
     </div>
   </div>
@@ -50,7 +55,26 @@
 
 <div class="container">
 
-  <h1> Hi </h1
+  <table class="table">
+    <tr scope="row">
+      <th scope="col" style="text-align: center;"> <img src="../../img/newRecord.png" class="img-thumbnail btn btn-outline-primary">Add Record</th>
+      <th scope="col" style="text-align: center;"> <img src="../../img/report.png" class="img-thumbnail btn btn-outline-primary">Reports</th>
+    </tr>
+
+    <tr scope="row">
+      <th scope="col" style="text-align: center;"> <img src="../../img/member.png" class="img-thumbnail btn btn-outline-primary">Team Member</th>
+      <th scope="col" style="text-align: center;"> <img src="../../img/target.png" class="img-thumbnail btn btn-outline-primary">Faith Goal</th>
+
+    </tr>
+
+    <tr scope="row">
+      <th scope="col" style="text-align: center;"> <img src="../../img/otherRecord.png" class="img-thumbnail btn btn-outline-primary">Other Record</th>
+      <th scope="col" style="text-align: center;"> <img src="../../img/category.png" class="img-thumbnail btn btn-outline-primary">Record Category</th>
+
+    </tr>
+
+
+</table>
 
 <div>
 

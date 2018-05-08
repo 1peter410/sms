@@ -18,26 +18,30 @@
       app.initialize();
   </script>
 
-
     <title>Menu</title>
 
+  <style>
+    .imageButton {
+        display:none;
+    }
+  </style>
 
 
 </head>
 
-<body>
+<body onload="displayUserInfo()">
 
   <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
 
-      <h5 class="text-white h4" align="center">Welcome, <span id="userNameSpan"></span></h5>
-      <h5 class="text-white h4" align="center"><span id="userEmailSpan"></span></h5>
+      <h5 class="text-white h4" align="center"><span id="userNameSpan"></span></h5>
+      <h5 class="text-white h4" align="center">(Team <span id="userTeamSpan"></span>)</h5>
 
       <br>
       <button type="button" class="btn btn-secondary btn-lg btn-block"  onclick="window.location.href='../editProfileScreen/editProfile.html';">Edit Profile</button>
-      <button type="button" class="btn btn-warning btn-lg btn-block" onclick="window.location.href='../loginScreen/login.html';">Log Out</button>
-      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitFromApp()">Exit (X)</button>
+      <button type="button" class="btn btn-warning btn-lg btn-block" onclick="logOut()">Log Out</button>
+      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp()">Exit (X)</button>
     </div>
   </div>
 
@@ -62,13 +66,13 @@
       <th scope="col" style="text-align: center;"> <img src="../../img/report.png" class="img-thumbnail btn btn-outline-primary">Reports</th>
     </tr>
 
-    <tr scope="row">
+    <tr name="leaderOnly" scope="row">
       <th scope="col" style="text-align: center;"> <img src="../../img/member.png" class="img-thumbnail btn btn-outline-primary">Team Member</th>
       <th scope="col" style="text-align: center;"> <img src="../../img/target.png" class="img-thumbnail btn btn-outline-primary">Faith Goal</th>
 
     </tr>
 
-    <tr scope="row">
+    <tr name="leaderOnly" scope="row">
       <th scope="col" style="text-align: center;"> <img src="../../img/otherRecord.png" class="img-thumbnail btn btn-outline-primary">Other Record</th>
       <th scope="col" style="text-align: center;"> <img src="../../img/category.png" class="img-thumbnail btn btn-outline-primary">Record Category</th>
 

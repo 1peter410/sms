@@ -36,6 +36,9 @@
     },
     "cordova-plugin-vibration": {
       "PACKAGE_NAME": "com.example.sms"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.example.sms"
     }
   },
   "dependent_plugins": {

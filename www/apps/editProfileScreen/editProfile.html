@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="profileScreen">
 
 <head>
   <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 </head>
 
 
-<body>
+<body ng-controller="editProfileController" >
 
   <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
@@ -31,12 +31,12 @@
 
       <br>
       <button type="button" class="btn btn-warning btn-lg btn-block" onclick="logOut()">Log Out</button>
-      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitFromApp()">Exit (X)</button>
+      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp()">Exit (X)</button>
     </div>
   </div>
 
   <nav class="navbar navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button ng-disabled="isDisabled" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 
       <span class="navbar-toggler-icon"></span>
       <span class="text-muted">Statistic Management System</span>
@@ -63,36 +63,87 @@
   <br>
 
 
-  <form class="container" name="registerForm" align="center" novalidate>
+
+  <form class="container" name="editProfileInfo" align="center" novalidate>
 
 
     <div class="form-group">
-      <label for="userName" class="text-dark"><b>Social Media:</b></label>
-      <input ng-disabled="isDisabled" ng-model="name" type="text" class="form-control" id="userName" name="userName" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" required style="text-align: center">
+      <label for="emailInput" class="text-dark"><b>Email:</b></label>
+      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" required class="form-control" id="emailInput" name="emailInput" style="text-align: center" ng-pattern="/\S+@\S+\.\S+/">
+
+      <div ng-show="!editProfileInfo.emailInput.$pristine" >
+      <span ng-show="editProfileInfo.emailInput.$error.required" style="color:red">Please enter your email.</span>
+      <span ng-show="editProfileInfo.emailInput.$error.email" style="color:red">This is not a valid email.</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
+      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^((\+60(\s|-)?)|0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)(\s|-)?\d{2,4}(\s|-)?\d{4}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
+
+      <div ng-show="!editProfileInfo.mobileInput.$pristine" >
+      <span ng-show="editProfileInfo.mobileInput.$error.required" style="color:red">Please enter your Mobile Number.</span>
+      <span ng-show="editProfileInfo.mobileInput.$error.pattern" style="color:red">Invalid Mobile No.</span>
+      </div>
+
+    </div>
 
 
+    <div class="form-group" name="editProfileInfo">
+      <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
+      <input ng-disabled="isDisabled" ng-model="name" type="text" class="form-control" id="socialInput" name="socialInput" required style="text-align: center">
+
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editInfoSubmit()" ng-disabled="editProfileInfo.$invalid || isDisabled">Edit Info</button>
+
+    <br>
+  </form>
+
+
+    <form class="container" name="editProfilePassword" align="center" novalidate>
+
+    <div class="form-group">
+      <label for="oldPasswordInput" class="text-dark"><b>Old Password:</b></label>
+      <input ng-disabled="isDisabled" ng-model="oldPasswordInput" type="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" required class="form-control" id="oldPasswordInput" name="oldPasswordInput" style="text-align: center">
+
+      <div ng-show="!editProfilePassword.oldPasswordInput.$pristine" >
+      <span ng-show="editProfilePassword.oldPasswordInput.$error.required" style="color:red">Please enter your old password.</span>
+      <span ng-show="editProfilePassword.oldPasswordInput.$error.pattern" style="color:red">Password must be minimum eight characters, at least one letter and one number, do not contain any symbol value</span>
+      </div>
 
     </div>
 
 
     <div class="form-group">
-      <label for="userPassword" class="text-dark"><b>Password:</b></label>
-      <input ng-disabled="isDisabled" ng-model="password" type="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" required class="form-control" id="userPassword" name="userPassword" style="text-align: center">
+      <label for="newPasswordInput" class="text-dark"><b>New Password:</b></label>
+      <input ng-disabled="isDisabled" ng-model="newPasswordInput" type="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" required class="form-control" id="newPasswordInput" name="newPasswordInput" style="text-align: center">
 
-
+      <div ng-show="!editProfilePassword.newPasswordInput.$pristine" >
+      <span ng-show="editProfilePassword.newPasswordInput.$error.required" style="color:red">Please enter your new password.</span>
+      <span ng-show="editProfilePassword.newPasswordInput.$error.pattern" style="color:red">Password must be minimum eight characters, at least one letter and one number, do not contain any symbol value</span>
+      </div>
 
     </div>
 
     <div class="form-group">
-      <label for="confirmPassword" class="text-dark"><b>Retype Password:</b></label>
-      <input ng-disabled="isDisabled" ng-model="retypepassword" type="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" password-confirm match-target="password" required class="form-control" id="confirmPassword" name="confirmPassword" style="text-align: center">
+      <label for="retypePasswordInput" class="text-dark"><b>Retype New Password:</b></label>
+      <input ng-disabled="isDisabled" ng-model="retypePasswordInput" type="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" password-confirm match-target="newPasswordInput" required class="form-control" id="retypePasswordInput" name="retypePasswordInput" style="text-align: center">
+
+      <div ng-show="!editProfilePassword.retypePasswordInput.$pristine" >
+      <span ng-show="editProfilePassword.retypePasswordInput.$error.required" style="color:red">Please retype your new password.</span>
+      <span ng-show="editProfilePassword.retypePasswordInput.$error.pattern" style="color:red">Password must be minimum eight characters, at least one letter and one number, do not contain any symbol value</span>
+      <span ng-show="editProfilePassword.retypePasswordInput.$error.match" style="color:red"><br>Please ensure the New Password and Retype New Password are Match</span>
+
+      </div>
+
 
 
     </div>
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="registerSubmit()" ng-disabled="registerForm.$invalid || isDisabled">Submit Edit</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="changePasswordSubmit()" ng-disabled="editProfilePassword.$invalid || isDisabled">Change Password</button>
 
 
   </form>

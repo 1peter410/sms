@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html ng-app="loginScreen">
+
+<head>
+    <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
+
+    <script src="../../js/Angular/angular.min.js"></script>
+    <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
+    <script src="../../js/Bootstrap/bootstrap.min.js"></script>
+
+    <script src="./login.js"></script>
+
+    <script type="text/javascript" src="../../cordova.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+    <title>Login</title>
+</head>
+
+
+<body>
+
+
+  <div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+
+      <h5 class="text-white h4" align="center">Statistic Management System</h5>
+
+      <br>
+      <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="window.location.href='../registerScreen/register.html';" >Register</button>
+      <button type="button" class="btn btn-warning btn-lg btn-block" onclick="window.location.href='../forgetPasswordScreen/forgetPassword.html';">Forget Password</button>
+      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitFromApp()">Exit (X)</button>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+
+      <span class="navbar-toggler-icon"></span>
+      <span class="text-muted">Login</span>
+
+    </button>
+  </nav>
+
+  </div>
+
+  <br>
+
+  <form name="loginForm" class="container" align="center" ng-controller="loginController" novalidate>
+
+    <img src="../img/logo.png" srcset="../../img/logo.png 500w, ../../img/logo.png 1000w">
+
+    <br><br><br>
+
+    <div class="form-group">
+      <label for="emailInput" class="text-dark"><b>Email:</b></label>
+      <input ng-disabled="isDisabled" ng-model="emailInput" type="email" class="form-control" id="emailInput" name="emailInput" required style="text-align: center">
+
+      <div ng-show="!loginForm.emailInput.$pristine" >
+      <span ng-show="loginForm.emailInput.$error.required" style="color:red">Please enter your email.</span>
+      <span ng-show="loginForm.emailInput.$error.email" style="color:red">This is not a valid email.</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="passwordInput" class="text-dark"><b>Password:</b></label>
+      <input ng-disabled="isDisabled" ng-model="passwordInput" type="password" class="form-control" id="passwordInput" name="passwordInput" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" required style="text-align: center">
+
+      <div ng-show="!loginForm.passwordInput.$pristine" >
+      <span ng-show="loginForm.passwordInput.$error.required" style="color:red">Please enter your password.</span>
+      <span ng-show="loginForm.passwordInput.$error.pattern" style="color:red">Password must be minimum eight characters, at least one letter and one number, do not contain any symbol value</span>
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="loginSubmit()" ng-disabled="loginForm.$invalid || isDisabled">Login</button>
+
+
+  </form>
+
+
+</body>
+
+
+
+
+
+</html>

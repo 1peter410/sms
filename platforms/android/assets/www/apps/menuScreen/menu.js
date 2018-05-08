@@ -27,3 +27,27 @@ var app = {
     }
 
 };
+
+function exitApp(){
+  navigator.app.exitApp();
+}
+
+function logOut(){
+  window.localStorage.removeItem('loginData');
+  alert("You have Logged Out.");
+  window.location.href='../loginScreen/login.html';
+
+}
+
+function displayUserInfo() {
+    var loginData = JSON.parse(localStorage.getItem("loginData"));
+
+    if(loginData.UserRole!="Leader"){
+      document.getElementsByName("leaderOnly")[0].setAttribute("class", "imageButton");
+      document.getElementsByName("leaderOnly")[1].setAttribute("class", "imageButton");
+
+    }
+
+    document.getElementById("userNameSpan").innerHTML = loginData.UserName;
+    document.getElementById("userTeamSpan").innerHTML = loginData.TeamName;
+}

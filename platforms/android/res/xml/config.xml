@@ -35,6 +35,10 @@
     <feature name="Vibration">
         <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
     </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
     <name>sms</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -44,6 +48,8 @@
     </author>
     <content src="./apps/splashScreen/splash.html" />
     <access origin="*" />
+    <allow-intent href="*" />
+    <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

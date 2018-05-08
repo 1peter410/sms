@@ -47,12 +47,12 @@ function loginCheck(){
 
     setTimeout(function(){
       window.location.href='../menuScreen/menu.html'
-    }, 10000);
+    }, 9000);
 
   }else{
     setTimeout(function(){
       window.location.href='../loginScreen/login.html'
-    }, 10000);
+    }, 9000);
   }
 
 }

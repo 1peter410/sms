@@ -78,3 +78,7 @@ var app = {
     }
 
 };
+
+function exitApp(){
+  navigator.app.exitApp();
+}
