@@ -20,19 +20,17 @@
 </head>
 
 
-<body ng-controller="loginController">
+<body ng-controller="loginController" onload="displaySelectionInfo();">
 
 
   <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
 
-      <h5 class="text-white h4" align="center">Statistic Management System</h5>
-
       <br>
       <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="window.location.href='../registerScreen/register.html';" >Register</button>
       <button type="button" class="btn btn-warning btn-lg btn-block" onclick="window.location.href='../forgetPasswordScreen/forgetPassword.html';">Forget Password</button>
-      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp();">Back to Selection</button>
+      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp();">Exit (X)</button>
 
     </div>
   </div>
@@ -45,7 +43,7 @@
 
     </button>
 
-    <button type="button" class="btn btn-info" onclick="window.location.href='../selectionScreen/selection.html';">Back to Selection</button>
+    <button type="button" class="btn btn-info" onclick="backSelection();">Back to Selection</button>
 
   </nav>
 
@@ -54,6 +52,10 @@
   <br>
 
   <form name="loginForm" class="container" align="center" novalidate>
+
+    <h3 class="text-black h3" align="center"><span id="userOrgSpan"></span></h3>
+    <h3 class="text-black h3" align="center">(<span id="userTeamSpan"></span>)</h3>
+    <br>
 
     <img src="../img/logo.png" srcset="../../img/login.png 500w, ../../img/login.png 1000w">
 

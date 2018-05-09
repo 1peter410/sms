@@ -79,6 +79,19 @@ var app = {
 
 };
 
+function displaySelectionInfo() {
+    var selectionData = JSON.parse(localStorage.getItem("selectionData"));
+
+    document.getElementById("userOrgSpan").innerHTML = selectionData.OrgName;
+    document.getElementById("userTeamSpan").innerHTML = selectionData.TeamName;
+}
+
 function exitApp(){
+  window.localStorage.removeItem('selectionData');
   navigator.app.exitApp();
+}
+
+function backSelection(){
+  window.localStorage.removeItem('selectionData');
+  window.location.href='../selectionScreen/selection.html';
 }

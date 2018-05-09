@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="selectionScreen">
 
 <head>
     <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -16,68 +16,58 @@
         app.initialize();
     </script>
 
+
     <title>Selection</title>
 </head>
 
 
-<body >
+<body ng-controller="selectionController" ng-init="getOrganization()">
 
 
   <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-
-      <h5 class="text-white h4" align="center">Statistic Management System</h5>
-
-      <br>
-      <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="window.location.href='../registerScreen/register.html';" >Register</button>
-      <button type="button" class="btn btn-warning btn-lg btn-block" onclick="window.location.href='../forgetPasswordScreen/forgetPassword.html';">Forget Password</button>
-      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp()">Exit (X)</button>
-    </div>
-  </div>
 
   <nav class="navbar navbar-dark bg-dark">
-    <button ng-disabled="isDisabled" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button disable class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 
-      <span class="navbar-toggler-icon"></span>
-      <span class="text-muted">Login</span>
+      Selection
 
     </button>
+
+    <button ng-disabled="isDisabled" type="button" class="btn btn-danger" onclick="exitApp();">Exit (X)</button>
+
   </nav>
 
   </div>
 
   <br>
 
-  <form name="loginForm" class="container" align="center" novalidate>
+  <form name="selectionForm" class="container" align="center" novalidate>
+
+    <h3 class="text-black h3" align="center">Statistic Management System</h3>
 
     <img src="../img/logo.png" srcset="../../img/logo.png 500w, ../../img/logo.png 1000w">
 
-    <br><br><br>
+    <br><br>
 
     <div class="form-group">
-      <label for="emailInput" class="text-dark"><b>Email:</b></label>
-      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" class="form-control" id="emailInput" name="emailInput" required style="text-align: center" ng-pattern="/\S+@\S+\.\S+/">
+      <label for="orgInput" class="text-dark"><b>Organization:</b></label>
 
-      <div ng-show="!loginForm.emailInput.$pristine" >
-      <span ng-show="loginForm.emailInput.$error.required" style="color:red">Please enter your email.</span>
-      <span ng-show="loginForm.emailInput.$error.pattern" style="color:red">This is not a valid email.</span>
-      </div>
+      <select required ng-options="item.OrgName for item in orgList | filter:{OrgName: ''}" class="custom-select" ng-model="orgSelection" ng-change="getTeam()" style="text-align-last: center; color:blue">
+                <option value="" disabled selected>Tab to Select</option>
+      </select>
 
     </div>
 
     <div class="form-group">
-      <label for="passwordInput" class="text-dark"><b>Password:</b></label>
-      <input ng-disabled="isDisabled" ng-model="passwordInput" type="password" class="form-control" id="passwordInput" name="passwordInput" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" required style="text-align: center">
+      <label for="teamInput" class="text-dark"><b>Team:</b></label>
 
-      <div ng-show="!loginForm.passwordInput.$pristine" >
-      <span ng-show="loginForm.passwordInput.$error.required" style="color:red">Please enter your password.</span>
-      <span ng-show="loginForm.passwordInput.$error.pattern" style="color:red">Password must be minimum eight characters, at least one letter and one number, do not contain any symbol value</span>
-      </div>
+      <select id='teamSelection' disabled required ng-options="item.TeamName for item in teamList | filter:{TeamName: ''}" class="custom-select" ng-model="teamSelection" style="text-align-last: center; color:blue">
+                <option value="" disabled selected>Team Selection</option>
+      </select>
 
     </div>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="loginSubmit()" ng-disabled="loginForm.$invalid || isDisabled">Login</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="selectionSubmit()" ng-disabled="selectionForm.$invalid || isDisabled">Proceed to Login</button>
 
 
   </form>

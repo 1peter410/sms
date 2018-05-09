@@ -51,7 +51,7 @@ function loginCheck(){
 
   }else{
     setTimeout(function(){
-      window.location.href='../loginScreen/login.html'
+      window.location.href='../selectionScreen/selection.html'
     }, 9000);
   }
 

@@ -87,6 +87,7 @@ function displaySelectionInfo() {
 }
 
 function exitApp(){
+  window.localStorage.removeItem('selectionData');
   navigator.app.exitApp();
 }
 

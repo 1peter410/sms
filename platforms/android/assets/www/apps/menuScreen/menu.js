@@ -33,6 +33,7 @@ function exitApp(){
 }
 
 function logOut(){
+  window.localStorage.removeItem('selectionData');
   window.localStorage.removeItem('loginData');
   alert("You have Logged Out.");
   window.location.href='../loginScreen/login.html';
