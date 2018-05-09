@@ -7,6 +7,8 @@ function forgetPasswordController($scope, $http, $window) {
 
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
+  var selectionData = JSON.parse(localStorage.getItem("selectionData"));
+
   $scope.isDisabled = false;
   $scope.emailInput = '';
   $scope.mobileInput = '';
@@ -20,7 +22,9 @@ function forgetPasswordController($scope, $http, $window) {
              method: 'POST',
              data: {
                  'userEmail' : $scope.emailInput,
-                 'userMobile' : $scope.mobileInput
+                 'userMobile' : $scope.mobileInput,
+                 'teamID' : selectionData.TeamID
+
              },
              url: 'https://flash-schedules.000webhostapp.com/forgetPassword.php'
           }).then(function (response){

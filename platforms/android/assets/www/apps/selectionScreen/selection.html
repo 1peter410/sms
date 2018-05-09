@@ -52,7 +52,7 @@
     <div class="form-group">
       <label for="orgInput" class="text-dark"><b>Organization:</b></label>
 
-      <select required ng-options="item.OrgName for item in orgList | filter:{OrgName: ''}" class="custom-select" ng-model="orgSelection" ng-change="getTeam()" style="text-align-last: center; color:blue">
+      <select ng-disabled="isDisabled" required ng-options="item.OrgName for item in orgList | filter:{OrgName: ''}" class="custom-select" ng-model="orgSelection" ng-change="getTeam()" style="text-align-last: center; color:blue">
                 <option value="" disabled selected>Tab to Select</option>
       </select>
 

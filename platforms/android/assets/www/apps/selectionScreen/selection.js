@@ -5,14 +5,12 @@ selectionControl.controller('selectionController', selectionController);
 
 function selectionController($scope, $http, $window) {
 
-  $scope.isDisabled = false;
+  $scope.isDisabled = true;
   $scope.orgSelection;
   $scope.teamSelection;
 
 
   $scope.getOrganization = function() {
-
-    $scope.isDisabled = true;
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
