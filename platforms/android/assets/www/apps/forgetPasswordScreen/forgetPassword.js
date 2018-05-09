@@ -1,3 +1,57 @@
+var forgetPasswordControl = angular.module('forgetPasswordScreen',[]);
+
+forgetPasswordControl.controller('forgetPasswordController', forgetPasswordController);
+
+
+function forgetPasswordController($scope, $http, $window) {
+
+  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+
+  $scope.isDisabled = false;
+  $scope.emailInput = '';
+  $scope.mobileInput = '';
+
+  $scope.forgetPasswordSubmit = function() {
+
+    $scope.isDisabled = true;
+
+
+    $http({
+             method: 'POST',
+             data: {
+                 'userEmail' : $scope.emailInput,
+                 'userMobile' : $scope.mobileInput
+             },
+             url: 'https://flash-schedules.000webhostapp.com/forgetPassword.php'
+          }).then(function (response){
+
+             if(response.data[0]=="DONE"){
+
+               alert("Recover Password Instruction have send to your Email. Please check your Email Inbox/Junk Mail/Spam Mail.");
+               $scope.emailInput = '';
+               $scope.mobileInput = '';
+               $scope.forgetPasswordForm.$setPristine();
+               $scope.isDisabled = false;
+
+             }else{
+
+               alert("Recover Password Failed. Email or Mobile Number is Not Registered. Please Try Again.");
+               $scope.isDisabled = false;
+
+             }
+
+          },function (error){
+               alert("Please ensure You are connected to Internet.");
+               $scope.isDisabled = false;
+          });
+
+
+  }
+
+
+
+}
+
 var app = {
 
     // Application Constructor
