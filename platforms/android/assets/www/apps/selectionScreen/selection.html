@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html ng-app="loginScreen">
+<html>
 
 <head>
     <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -9,18 +9,18 @@
     <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
     <script src="../../js/Bootstrap/bootstrap.min.js"></script>
 
-    <script src="./login.js"></script>
+    <script src="./selection.js"></script>
 
     <script type="text/javascript" src="../../cordova.js"></script>
     <script type="text/javascript">
         app.initialize();
     </script>
 
-    <title>Login</title>
+    <title>Selection</title>
 </head>
 
 
-<body ng-controller="loginController">
+<body >
 
 
   <div class="pos-f-t">
@@ -32,8 +32,7 @@
       <br>
       <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="window.location.href='../registerScreen/register.html';" >Register</button>
       <button type="button" class="btn btn-warning btn-lg btn-block" onclick="window.location.href='../forgetPasswordScreen/forgetPassword.html';">Forget Password</button>
-      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp();">Back to Selection</button>
-
+      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp()">Exit (X)</button>
     </div>
   </div>
 
@@ -44,9 +43,6 @@
       <span class="text-muted">Login</span>
 
     </button>
-
-    <button type="button" class="btn btn-info" onclick="window.location.href='../selectionScreen/selection.html';">Back to Selection</button>
-
   </nav>
 
   </div>
@@ -55,7 +51,7 @@
 
   <form name="loginForm" class="container" align="center" novalidate>
 
-    <img src="../img/logo.png" srcset="../../img/login.png 500w, ../../img/login.png 1000w">
+    <img src="../img/logo.png" srcset="../../img/logo.png 500w, ../../img/logo.png 1000w">
 
     <br><br><br>
 
