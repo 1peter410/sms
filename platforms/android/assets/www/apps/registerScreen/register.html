@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="registerScreen">
 
 <head>
 
@@ -21,7 +21,7 @@
 </head>
 
 
-<body>
+<body ng-controller="registerController">
 
   <div class="pos-f-t">
 
@@ -40,33 +40,48 @@
   <form name="registerForm" class="container" align="center" novalidate>
 
     <div class="form-group">
-      <label for="userName" class="text-dark"><b>Full Name:</b></label>
-      <input ng-disabled="isDisabled" ng-model="name" type="text" class="form-control" id="userName" name="userName" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" required style="text-align: center">
+      <label for="nameInput" class="text-dark"><b>Full Name:</b></label>
+      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" required style="text-align: center">
+
+      <div ng-show="!registerForm.nameInput.$pristine" >
+      <span ng-show="registerForm.nameInput.$error.required" style="color:red">Please enter your full name.</span>
+      <span ng-show="registerForm.nameInput.$error.pattern" style="color:red">This is not a valid name.</span>
+      </div>
 
     </div>
 
     <div class="form-group">
-      <label for="userEmail" class="text-dark"><b>Email:</b></label>
-      <input ng-disabled="isDisabled" ng-model="email" type="email" required class="form-control" id="userEmail" name="userEmail" style="text-align: center">
+      <label for="emailInput" class="text-dark"><b>Email:</b></label>
+      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" required class="form-control" id="emailInput" name="emailInput" ng-pattern="/\S+@\S+\.\S+/" style="text-align: center">
 
+      <div ng-show="!registerForm.emailInput.$pristine" >
+      <span ng-show="registerForm.emailInput.$error.required" style="color:red">Please enter your email.</span>
+      <span ng-show="registerForm.emailInput.$error.pattern" style="color:red">This is not a valid email.</span>
+      </div>
 
     </div>
 
 
     <div class="form-group">
-      <label for="userHPNo" class="text-dark"><b>Mobile Number:</b></label>
-      <input ng-disabled="isDisabled" ng-model="mobileno" ng-pattern="/^((\+60(\s|-)?)|0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)(\s|-)?\d{2,4}(\s|-)?\d{4}$/" required type="text" id="userHPNo" name="userHPNo" class="input-medium bfh-phone form-control" data-country="MY" style="text-align: center">
+      <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
+      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
 
+      <div ng-show="!registerForm.mobileInput.$pristine" >
+      <span ng-show="registerForm.mobileInput.$error.required" style="color:red">Please enter your mobile number.</span>
+      <span ng-show="registerForm.mobileInput.$error.pattern" style="color:red">This is not a valid mobile number.</span>
+      </div>
 
     </div>
 
     <div class="form-group">
-      <label for="userHPNo" class="text-dark"><b>Social Media:</b></label>
-      <input ng-disabled="isDisabled" ng-model="mobileno" ng-pattern="/^((\+60(\s|-)?)|0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)(\s|-)?\d{2,4}(\s|-)?\d{4}$/" required type="text" id="userHPNo" name="userHPNo" class="input-medium bfh-phone form-control" data-country="MY" style="text-align: center">
+      <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
+      <input ng-disabled="isDisabled" ng-model="socialInput"  required type="text" id="socialInput" name="socialInput" class="form-control" style="text-align: center">
 
+      <div ng-show="!registerForm.socialInput.$pristine" >
+      <span ng-show="registerForm.socialInput.$error.required" style="color:red">Please enter your social media.</span>
+      </div>
 
     </div>
-
 
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>

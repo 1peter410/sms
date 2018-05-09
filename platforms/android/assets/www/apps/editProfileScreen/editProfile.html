@@ -94,6 +94,10 @@
       <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
       <input ng-disabled="isDisabled" ng-model="socialInput" type="text" class="form-control" id="socialInput" name="socialInput" required style="text-align: center">
 
+      <div ng-show="!editProfileInfo.socialInput.$pristine" >
+      <span ng-show="editProfileInfo.socialInput.$error.required" style="color:red">Please enter your Social Media.</span>
+      </div>
+
     </div>
     <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editInfoSubmit()" ng-disabled="editProfileInfo.$invalid || isDisabled">Edit Info</button>
 

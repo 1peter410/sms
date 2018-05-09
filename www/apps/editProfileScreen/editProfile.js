@@ -35,7 +35,7 @@ function editProfileController($scope, $http, $window) {
 
           },function (error){
                alert("Please ensure You are connected to Internet.");
-               $scope.isDisabled = true;
+               $scope.isDisabled = false;
           });
 
   }

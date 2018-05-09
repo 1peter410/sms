@@ -5,6 +5,7 @@ selectionControl.controller('selectionController', selectionController);
 
 function selectionController($scope, $http, $window) {
 
+
   $scope.isDisabled = true;
   $scope.orgSelection;
   $scope.teamSelection;
@@ -33,6 +34,8 @@ function selectionController($scope, $http, $window) {
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("goOnline").disabled=false;
+          document.getElementById('goOnline').value = "Click to Go Online";
           $scope.isDisabled = false;
      });
 
@@ -70,6 +73,7 @@ function selectionController($scope, $http, $window) {
      },function (error){
           alert("Please ensure You are connected to Internet.");
           $scope.isDisabled = false;
+
      });
 
   };
@@ -80,6 +84,12 @@ function selectionController($scope, $http, $window) {
     localStorage.setItem("selectionData", JSON.stringify($scope.teamSelection));
     var selectionData = JSON.parse(localStorage.getItem("selectionData"));
     window.location.href='../loginScreen/login.html';
+
+  }
+
+  $scope.goOnline = function() {
+
+    window.location.href='../selectionScreen/selection.html';
 
   }
 

@@ -1,3 +1,43 @@
+var menuControl = angular.module('menuScreen',[]);
+
+menuControl.controller('menuController', menuController);
+
+
+function menuController($scope, $http, $window) {
+
+
+    $scope.checkOnline = function() {
+
+      if(!window.navigator.onLine){
+        alert("Please ensure You are connected to Internet.");
+
+        $scope.isDisabled = true;
+
+        document.getElementById("goOnline").disabled=false;
+        document.getElementById('goOnline').value = "Click to Go Online";
+      }else{
+        $scope.isDisabled = false;
+      }
+
+
+    }
+
+    $scope.goOnline = function() {
+
+      window.location.href='../menuScreen/menu.html';
+
+    }
+
+    $scope.test = function() {
+
+      alert("GG");
+    }
+
+
+
+}
+
+
 var app = {
 
     // Application Constructor
