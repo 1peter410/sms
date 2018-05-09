@@ -15,11 +15,14 @@ function loginController($scope, $http, $window) {
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
+    var selectionData = JSON.parse(localStorage.getItem("selectionData"));
+
     $http({
         method: 'POST',
         data: {
             'userEmail' : $scope.emailInput,
             'userPassword' : $scope.passwordInput,
+            'teamID' : selectionData.TeamID
         },
         url: 'https://flash-schedules.000webhostapp.com/login.php'
      }).then(function (response){
@@ -79,6 +82,19 @@ var app = {
 
 };
 
+function displaySelectionInfo() {
+    var selectionData = JSON.parse(localStorage.getItem("selectionData"));
+
+    document.getElementById("userOrgSpan").innerHTML = selectionData.OrgName;
+    document.getElementById("userTeamSpan").innerHTML = selectionData.TeamName;
+}
+
 function exitApp(){
+  window.localStorage.removeItem('selectionData');
   navigator.app.exitApp();
+}
+
+function backSelection(){
+  window.localStorage.removeItem('selectionData');
+  window.location.href='../selectionScreen/selection.html';
 }

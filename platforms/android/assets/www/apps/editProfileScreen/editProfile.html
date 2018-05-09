@@ -20,14 +20,14 @@
 </head>
 
 
-<body ng-controller="editProfileController" >
+<body ng-controller="editProfileController" ng-init="getProfileInfo()" onload="displayUserInfo()">
 
   <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-4">
 
-      <h5 class="text-white h4" align="center">Welcome, <span id="userNameSpan"></span></h5>
-      <h5 class="text-white h4" align="center"><span id="userEmailSpan"></span></h5>
+      <h5 class="text-white h4" align="center"><span id="userNameSpan"></span></h5>
+      <h5 class="text-white h4" align="center">(Team <span id="userTeamSpan"></span>)</h5>
 
       <br>
       <button type="button" class="btn btn-warning btn-lg btn-block" onclick="logOut()">Log Out</button>
@@ -73,14 +73,14 @@
 
       <div ng-show="!editProfileInfo.emailInput.$pristine" >
       <span ng-show="editProfileInfo.emailInput.$error.required" style="color:red">Please enter your email.</span>
-      <span ng-show="editProfileInfo.emailInput.$error.email" style="color:red">This is not a valid email.</span>
+      <span ng-show="editProfileInfo.emailInput.$error.pattern" style="color:red">This is not a valid email.</span>
       </div>
 
     </div>
 
     <div class="form-group">
       <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
-      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^((\+60(\s|-)?)|0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)(\s|-)?\d{2,4}(\s|-)?\d{4}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
 
       <div ng-show="!editProfileInfo.mobileInput.$pristine" >
       <span ng-show="editProfileInfo.mobileInput.$error.required" style="color:red">Please enter your Mobile Number.</span>
@@ -92,7 +92,11 @@
 
     <div class="form-group" name="editProfileInfo">
       <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
-      <input ng-disabled="isDisabled" ng-model="name" type="text" class="form-control" id="socialInput" name="socialInput" required style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="socialInput" type="text" class="form-control" id="socialInput" name="socialInput" required style="text-align: center">
+
+      <div ng-show="!editProfileInfo.socialInput.$pristine" >
+      <span ng-show="editProfileInfo.socialInput.$error.required" style="color:red">Please enter your Social Media.</span>
+      </div>
 
     </div>
     <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editInfoSubmit()" ng-disabled="editProfileInfo.$invalid || isDisabled">Edit Info</button>
@@ -143,7 +147,7 @@
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="changePasswordSubmit()" ng-disabled="editProfilePassword.$invalid || isDisabled">Change Password</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editPasswordSubmit()" ng-disabled="editProfilePassword.$invalid || isDisabled">Change Password</button>
 
 
   </form>

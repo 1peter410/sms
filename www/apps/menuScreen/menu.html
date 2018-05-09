@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="menuScreen">
 
 <head>
 
@@ -29,7 +29,7 @@
 
 </head>
 
-<body onload="displayUserInfo()">
+<body onload="displayUserInfo()" ng-init="checkOnline()" ng-controller="menuController">
 
   <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
@@ -56,13 +56,16 @@
 
 </div>
 
-<br>
 
-<div class="container">
 
-  <table class="table">
+<div class="container" align="center">
+
+  <input disabled class="navbar-toggler" type="button" id="goOnline" value="Menu Selection" ng-click="goOnline();"/>
+
+
+  <table class="table" >
     <tr scope="row">
-      <th scope="col" style="text-align: center;"> <img src="../../img/newRecord.png" class="img-thumbnail btn btn-outline-primary">Add Record</th>
+      <th scope="col" style="text-align: center;"> <img src="../../img/newRecord.png" class="img-thumbnail btn btn-outline-primary" ng-click="isDisabled || test()">Add Record</th>
       <th scope="col" style="text-align: center;"> <img src="../../img/report.png" class="img-thumbnail btn btn-outline-primary">Reports</th>
     </tr>
 
