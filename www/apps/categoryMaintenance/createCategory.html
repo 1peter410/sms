@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html ng-app='createCategoryScreen'>
+
+<head>
+
+  <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <script src="../../js/Angular/angular.min.js"></script>
+  <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
+  <script src="../../js/Bootstrap/bootstrap.min.js"></script>
+
+    <script src="./createCategory.js"></script>
+
+    <script type="text/javascript" src="../../cordova.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+    <title>Create Category</title>
+</head>
+
+
+<body ng-controller='createCategoryController'>
+
+  <div class="pos-f-t">
+
+  <nav class="navbar navbar-dark bg-dark">
+      <span class="text-muted">Category Maintenace</span>
+
+
+    <button ng-disabled="isDisabled" type="button" class="btn btn-info" onclick="window.location.href='../menuScreen/menu.html';">Back to Menu</button>
+
+  </nav>
+
+  </div>
+
+  <ul class="nav nav-tabs navbar-light" style="text-align: center;background-color: #e3f2fd">
+              <li class="nav-item nav-link active"><a href="../categoryMaintenance/createCategory.html">
+                      <span><input type="image" src="../../img/create.png" style="height: 50px; width: 50px"></span>
+                      Create</a>
+              </li>
+              <li class="nav-item nav-link"><a href="../categoryMaintenance/viewCategory.html">
+                      <span><input type="image" src="../../img/edit.png" style="height: 50px; width: 50px"></span>
+                      View/Edit</a>
+              </li>
+
+  </ul>
+
+  <form name="createCategoryForm" class="container" align="center" novalidate>
+<br>
+    <div class="form-group">
+      <label for="nameInput" class="text-dark"><b>Category Name:</b></label>
+      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" required style="text-align: center">
+
+      <div ng-show="!createCategoryForm.nameInput.$pristine" >
+      <span ng-show="createCategoryForm.nameInput.$error.required" style="color:red">Please enter Category Name.</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="descInput" class="text-dark"><b>Description:</b></label>
+      <textarea ng-disabled="isDisabled" ng-model="descInput" type="text" class="form-control" id="descInput" name="descInput" required style="text-align: center" rows="4" ></textarea>
+
+      <div ng-show="!createCategoryForm.descInput.$pristine" >
+      <span ng-show="createCategoryForm.descInput.$error.required" style="color:red">Please enter Category Description.</span>
+      </div>
+
+    </div>
+
+
+
+
+    <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createCategorySubmit()" ng-disabled="createCategoryForm.$invalid || isDisabled">Create Category</button>
+
+
+  </form>
+
+
+</body>
+
+
+
+
+
+</html>

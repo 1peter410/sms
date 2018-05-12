@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html ng-app='detailCategoryScreen'>
+
+<head>
+
+  <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <script src="../../js/Angular/angular.min.js"></script>
+  <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
+  <script src="../../js/Bootstrap/bootstrap.min.js"></script>
+
+    <script src="./detailCategory.js"></script>
+
+    <script type="text/javascript" src="../../cordova.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+    <title>Detail Category</title>
+</head>
+
+
+<body ng-controller='detailCategoryController'>
+
+  <div class="pos-f-t">
+
+  <nav class="navbar navbar-dark bg-dark">
+      <span class="text-muted">Edit Category Detail</span>
+
+
+    <button ng-disabled="isDisabled" type="button" class="btn btn-info" onclick="window.location.href='../categoryMaintenance/viewCategory.html';">Back to View</button>
+
+  </nav>
+
+  </div>
+
+
+  <form name="editCategoryForm" class="container" align="center" novalidate>
+<br>
+    <div class="form-group">
+      <label for="nameInput" class="text-dark"><b>Category Name:</b></label>
+      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" required style="text-align: center">
+
+      <div ng-show="!editCategoryForm.nameInput.$pristine" >
+      <span ng-show="editCategoryForm.nameInput.$error.required" style="color:red">Please enter Category Name.</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="descInput" class="text-dark"><b>Description:</b></label>
+      <textarea ng-disabled="isDisabled" ng-model="descInput" type="text" class="form-control" id="descInput" name="descInput" required style="text-align: center" rows="4" ></textarea>
+
+      <div ng-show="!editCategoryForm.descInput.$pristine" >
+      <span ng-show="editCategoryForm.descInput.$error.required" style="color:red">Please enter Category Description.</span>
+      </div>
+
+    </div>
+
+
+    <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editCategorySubmit()" ng-disabled="editCategoryForm.$invalid || isDisabled">Edit Category</button>
+
+
+  </form>
+
+
+</body>
+
+
+
+
+
+</html>
