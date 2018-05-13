@@ -1,0 +1,60 @@
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Management</title>
+  <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <script src="../../js/Angular/angular.min.js"></script>
+  <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
+  <script src="../../js/Bootstrap/bootstrap.min.js"></script>
+
+  <script src="./login.js"></script>
+
+  <script type="text/javascript" src="../../cordova.js"></script>
+  <script type="text/javascript">
+  app.initialize();
+  </script>
+  <style>
+  #formApprove button {
+    width: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  </style>
+</head>
+<body>
+  <!-- -----------navigation---------------------------------------------------------------------------------------------->
+  <nav class="navbar navbar-dark bg-dark">
+    <a href="approveMember.html">
+      <button class="btn btn-dark btn-outline-light">BACK</button></a>
+      <span style="color: white">Approve/Decline Member</span>
+    </nav>
+
+    <!-- -----------member form--------------------------------------------------------------------------------------------->
+    <div class="container">
+      <form id="formApprove" align="center">
+        <br>
+        <div class="form-group">
+          <label for="inputMemberName">Member Name:</label>
+          <input type="text" class="form-control" id="inputMemberName" value="A" style="text-align: center">
+        </div>
+        <div class="form-group">
+          <label for="inputEmail">Email:</label>
+          <input type="text" class="form-control" id="inputEmail" value="A@gmail.com" style="text-align: center">
+        </div>
+        <div class="form-group">
+          <label for="inputPhoneNo">H/P:</label>
+          <input type="tel" class="form-control" id="inputPhoneNo" value="012-3456789" style="text-align: center">
+        </div><br>
+
+        <a href="approveMember.html">
+          <button type="button" class="btn btn-primary" id="btnApprove">Approve</button></a>
+        <a href="approveMember.html">
+          <button type="button" class="btn btn-danger" id="btnDecline">Decline</button></a>
+      </form>
+
+    </div>
+  </body>
+  </html>

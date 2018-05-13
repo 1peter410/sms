@@ -1,0 +1,157 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Management</title>
+  <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <script src="../../js/Angular/angular.min.js"></script>
+  <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
+  <script src="../../js/Bootstrap/bootstrap.min.js"></script>
+
+  <script src="./login.js"></script>
+
+  <script type="text/javascript" src="../../cordova.js"></script>
+  <script type="text/javascript">
+  app.initialize();
+  </script>
+  <style>
+  .navTab {
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+  .navTab a button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    text-decoration: none;
+    color: purple;
+    font-weight: bold;
+  }
+  .navTab button:hover {
+    background-color: #ddd;
+  }
+  .navTab button.active {
+    background-color: #ccc;
+  }
+  #memberTable {
+    width: 100%;
+    overflow: auto;
+    height: 200px;
+    display: block;
+    border: #dee2e6 solid 2px;
+  }
+  #memberTable tr {
+    border: #dee2e6 solid 2px;
+    width: 100%;
+  }
+  #memberTable td {
+    width: 100%;
+  }
+  #memberTable tr:hover {
+    background-color: #ddd;
+  }
+  </style>
+</head>
+<body>
+  <!-- -----------navigation---------------------------------------------------------------------------------------------->
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="btn btn-dark btn-outline-light">BACK</button>
+    <span style="color: white">Member Maintenance</span>
+  </nav>
+
+  <!-- -----------3 sections (add member, view/edit member, approve member------------------------------------------------>
+  <div class="navTab">
+    <a href="addMember.html"><button class="col-4">
+      <span><input type="image" src="../../img/addMember.png" style="height: 30px; width: 30px"></span>
+      <br>Add</button>
+    </a>
+    <a href="viewEditMember.html"><button class="active col-4">
+      <span><input type="image" src="../../img/viewMember.png" style="height: 30px; width: 30px"></span>
+      <br>View/Edit</button>
+    </a>
+    <a href="approveMember.html"><button class="col-4">
+      <span><input type="image" src="../../img/approveMember.png" style="height: 30px; width: 30px"></span>
+      <br>Approve</button>
+    </a>
+  </div>
+
+  <!-- ------------view/edit member---------------------------------------------------------------------------------------->
+  <div class="container">
+    <div id="viewEditMember">
+      <form class="form-horizontal" align="center">
+        <br>
+        <div class="form-group">
+          <label class="control-label" for="inputMemberName">Name:</label>
+          <input type="text" class="form-control" id="inputMemberName" placeholder="Name" style="text-align: center">
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="inputRole">Role:</label>
+          <select class="form-control form-control" id="inputRole" style="text-align-last: center">
+            <option>All</option>
+            <option>Member</option>
+            <option>Leader</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="inputStauts">Status:</label>
+          <select class="form-control form-control" id="inputStauts" style="text-align-last: center">
+            <option>All</option>
+            <option>Active</option>
+            <option>Terminated</option>
+          </select>
+        </div>
+
+        <button type="button" class="btn btn-primary">Search</button>
+      </form>
+
+      <br>
+      <!-- --------------members table------------------------------------------------------------------------------->
+      <div class="table-responsive">
+        <table id="memberTable" class="table">
+          <tr>
+            <td>
+              <p>Name: Eric</p>
+              <p>Role: Leader</p>
+            </td>
+            <td style="float: right">
+              <a href="viewEditMembDetails1.html">
+                <button type="button" class="btn btn-info" style="float: top; margin-top: 10px; margin-right: 20px">
+                  <span><img src="../../img/view.png" style="height: 20px; width: 20px"></span> View</button></a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Name: Althony</p>
+                  <p>Role: Member</p>
+                </td>
+                <td style="float: right">
+                  <a href="viewEditMembDetails1.html">
+                    <button type="button" class="btn btn-info" style="float: top; margin-top: 10px; margin-right: 20px">
+                      <span><img src="../../img/view.png" style="height: 20px; width: 20px"></span> View</button></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>Name: Wing</p>
+                      <p>Role: Member</p>
+                    </td>
+                    <td style="float: right">
+                      <a href="viewEditMembDetails1.html">
+                        <button type="button" class="btn btn-info" style="float: top; margin-top: 10px; margin-right: 20px">
+                          <span><img src="../../img/view.png" style="height: 20px; width: 20px"></span> View</button></a>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </body>
+            </html>
