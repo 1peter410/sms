@@ -35,7 +35,7 @@ function detailCategoryController($scope, $http, $window) {
         if(response.data[0]=="DONE"){
 
           alert("Successful Edit Category.");
-
+          window.localStorage.removeItem('cateogryDetails');
           $window.location.href = '../categoryMaintenance/viewCategory.html';
 
         }else if(response.data[0]=="NAME"){
@@ -76,7 +76,7 @@ function detailCategoryController($scope, $http, $window) {
         if(response.data[0]=="DONE"){
 
           alert("Successful Delete Category.");
-
+          window.localStorage.removeItem('cateogryDetails');
           $window.location.href = '../categoryMaintenance/viewCategory.html';
 
         }else{
