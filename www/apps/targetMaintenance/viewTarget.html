@@ -50,9 +50,10 @@
     <div class="form-group">
       <label for="categoryInput" class="text-dark"><b>Show:</b></label>
 
-      <select id='categorySelection' class="custom-select" ng-model="categorySelection" style="text-align-last: center; color:blue">
-                <option value="" >All Members</option>
-                <option value="NO" selected>No Target Yet</option>
+      <select id='showOption' class="custom-select" ng-model="showOption" style="text-align-last: center; color:blue">
+                <option value="ALL" selected >All Members</option>
+                <option value="YES" selected >Target is Set</option>
+                <option value="NO" >No Target Yet</option>
       </select>
 
     </div>

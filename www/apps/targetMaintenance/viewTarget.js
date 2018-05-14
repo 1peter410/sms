@@ -6,7 +6,7 @@ viewTargetControl.controller('viewTargetController', viewTargetController);
 function viewTargetController($scope, $http, $window) {
 
   $scope.nameInput='';
-  $scope.categorySelection;
+  $scope.showOption='ALL';
 
 
   $scope.isDisabled = false;
@@ -26,7 +26,7 @@ function viewTargetController($scope, $http, $window) {
         data: {
           'nameInput' : $scope.nameInput,
           'teamID' : selectionData.TeamID,
-          'categoryID' : $scope.categorySelection
+          'showOption' : $scope.showOption
         },
         url: 'https://flash-schedules.000webhostapp.com/getTarget.php'
      }).then(function (response){
