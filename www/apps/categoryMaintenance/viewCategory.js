@@ -15,15 +15,13 @@ function viewCategoryController($scope, $http, $window) {
   $scope.getCategory = function() {
 
     document.getElementById("checkOnline").innerHTML = "Loading...";
-    $scope.isDisabled = true;
-
 
      $http({
          method: 'POST',
          data: {
            'teamID' : selectionData.TeamID
          },
-         url: 'https://flash-schedules.000webhostapp.com/viewCategory.php'
+         url: 'https://flash-schedules.000webhostapp.com/getCategory.php'
       }).then(function (response){
 
          $scope.testing=response.data;

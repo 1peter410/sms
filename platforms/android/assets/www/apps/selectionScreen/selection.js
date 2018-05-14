@@ -5,11 +5,8 @@ selectionControl.controller('selectionController', selectionController);
 
 function selectionController($scope, $http, $window) {
 
-
-  $scope.isDisabled = true;
   $scope.orgSelection;
   $scope.teamSelection;
-
 
   $scope.getOrganization = function() {
 

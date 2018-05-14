@@ -6,18 +6,14 @@ viewTargetControl.controller('viewTargetController', viewTargetController);
 function viewTargetController($scope, $http, $window) {
 
   $scope.nameInput='';
-  $scope.categorySelection;
+  $scope.showOption='ALL';
 
 
   $scope.isDisabled = false;
   var selectionData = JSON.parse(localStorage.getItem("selectionData"));
 
 
-
-
   $scope.getTarget = function() {
-
-    $scope.isDisabled = true;
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
@@ -26,7 +22,7 @@ function viewTargetController($scope, $http, $window) {
         data: {
           'nameInput' : $scope.nameInput,
           'teamID' : selectionData.TeamID,
-          'categoryID' : $scope.categorySelection
+          'showOption' : $scope.showOption
         },
         url: 'https://flash-schedules.000webhostapp.com/getTarget.php'
      }).then(function (response){

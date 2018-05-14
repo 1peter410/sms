@@ -15,8 +15,6 @@ function viewCategoryController($scope, $http, $window) {
   $scope.getCategory = function() {
 
     document.getElementById("checkOnline").innerHTML = "Loading...";
-    $scope.isDisabled = true;
-
 
      $http({
          method: 'POST',

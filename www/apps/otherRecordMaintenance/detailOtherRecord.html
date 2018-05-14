@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html ng-app='createOtherRecordScreen'>
+<html ng-app='detailOtherRecordScreen'>
 
 <head>
 
@@ -11,44 +11,34 @@
   <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
   <script src="../../js/Bootstrap/bootstrap.min.js"></script>
 
-    <script src="./createOtherRecord.js"></script>
+    <script src="./detailOtherRecord.js"></script>
 
     <script type="text/javascript" src="../../cordova.js"></script>
     <script type="text/javascript">
         app.initialize();
     </script>
 
-    <title>Create Other Record</title>
+    <title>Edit Other Record</title>
 </head>
 
 
-<body ng-controller='createOtherRecordController' ng-init="getCategory()">
+<body ng-controller='detailOtherRecordController' ng-init="getCategory()">
 
   <div class="pos-f-t">
 
   <nav class="navbar navbar-dark bg-dark">
-      <span class="text-muted">Other Record Maintenace</span>
+      <span class="text-muted">Edit Record</span>
 
 
-    <button ng-disabled="isDisabled" type="button" class="btn btn-info" onclick="window.location.href='../menuScreen/menu.html';">Back to Menu</button>
+    <button ng-disabled="isDisabled" type="button" class="btn btn-info" ng-click="backToView()">Back to View</button>
 
   </nav>
 
   </div>
 
-  <ul class="nav nav-tabs navbar-light" style="text-align: center;background-color: #e3f2fd">
-              <li class="nav-item nav-link active"><a href="../otherRecordMaintenance/createOtherRecord.html">
-                      <span><input type="image" src="../../img/create.png" style="height: 50px; width: 50px"></span>
-                      Create</a>
-              </li>
-              <li class="nav-item nav-link"><a href="../otherRecordMaintenance/viewOtherRecord.html">
-                      <span><input type="image" src="../../img/edit.png" style="height: 50px; width: 50px"></span>
-                      View/Edit</a>
-              </li>
 
-  </ul>
 
-  <form name="createOtherRecordForm" class="container" align="center" novalidate>
+  <form name="detailOtherRecordForm" class="container" align="center" novalidate>
 <br>
 
 <div class="form-group">
@@ -57,8 +47,8 @@
         min="1979-12-31" max="2020-12-31" ng-disabled="isDisabled"
         >
 
-        <div ng-show="!createOtherRecordForm.startDate.$pristine" >
-        <span ng-show="createOtherRecordForm.startDate.$error.required" style="color:red">Please select the Start Date.</span>
+        <div ng-show="!detailOtherRecordForm.startDate.$pristine" >
+        <span ng-show="detailOtherRecordForm.startDate.$error.required" style="color:red">Please select the Start Date.</span>
         </div>
 
 </div>
@@ -69,8 +59,8 @@
         min="1979-12-31" max="2020-12-31" ng-disabled="isDisabled"
         >
 
-        <div ng-show="!createOtherRecordForm.endDate.$pristine" >
-        <span ng-show="createOtherRecordForm.endDate.$error.required" style="color:red">Please select the End Date.</span>
+        <div ng-show="!detailOtherRecordForm.endDate.$pristine" >
+        <span ng-show="detailOtherRecordForm.endDate.$error.required" style="color:red">Please select the End Date.</span>
         </div>
 
 </div>
@@ -80,8 +70,8 @@
       <label for="nameInput" class="text-dark"><b>Event/Campaign Name:</b></label>
       <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" required style="text-align: center">
 
-      <div ng-show="!createOtherRecordForm.nameInput.$pristine" >
-      <span ng-show="createOtherRecordForm.nameInput.$error.required" style="color:red">Please enter Event/Campaign Name.</span>
+      <div ng-show="!detailOtherRecordForm.nameInput.$pristine" >
+      <span ng-show="detailOtherRecordForm.nameInput.$error.required" style="color:red">Please enter Event/Campaign Name.</span>
       </div>
 
     </div>
@@ -90,7 +80,7 @@
       <label for="categoryInput" class="text-dark"><b>Category:</b></label>
 
       <select id='categorySelection' ng-disabled="isDisabled" required ng-options="item.CategoryName for item in categoryList | filter:{CategoryName: ''}" class="custom-select" ng-model="categorySelection" style="text-align-last: center; color:blue">
-                <option value="" disabled selected>Category Selection</option>
+
       </select>
 
     </div>
@@ -99,9 +89,9 @@
       <label for="reachOutInput" class="text-dark"><b>Reach Out Number:</b></label>
       <input ng-disabled="isDisabled" required ng-model="reachOutInput" type="text" class="form-control" ng-pattern="/^[0-9]\d*$/" id="reachOutInput" name="reachOutInput" style="text-align: center">
 
-      <div ng-show="!createOtherRecordForm.reachOutInput.$pristine" >
-      <span ng-show="createOtherRecordForm.reachOutInput.$error.required" style="color:red">Please enter Reach Out Number.</span>
-      <span ng-show="createOtherRecordForm.reachOutInput.$error.pattern" style="color:red">Please enter Positive Number Only.</span>
+      <div ng-show="!detailOtherRecordForm.reachOutInput.$pristine" >
+      <span ng-show="detailOtherRecordForm.reachOutInput.$error.required" style="color:red">Please enter Reach Out Number.</span>
+      <span ng-show="detailOtherRecordForm.reachOutInput.$error.pattern" style="color:red">Please enter Positive Number Only.</span>
       </div>
 
     </div>
@@ -116,7 +106,9 @@
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createOtherRecordSubmit()" ng-disabled="createOtherRecordForm.$invalid || isDisabled">Submit Record</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editOtherRecordSubmit()" ng-disabled="detailOtherRecordForm.$invalid || isDisabled">Edit Record</button>
+
+    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-click="deleteOtherRecordSubmit()" ng-disabled="detailOtherRecordForm.$invalid || isDisabled">Delete Record</button>
 
 
   </form>

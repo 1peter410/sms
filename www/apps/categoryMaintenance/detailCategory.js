@@ -80,7 +80,7 @@ function detailCategoryController($scope, $http, $window) {
           $window.location.href = '../categoryMaintenance/viewCategory.html';
 
         }else{
-          alert("Delete Category3 Failed. Please try again.");
+          alert("Delete Category Failed. Please try again.");
           $scope.isDisabled = false;
         }
 

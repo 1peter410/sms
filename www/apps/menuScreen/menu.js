@@ -73,6 +73,8 @@ function exitApp(){
 }
 
 function logOut(){
+  window.localStorage.removeItem('targetDetails');
+  window.localStorage.removeItem('otherRecordDetails');
   window.localStorage.removeItem('cateogryDetails');
   window.localStorage.removeItem('selectionData');
   window.localStorage.removeItem('loginData');

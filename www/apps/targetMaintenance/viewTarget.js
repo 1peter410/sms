@@ -13,11 +13,7 @@ function viewTargetController($scope, $http, $window) {
   var selectionData = JSON.parse(localStorage.getItem("selectionData"));
 
 
-
-
   $scope.getTarget = function() {
-
-    $scope.isDisabled = true;
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
