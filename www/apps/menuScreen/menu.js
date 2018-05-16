@@ -28,9 +28,10 @@ function menuController($scope, $http, $window) {
 
     }
 
-    $scope.test = function() {
-
-      alert("GG");
+    $scope.option = function() {
+      window.localStorage.removeItem('feedbackData');
+      window.localStorage.removeItem('personalData');
+      window.location.href='../menuScreen/submitOption.html';
     }
 
 
@@ -73,6 +74,9 @@ function exitApp(){
 }
 
 function logOut(){
+
+  window.localStorage.removeItem('feedbackData');
+  window.localStorage.removeItem('personalData');
   window.localStorage.removeItem('targetDetails');
   window.localStorage.removeItem('otherRecordDetails');
   window.localStorage.removeItem('cateogryDetails');

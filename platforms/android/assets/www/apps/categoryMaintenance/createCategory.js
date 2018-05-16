@@ -41,7 +41,7 @@ function createCategoryController($scope, $http, $window) {
 
 
         }else{
-          alert("Create Category. Failed. Please try again.");
+          alert("Create Category Failed. Please try again.");
           $scope.isDisabled = false;
         }
 

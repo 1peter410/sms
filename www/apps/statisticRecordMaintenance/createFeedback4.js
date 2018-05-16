@@ -1,68 +1,22 @@
-var createOtherRecordControl = angular.module('createOtherRecordScreen',[]);
+var submissionControl = angular.module('submissionScreen',[]);
 
-createOtherRecordControl.controller('createOtherRecordController', createOtherRecordController);
+submissionControl.controller('submissionController', submissionController);
 
 
-function createOtherRecordController($scope, $http, $window) {
+function submissionController($scope, $http, $window) {
 
   var selectionData = JSON.parse(localStorage.getItem("selectionData"));
+  var loginData = JSON.parse(localStorage.getItem("loginData"));
+
+
+  var feedbackData = JSON.parse(localStorage.getItem("feedbackData"));
+  var personalData = JSON.parse(localStorage.getItem("personalData"));
 
   $scope.isDisabled = false;
-  $scope.startDate ='';
-  $scope.endDate ='';
-  $scope.nameInput='';
   $scope.categorySelection;
-  $scope.reachOutInput='';
-  $scope.remarkInput='';
+  $scope.partnerSelection=null;
 
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-
-
-  $scope.createOtherRecordSubmit = function() {
-
-    $scope.isDisabled = true;
-
-
-    $http({
-        method: 'POST',
-        data: {
-            'startDate' : $scope.startDate,
-            'endDate' : $scope.endDate,
-            'otherName' : $scope.nameInput,
-            'categoryID' : $scope.categorySelection.CategoryID,
-            'otherCount' : $scope.reachOutInput,
-            'otherRemark' : $scope.remarkInput,
-            'teamID' : selectionData.TeamID,
-
-        },
-        url: 'https://flash-schedules.000webhostapp.com/createOtherRecord.php'
-     }).then(function (response){
-
-        if(response.data[0]=="DONE"){
-
-          alert("Successful Create Record.");
-
-          $window.location.href = '../otherRecordMaintenance/createOtherRecord.html';
-
-        }else if(response.data[0]=="DUPLICATED"){
-
-          alert("This Record Details is already Created. (Same Name and Same Category is already Exist)");
-          $scope.isDisabled = false;
-
-
-        }else{
-          alert("Create Record Failed. Please try again.");
-          $scope.isDisabled = false;
-        }
-
-
-     },function (error){
-          alert("Please ensure You are connected to Internet.");
-          $scope.isDisabled = false;
-     });
-
-  };
-
 
   $scope.getCategory = function() {
 
@@ -95,6 +49,53 @@ function createOtherRecordController($scope, $http, $window) {
 
   };
 
+  $scope.getUser = function() {
+
+    $http({
+        method: 'POST',
+        data: {
+          'teamID' : selectionData.TeamID,
+          'userID' : loginData.UserID
+
+         },
+        url: 'https://flash-schedules.000webhostapp.com/getUser.php'
+     }).then(function (response){
+
+        if(response.data[0]!="GG"){
+
+          $scope.partnerList=response.data;
+
+          $scope.isDisabled = false;
+
+
+        }else{
+          alert("No User from Database.");
+          $scope.isDisabled = false;
+        }
+
+
+     },function (error){
+          alert("Please ensure You are connected to Internet.");
+          $scope.isDisabled = false;
+
+     });
+
+  };
+
+
+  $scope.submitRecord= function(){
+    alert($scope.categorySelection.CategoryID);
+
+    if($scope.partnerSelection){
+      alert($scope.partnerSelection.UserID);
+
+    }else{
+      alert("GG");
+    }
+
+
+
+  }
 
 }
 

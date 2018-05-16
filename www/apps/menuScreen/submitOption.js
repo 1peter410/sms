@@ -1,9 +1,9 @@
-var menuControl = angular.module('menuScreen',[]);
+var submitOptionControl = angular.module('submitOptionScreen',[]);
 
-menuControl.controller('menuController', menuController);
+submitOptionControl.controller('submitOptionController', submitOptionController);
 
 
-function menuController($scope, $http, $window) {
+function submitOptionController($scope, $http, $window) {
 
 
     $scope.checkOnline = function() {
@@ -24,7 +24,7 @@ function menuController($scope, $http, $window) {
 
     $scope.goOnline = function() {
 
-      window.location.href='../menuScreen/menu.html';
+      window.location.href='../menuScreen/submitOption.html';
 
     }
 
@@ -34,7 +34,29 @@ function menuController($scope, $http, $window) {
       window.location.href='../statisticRecordMaintenance/createFeedback1.html';
     }
 
+    $scope.selfSubmit = function() {
 
+
+      window.location.href='../statisticRecordMaintenance/selfSubmit.html';
+
+
+    }
+
+    $scope.viewRecord = function() {
+
+
+      alert("GG");
+
+    }
+
+
+    $scope.backToMenu = function() {
+
+      window.localStorage.removeItem('feedbackData');
+      window.localStorage.removeItem('personalData');
+
+      window.location.href='../menuScreen/menu.html';
+    };
 
 }
 

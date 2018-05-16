@@ -21,7 +21,7 @@ function viewCategoryController($scope, $http, $window) {
          data: {
            'teamID' : selectionData.TeamID
          },
-         url: 'https://flash-schedules.000webhostapp.com/viewCategory.php'
+         url: 'https://flash-schedules.000webhostapp.com/getCategory.php'
       }).then(function (response){
 
          $scope.testing=response.data;
