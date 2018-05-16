@@ -192,12 +192,6 @@ var app = {
 
 };
 
-function displayUserInfo() {
-    var loginData = JSON.parse(localStorage.getItem("loginData"));
-
-    document.getElementById("userNameSpan").innerHTML = loginData.UserName;
-    document.getElementById("userTeamSpan").innerHTML = loginData.TeamName;
-}
 
 function exitApp(){
   navigator.app.exitApp();

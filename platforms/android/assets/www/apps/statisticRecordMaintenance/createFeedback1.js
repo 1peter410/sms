@@ -150,12 +150,12 @@ function createFeedbackController1($scope, $http, $window) {
   };
 
 
-  $scope.backToMenu = function() {
+  $scope.backToSelection = function() {
 
     window.localStorage.removeItem('feedbackData');
     window.localStorage.removeItem('personalData');
 
-    window.location.href='../menuScreen/menu.html';
+    window.location.href='../menuScreen/submitOption.html';
   };
 
 

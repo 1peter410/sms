@@ -21,32 +21,7 @@
 </head>
 
 
-<body ng-controller="editProfileController" ng-init="getProfileInfo()" onload="displayUserInfo()">
-
-  <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-
-      <h5 class="text-white h4" align="center"><span id="userNameSpan"></span></h5>
-      <h5 class="text-white h4" align="center">(Team <span id="userTeamSpan"></span>)</h5>
-
-      <br>
-      <button type="button" class="btn btn-warning btn-lg btn-block" onclick="logOut()">Log Out</button>
-      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp()">Exit (X)</button>
-    </div>
-  </div>
-
-  <nav class="navbar navbar-dark bg-dark">
-    <button ng-disabled="isDisabled" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-
-      <span class="navbar-toggler-icon"></span>
-      <span class="text-muted">Statistic Management System</span>
-
-    </button>
-  </nav>
-
-  </div>
-
+<body ng-controller="editProfileController" ng-init="getProfileInfo()">
 
 
   <div class="pos-f-t">

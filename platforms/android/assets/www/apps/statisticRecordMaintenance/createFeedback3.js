@@ -28,3 +28,8 @@ var app = {
     }
 
 };
+
+
+function finalScreen(){
+  window.location.href='../statisticRecordMaintenance/createFeedback4.html';
+}
