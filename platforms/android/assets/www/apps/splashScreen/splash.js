@@ -40,19 +40,20 @@ $(window).on('resize', function resize()  {
 }).resize();
 });
 
-function loginCheck(){
+function splashScreen(){
   document.body.style.opacity='1';
+}
+
+function loginCheck(){
 
   if(localStorage.getItem("loginData")!=null){
 
-    setTimeout(function(){
       window.location.href='../menuScreen/menu.html'
-    }, 9000);
 
   }else{
-    setTimeout(function(){
+
       window.location.href='../selectionScreen/selection.html'
-    }, 9000);
+
   }
 
 }
