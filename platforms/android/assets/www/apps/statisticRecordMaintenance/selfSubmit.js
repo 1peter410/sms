@@ -26,6 +26,8 @@ function selfSubmitController($scope, $http, $window) {
 
   $scope.getCategory = function() {
 
+    $scope.isDisabled = true;
+
     $http({
         method: 'POST',
         data: {
@@ -56,6 +58,8 @@ function selfSubmitController($scope, $http, $window) {
   };
 
   $scope.getUser = function() {
+
+    $scope.isDisabled = true;
 
     $http({
         method: 'POST',
@@ -153,6 +157,9 @@ function selfSubmitController($scope, $http, $window) {
     $scope.nameInput='';
     $scope.socialInput='';
     $scope.mobileInput='';
+    $scope.categorySelection=null;
+    $scope.partnerSelection=null;
+    $scope.remarkInput="";
 
   }
 

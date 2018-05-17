@@ -36,7 +36,7 @@
 
   </div>
 
-  <form name="viewFeedbackForm" class="container" align="center" novalidate>
+  <form name="viewFeedbackForm" class="container" align="center" novalidate ng-init="getRecord()">
 <br>
 
     <div class="form-group">
@@ -63,21 +63,34 @@
     </div>
 
     <div class="form-group">
-      <input ng-disabled="isDisabled" placeholder="Remark Filter" required ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" style="text-align: center">
+      <input ng-disabled="isDisabled" placeholder="Remark Filter" required ng-model="remarkInput" type="text" class="form-control" id="remarkInput" name="remarkInput" style="text-align: center">
 
     </div>
 
-    <div class="form-group"><b>Date Filter</b>
+    <div class="form-group"><b>Year/Month Filter</b>
      <input ng-model="dateInput" dateInput type="date" name="dateInput" class="form-control" id="dateInput" name="dateInput" style="text-align: center"
             min="1979-12-31" max="2020-12-31" ng-disabled="isDisabled"
             >
     </div>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="personalInfoPage()" >Filter</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="getRecord()" >Filter</button>
 
 
 
   </form>
+
+<br>
+  <div class="container">
+
+   <div class="list-group">
+      <button ng-click="viewDetails(foo)" ng-disabled="isDisabled"
+        class="list-group-item text-primary" ng-repeat="foo in testing | filter:{RespondentName: ''}">
+        {{foo.RespondentName}} - {{foo.CategoryName}}</button>
+
+      <button disabled class="list-group-item text-muted" ng-repeat="foo in testing" ng-if="foo.RespondentName==null">No Search Found</button>
+   </div>
+
+ </div>
 
 
 </body>

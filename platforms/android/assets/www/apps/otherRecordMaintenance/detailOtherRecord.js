@@ -20,6 +20,8 @@ function detailOtherRecordController($scope, $http, $window) {
 
   $scope.getCategory = function() {
 
+    $scope.isDisabled = true;
+
     $http({
         method: 'POST',
         data: {

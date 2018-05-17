@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html ng-app="detailFeedbackScreen">
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <script src="../../js/Angular/angular.min.js"></script>
+  <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
+  <script src="../../js/Bootstrap/bootstrap.min.js"></script>
+
+    <script src="./detailFeedback.js"></script>
+
+    <script type="text/javascript" src="../../cordova.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+    <title>Edit Record</title>
+</head>
+
+
+<body ng-controller="detailFeedbackController">
+
+  <div class="pos-f-t">
+
+  <nav class="navbar navbar-dark bg-dark">
+      <span class="text-muted">Record Details</span>
+
+
+    <button ng-disabled="isDisabled" type="button" class="btn btn-info" ng-click='backToView()'>Back to View</button>
+
+  </nav>
+
+  </div>
+
+
+  <form name="detailFeedbackForm" class="container" align="center" novalidate>
+
+    <br>
+
+    <div class="form-group">
+      <label for="nameInput" class="text-dark"><b>Full Name:</b></label>
+      <input ng-disabled="isDisabled" required ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" style="text-align: center">
+
+      <div ng-show="!selfSubmitForm.nameInput.$pristine" >
+        <span ng-show="selfSubmitForm.nameInput.$error.required" style="color:red">Please enter your name.</span>
+        <span ng-show="selfSubmitForm.nameInput.$error.pattern" style="color:red">This is not a valid name.</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
+      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
+
+      <div ng-show="!selfSubmitForm.mobileInput.$pristine" >
+      <span ng-show="selfSubmitForm.mobileInput.$error.pattern" style="color:red">This is not a valid mobile number.</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
+      <input ng-disabled="isDisabled" ng-model="socialInput"  type="text" id="socialInput" name="socialInput" class="form-control" style="text-align: center">
+
+    </div>
+
+  <div class="form-group">
+    <label for="categoryInput" class="text-dark"><b>Category:</b></label>
+
+    <select id='categorySelection' ng-disabled="isDisabled" required ng-options="item.CategoryName for item in categoryList | filter:{CategoryName: ''}" class="custom-select" ng-model="categorySelection" style="text-align-last: center; color:blue">
+              <option value="" disabled>Category Selection</option>
+    </select>
+
+  </div>
+
+  <div class="form-group">
+    <label for="partnerInput" class="text-dark"><b>Partner With:</b></label>
+
+    <select id='partnerSelection' ng-disabled="isDisabled" ng-options="item.UserName for item in partnerList | filter:{UserName: ''}" class="custom-select" ng-model="partnerSelection" style="text-align-last: center; color:blue">
+              <option value="">Holy Spirit</option>
+    </select>
+
+  </div>
+
+  <div class="form-group">
+    <label for="remarkInput" class="text-dark"><b>Remarks</b></label>
+    <textarea ng-disabled="isDisabled" ng-model="remarkInput" type="text" class="form-control" id="remarkInput" name="remarkInput" style="text-align: center" rows="4" ></textarea>
+
+  </div>
+
+  <div class="form-group">
+    <label for="Q1" class="text-dark" ><b>How would you rate our Message Delivery?</b></label>
+
+    <select ng-disabled="isDisabled" class="custom-select" name="Q1" id="Q1"
+       ng-options="option.value for option in Q1.availableOptions track by option.value"
+       ng-model="Q1.selectedOption" style="text-align-last: center; color:blue" required>
+
+       <option value="" disabled selected>No Feedback</option>
+
+     </select>
+
+
+  </div>
+
+  <div class="form-group">
+    <label for="Q2" class="text-dark"><b>Did you find this Message Valuable?</b></label>
+
+    <select ng-disabled="isDisabled" class="custom-select" name="Q2" id="Q2"
+       ng-options="option.value for option in Q2.availableOptions track by option.value"
+       ng-model="Q2.selectedOption" style="text-align-last: center; color:blue" required>
+
+       <option value="" disabled selected>No Feedback</option>
+
+     </select>
+
+  </div>
+
+  <div class="form-group">
+    <label for="Q3" class="text-dark"><b>When comes to Christianity Topic...</b></label>
+
+    <select ng-disabled="isDisabled" class="custom-select" name="Q3" id="Q3"
+       ng-options="option.value for option in Q3.availableOptions track by option.value"
+       ng-model="Q3.selectedOption" style="text-align-last: center; color:blue" required>
+
+       <option value="" disabled selected>No Feedback</option>
+
+     </select>
+
+  </div>
+
+
+  <div class="form-group">
+    <label for="Q4" class="text-dark"><b>Do you like to know more about Christianity?</b></label>
+
+    <select ng-disabled="isDisabled" class="custom-select" name="Q4" id="Q4"
+       ng-options="option.value for option in Q4.availableOptions track by option.value"
+       ng-model="Q4.selectedOption" style="text-align-last: center; color:blue" required>
+
+       <option value="" disabled selected>No Feedback</option>
+
+     </select>
+
+  </div>
+
+
+  <div class="form-group">
+    <label for="commentInput" class="text-dark"><b>Do you have any Feedback/Comment for us?</b></label>
+    <textarea ng-disabled="isDisabled" ng-model="commentInput" type="text" class="form-control" id="commentInput" name="commentInput" style="text-align: center" rows="4" ></textarea>
+
+  </div>
+
+
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editTarget()" ng-disabled="detailFeedbackForm.$invalid || isDisabled">Edit</button>
+    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-click="editTarget()">Delete</button>
+
+
+  </form>
+
+
+</body>
+
+
+
+
+
+</html>

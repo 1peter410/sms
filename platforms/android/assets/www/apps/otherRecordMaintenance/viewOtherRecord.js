@@ -20,6 +20,8 @@ function viewOtherRecordController($scope, $http, $window) {
 
   $scope.getOtherRecord = function() {
 
+    $scope.isDisabled = true;
+
     if($scope.dateInput!=null){
       $scope.monthInput= $scope.dateInput.getMonth()+1;
       $scope.yearInput= $scope.dateInput.getFullYear();
@@ -58,7 +60,7 @@ function viewOtherRecordController($scope, $http, $window) {
 
       localStorage.setItem("otherRecordDetails", JSON.stringify(yourSharedData));
       window.location.href='./detailOtherRecord.html';
-  
+
   }
 
 

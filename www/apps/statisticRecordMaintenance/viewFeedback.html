@@ -85,7 +85,7 @@
    <div class="list-group">
       <button ng-click="viewDetails(foo)" ng-disabled="isDisabled"
         class="list-group-item text-primary" ng-repeat="foo in testing | filter:{RespondentName: ''}">
-        {{foo.RespondentName}} - {{foo.CategoryName}}</button>
+        {{foo.RespondentName}} - {{foo.CategoryName}}<br>({{foo.EvangelismDateTime}})</button>
 
       <button disabled class="list-group-item text-muted" ng-repeat="foo in testing" ng-if="foo.RespondentName==null">No Search Found</button>
    </div>

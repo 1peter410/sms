@@ -5,24 +5,38 @@ viewFeedbackControl.controller('viewFeedbackController', viewFeedbackController)
 
 function viewFeedbackController($scope, $http, $window) {
 
-
+  var loginData = JSON.parse(localStorage.getItem("loginData"));
   var selectionData = JSON.parse(localStorage.getItem("selectionData"));
+
 
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
   $scope.categorySelection;
 
+  $scope.selectedCategory="";
+
+  $scope.nameInput="";
+  $scope.remarkInput="";
+
+  $scope.dateInput =null;
+
+  $scope.monthInput='GG';
+  $scope.yearInput='GG';
+
+
   $scope.Q4 = {
    availableOptions: [
      {value: 'No Filter Interest'},
-     {value: 'Wanted to know Christianity'},
-     {value: 'Not Wanted to know Christianity'},
+     {value: 'Wanted to know Christianity'}
    ],
    selectedOption: {value: 'No Filter Interest'}
   };
 
+  $scope.question="";
 
   $scope.getCategory = function() {
+
+    $scope.isDisabled = true;
 
     $http({
         method: 'POST',
@@ -53,6 +67,66 @@ function viewFeedbackController($scope, $http, $window) {
      });
 
   };
+
+
+    $scope.getRecord = function() {
+
+      $scope.isDisabled = true;
+
+      if($scope.categorySelection){
+        $scope.selectedCategory=$scope.categorySelection.CategoryID;
+      }else{
+        $scope.selectedCategory="";
+      }
+
+      if($scope.dateInput!=null){
+        $scope.monthInput= $scope.dateInput.getMonth()+1;
+        $scope.yearInput= $scope.dateInput.getFullYear();
+      }else{
+        $scope.monthInput='GG';
+        $scope.yearInput='GG';
+      }
+
+      if($scope.Q4.selectedOption.value=="No Filter Interest"){
+        $scope.question="";
+      }else{
+        $scope.question="Yes";
+      }
+
+
+      $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+
+      $http({
+          method: 'POST',
+          data: {
+            'q4' : $scope.question,
+            'categoryID' : $scope.selectedCategory,
+            'nameInput' : $scope.nameInput,
+            'remarkInput' : $scope.remarkInput,
+            'monthInput' : $scope.monthInput,
+            'yearInput' : $scope.yearInput,
+            'userID' : loginData.UserID
+          },
+          url: 'https://flash-schedules.000webhostapp.com/getRecord.php'
+       }).then(function (response){
+
+          $scope.testing=response.data;
+          $scope.isDisabled = false;
+
+       },function (error){
+            alert("Please ensure You are connected to Internet.");
+            $scope.isDisabled = false;
+       });
+
+
+    }
+
+    $scope.viewDetails = function(yourSharedData){
+
+        localStorage.setItem("recordDetails", JSON.stringify(yourSharedData));
+        window.location.href='./detailFeedback.html';
+
+    }
 
 }
 

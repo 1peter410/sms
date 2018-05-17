@@ -50,7 +50,7 @@
     <div class="form-group">
       <label for="categoryInput" class="text-dark"><b>Show:</b></label>
 
-      <select id='showOption' class="custom-select" ng-model="showOption" style="text-align-last: center; color:blue">
+      <select id='showOption' ng-disabled="isDisabled"  class="custom-select" ng-model="showOption" style="text-align-last: center; color:blue">
                 <option value="ALL" selected >All Members</option>
                 <option value="YES" selected >Faith Goal is Set</option>
                 <option value="NO" >No Faith Goal Yet</option>
