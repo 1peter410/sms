@@ -16,6 +16,10 @@ function submissionController($scope, $http, $window) {
   $scope.categorySelection;
   $scope.partnerSelection=null;
 
+  $scope.partnerWith;
+
+  $scope.remarkInput;
+
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
   $scope.getCategory = function() {
@@ -23,6 +27,7 @@ function submissionController($scope, $http, $window) {
     $http({
         method: 'POST',
         data: {
+
           'teamID' : selectionData.TeamID
          },
         url: 'https://flash-schedules.000webhostapp.com/getCategory.php'
@@ -83,15 +88,59 @@ function submissionController($scope, $http, $window) {
   };
 
 
+
+
   $scope.submitRecord= function(){
-    alert($scope.categorySelection.CategoryID);
+
+    $scope.isDisabled = true;
 
     if($scope.partnerSelection){
-      alert($scope.partnerSelection.UserID);
-
+      $scope.partnerWith=$scope.partnerSelection.UserID;
     }else{
-      alert("GG");
+      $scope.partnerWith='Holy Spirit';
     }
+
+
+    $http({
+        method: 'POST',
+        data: {
+          'respondentName': personalData.Name,
+          'respondentMobile': personalData.Mobile,
+          'respondentSocial': personalData.Social,
+          'q1': feedbackData.Q1.selectedOption.value,
+          'q2': feedbackData.Q2.selectedOption.value,
+          'q3': feedbackData.Q3.selectedOption.value,
+          'q4': feedbackData.Q4.selectedOption.value,
+          'evangelismComment': feedbackData.Comment,
+          'partnerWith': $scope.partnerWith,
+          'evangelismRemark': $scope.remarkInput,
+          'categoryID': $scope.categorySelection.CategoryID,
+          'userID': loginData.UserID,
+          'teamID' : selectionData.TeamID
+
+         },
+        url: 'https://flash-schedules.000webhostapp.com/createFeedback.php'
+     }).then(function (response){
+
+        if(response.data[0]=="DONE"){
+
+          alert("Create Feedback Success.");
+          $scope.isDisabled = false;
+          window.localStorage.removeItem('feedbackData');
+          window.localStorage.removeItem('personalData');
+          window.location.href='../menuScreen/submitOption.html';
+
+        }else{
+          alert("Create Feedback failed. Please Try Again.");
+          $scope.isDisabled = false;
+        }
+
+
+     },function (error){
+          alert("Please ensure You are connected to Internet.");
+          $scope.isDisabled = false;
+
+     });
 
 
 
