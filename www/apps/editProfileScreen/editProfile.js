@@ -19,6 +19,8 @@ function editProfileController($scope, $http, $window) {
 
   $scope.getProfileInfo = function(){
 
+    $scope.isDisabled = true;
+
     $http({
              method: 'POST',
              data: {

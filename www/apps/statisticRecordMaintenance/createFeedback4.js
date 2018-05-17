@@ -24,6 +24,8 @@ function submissionController($scope, $http, $window) {
 
   $scope.getCategory = function() {
 
+    $scope.isDisabled = true;
+
     $http({
         method: 'POST',
         data: {
@@ -55,6 +57,8 @@ function submissionController($scope, $http, $window) {
   };
 
   $scope.getUser = function() {
+
+    $scope.isDisabled = true;
 
     $http({
         method: 'POST',

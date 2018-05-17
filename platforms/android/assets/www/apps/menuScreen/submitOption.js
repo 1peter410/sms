@@ -45,7 +45,8 @@ function submitOptionController($scope, $http, $window) {
     $scope.viewRecord = function() {
 
 
-      alert("GG");
+      window.location.href='../statisticRecordMaintenance/viewFeedback.html';
+
 
     }
 

@@ -17,7 +17,7 @@ function selfSubmitController($scope, $http, $window) {
     $scope.empty="";
 
     $scope.partnerWith;
-    $scope.remarkInput;
+    $scope.remarkInput="";
 
   $scope.isDisabled = false;
 
@@ -102,9 +102,9 @@ function selfSubmitController($scope, $http, $window) {
     $http({
         method: 'POST',
         data: {
-          'respondentName': nameInput,
-          'respondentMobile': mobileInput,
-          'respondentSocial': socialInput,
+          'respondentName': $scope.nameInput,
+          'respondentMobile': $scope.mobileInput,
+          'respondentSocial': $scope.socialInput,
           'q1': $scope.empty,
           'q2': $scope.empty,
           'q3': $scope.empty,

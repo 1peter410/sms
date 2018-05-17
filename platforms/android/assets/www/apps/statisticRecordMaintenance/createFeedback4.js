@@ -18,7 +18,7 @@ function submissionController($scope, $http, $window) {
 
   $scope.partnerWith;
 
-  $scope.remarkInput;
+  $scope.remarkInput="";
 
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
@@ -99,6 +99,7 @@ function submissionController($scope, $http, $window) {
     }else{
       $scope.partnerWith='Holy Spirit';
     }
+
 
 
     $http({

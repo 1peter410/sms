@@ -1,50 +1,49 @@
-var viewOtherRecordControl = angular.module('viewOtherRecordScreen',[]);
 
-viewOtherRecordControl.controller('viewOtherRecordController', viewOtherRecordController);
+var viewFeedbackControl = angular.module('viewFeedbackScreen',[]);
 
+viewFeedbackControl.controller('viewFeedbackController', viewFeedbackController);
 
-function viewOtherRecordController($scope, $http, $window) {
+function viewFeedbackController($scope, $http, $window) {
+
 
   var selectionData = JSON.parse(localStorage.getItem("selectionData"));
 
-  $scope.isDisabled = false;
-  $scope.dateInput =null;
-
-  $scope.monthInput='GG';
-  $scope.yearInput='GG';
-
-  $scope.nameInput='';
-
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
+  $scope.categorySelection;
 
-  $scope.getOtherRecord = function() {
+  $scope.Q4 = {
+   availableOptions: [
+     {value: 'No Filter Interest'},
+     {value: 'Wanted to know Christianity'},
+     {value: 'Not Wanted to know Christianity'},
+   ],
+   selectedOption: {value: 'No Filter Interest'}
+  };
 
-    $scope.isDisabled = true;
 
-    if($scope.dateInput!=null){
-      $scope.monthInput= $scope.dateInput.getMonth()+1;
-      $scope.yearInput= $scope.dateInput.getFullYear();
-    }else{
-      $scope.monthInput='GG';
-      $scope.yearInput='GG';
-    }
+  $scope.getCategory = function() {
 
     $http({
         method: 'POST',
         data: {
-          'otherName' : $scope.nameInput,
-          'monthInput' : $scope.monthInput,
-          'yearInput' : $scope.yearInput,
+
           'teamID' : selectionData.TeamID
          },
-        url: 'https://flash-schedules.000webhostapp.com/getOtherRecord.php'
+        url: 'https://flash-schedules.000webhostapp.com/getCategory.php'
      }).then(function (response){
 
+        if(response.data[0]!="GG"){
 
-          $scope.testing=response.data;
+          $scope.categoryList=response.data;
 
           $scope.isDisabled = false;
+
+
+        }else{
+          alert("No Category is Created.");
+          $scope.isDisabled = false;
+        }
 
 
      },function (error){
@@ -55,19 +54,7 @@ function viewOtherRecordController($scope, $http, $window) {
 
   };
 
-
-  $scope.viewDetails = function(yourSharedData){
-
-      localStorage.setItem("otherRecordDetails", JSON.stringify(yourSharedData));
-      window.location.href='./detailOtherRecord.html';
-
-  }
-
-
-
-
 }
-
 
 var app = {
 
