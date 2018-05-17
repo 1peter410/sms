@@ -1,6 +1,7 @@
 
 var viewFeedbackControl = angular.module('viewFeedbackScreen',[]);
 
+
 viewFeedbackControl.controller('viewFeedbackController', viewFeedbackController);
 
 function viewFeedbackController($scope, $http, $window) {
