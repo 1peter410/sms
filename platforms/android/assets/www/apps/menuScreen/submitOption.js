@@ -32,7 +32,9 @@ function submitOptionController($scope, $http, $window) {
 
     $scope.goOnline = function() {
 
-      window.location.href='../menuScreen/submitOption.html';
+      if(!$scope.isOnline){
+        window.location.href='../menuScreen/submitOption.html';
+      }
 
     }
 
