@@ -22,12 +22,12 @@
 </head>
 
 
-<body ng-controller='detailCategoryController'>
+<body ng-controller='detailCategoryController' ng-init="checkOnline()">
 
   <div class="pos-f-t">
 
   <nav class="navbar navbar-dark bg-dark">
-      <span class="text-muted">Edit Category Detail</span>
+      <span class="text-muted">Edit Category</span>
 
 
     <button ng-disabled="isDisabled" type="button" class="btn btn-info" ng-click='backToView()'>Back to View</button>
@@ -36,9 +36,13 @@
 
   </div>
 
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
+
 
   <form name="editCategoryForm" class="container" align="center" novalidate>
-<br>
+
     <div class="form-group">
       <label for="nameInput" class="text-dark"><b>Category Name:</b></label>
       <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" required style="text-align: center">
@@ -63,7 +67,7 @@
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
     <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editCategorySubmit()" ng-disabled="editCategoryForm.$invalid || isDisabled">Edit Category</button>
-    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-click="deleteCategorySubmit()" ng-disabled="editCategoryForm.$invalid || isDisabled">Delete</button>
+    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-click="deleteCategorySubmit()" ng-disabled="editCategoryForm.$invalid || isDisabled">Delete Category</button>
 
 
   </form>

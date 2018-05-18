@@ -22,7 +22,7 @@
 </head>
 
 
-<body ng-controller='createOtherRecordController' ng-init="getCategory()">
+<body ng-controller='createOtherRecordController' ng-init="getCategory();">
 
   <div class="pos-f-t">
 
@@ -48,8 +48,11 @@
 
   </ul>
 
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
+
   <form name="createOtherRecordForm" class="container" align="center" novalidate>
-<br>
 
 <div class="form-group">
  <label for="startDate" class="text-dark"><b>Start Date:</b></label>

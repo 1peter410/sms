@@ -72,6 +72,9 @@ function viewFeedbackController($scope, $http, $window) {
 
     $scope.getRecord = function() {
 
+      $scope.isOnline = true;
+      document.getElementById("checkOnline").innerHTML = "Loading...";
+
       $scope.isDisabled = true;
 
       if($scope.categorySelection){
@@ -113,9 +116,14 @@ function viewFeedbackController($scope, $http, $window) {
 
           $scope.testing=response.data;
           $scope.isDisabled = false;
+          document.getElementById("checkOnline").innerHTML = "(Click on List to View Details)";
+          $scope.isOnline = true;
 
        },function (error){
             alert("Please ensure You are connected to Internet.");
+            document.getElementById("checkOnline").style.color = "red";
+            document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+            $scope.isOnline = false;
             $scope.isDisabled = false;
        });
 
@@ -126,6 +134,14 @@ function viewFeedbackController($scope, $http, $window) {
 
         localStorage.setItem("recordDetails", JSON.stringify(yourSharedData));
         window.location.href='./detailFeedback.html';
+
+    }
+
+    $scope.goOnline = function(){
+
+      if(!$scope.isOnline){
+        window.location.href='../statisticRecordMaintenance/viewFeedback.html';
+      }
 
     }
 

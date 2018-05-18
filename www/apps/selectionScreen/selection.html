@@ -31,15 +31,16 @@
 
   <nav class="navbar navbar-dark bg-dark">
 
-    <input disabled class="navbar-toggler" type="button" id="goOnline" value="Selection" ng-click="goOnline();"/>
-
+    <span class="text-muted">Selection</span>
     <button ng-disabled="isDisabled" type="button" class="btn btn-danger" onclick="exitApp();">Exit (X)</button>
 
   </nav>
 
   </div>
 
-  <br>
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
 
   <form name="selectionForm" class="container" align="center" novalidate>
 

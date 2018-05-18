@@ -39,7 +39,7 @@
       <h5 class="text-white h4" align="center">(Team <span id="userTeamSpan"></span>)</h5>
 
       <br>
-      <button type="button" class="btn btn-secondary btn-lg btn-block"  onclick="window.location.href='../editProfileScreen/editProfile.html';">Edit Profile</button>
+      <button type="button" class="btn btn-secondary btn-lg btn-block" ng-click="isDisabled || editProfile()">Edit Profile</button>
       <button type="button" class="btn btn-warning btn-lg btn-block" onclick="logOut()">Log Out</button>
       <button type="button" class="btn btn-danger btn-lg btn-block" onclick="exitApp()">Exit (X)</button>
       <button type="button" class="btn btn-info btn-lg btn-block" onclick="#">Why Measure?</button>
@@ -57,28 +57,27 @@
 
 </div>
 
-
+<div>
+  <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+</div>
 
 <div class="container" align="center">
-
-  <input disabled class="navbar-toggler" type="button" id="goOnline" value="Menu Selection" ng-click="goOnline();"/>
-
 
   <table class="table" >
     <tr scope="row">
       <th scope="col" style="text-align: center;"> <img src="../../img/newRecord.png" class="img-thumbnail btn btn-outline-primary" ng-click="isDisabled || option()">Record</th>
-      <th scope="col" style="text-align: center;"> <img src="../../img/report.png" class="img-thumbnail btn btn-outline-primary">Reports</th>
+      <th scope="col" style="text-align: center;"> <img src="../../img/report.png" class="img-thumbnail btn btn-outline-primary" ng-click="isDisabled || report()">Reports</th>
     </tr>
 
     <tr name="leaderOnly" scope="row">
       <th scope="col" style="text-align: center;"> <img src="../../img/member.png" class="img-thumbnail btn btn-outline-primary">Team Member</th>
-      <th scope="col" style="text-align: center;"> <img src="../../img/target.png" class="img-thumbnail btn btn-outline-primary" onclick="window.location.href='../targetMaintenance/viewTarget.html'">Faith Goal</th>
+      <th scope="col" style="text-align: center;"> <img src="../../img/target.png" class="img-thumbnail btn btn-outline-primary" ng-click="isDisabled || member()">Faith Goal</th>
 
     </tr>
 
     <tr name="leaderOnly" scope="row">
-      <th scope="col" style="text-align: center;"> <img src="../../img/otherRecord.png" class="img-thumbnail btn btn-outline-primary" onclick="window.location.href='../otherRecordMaintenance/createOtherRecord.html'">Other Record</th>
-      <th scope="col" style="text-align: center;"> <img src="../../img/category.png" class="img-thumbnail btn btn-outline-primary" onclick="window.location.href='../categoryMaintenance/createCategory.html'">Record Category</th>
+      <th scope="col" style="text-align: center;"> <img src="../../img/otherRecord.png" class="img-thumbnail btn btn-outline-primary" ng-click="isDisabled || other()">Other Record</th>
+      <th scope="col" style="text-align: center;"> <img src="../../img/category.png" class="img-thumbnail btn btn-outline-primary" ng-click="isDisabled || category()">Record Category</th>
 
     </tr>
 

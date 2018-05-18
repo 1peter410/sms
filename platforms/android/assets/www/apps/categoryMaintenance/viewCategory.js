@@ -11,11 +11,12 @@ function viewCategoryController($scope, $http, $window) {
 
   $scope.isDisabled = false;
 
+  $scope.isOnline = false;
 
   $scope.getCategory = function() {
 
     $scope.isDisabled = true;
-
+    $scope.isOnline = true;
     document.getElementById("checkOnline").innerHTML = "Loading...";
 
      $http({
@@ -28,13 +29,17 @@ function viewCategoryController($scope, $http, $window) {
 
          $scope.testing=response.data;
          document.getElementById("checkOnline").innerHTML = "(Click on List to View Details)";
+         $scope.isOnline = true;
          $scope.isDisabled = false;
+
 
 
       },function (error){
            alert("Please ensure You are connected to Internet.");
-           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Go Online)";
-           $scope.isDisabled = false;
+           document.getElementById("checkOnline").style.color = "red";
+           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+           $scope.isOnline = false;
+           $scope.isDisabled = true;
       });
 
 
@@ -44,6 +49,14 @@ function viewCategoryController($scope, $http, $window) {
 
       localStorage.setItem("cateogryDetails", JSON.stringify(yourSharedData));
       window.location.href='./detailCategory.html';
+
+  }
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../categoryMaintenance/viewCategory.html';
+    }
 
   }
 

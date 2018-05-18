@@ -15,8 +15,13 @@ function detailCategoryController($scope, $http, $window) {
   $scope.descInput = detailData.CategoryDesc;
   $scope.TeamID = detailData.TeamID;
 
+  $scope.isOnline = false;
 
   $scope.editCategorySubmit = function() {
+
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Editing...";
 
     $scope.isDisabled = true;
 
@@ -41,11 +46,15 @@ function detailCategoryController($scope, $http, $window) {
         }else if(response.data[0]=="NAME"){
 
           alert("Category Name is already used.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Category Name is Used)";
           $scope.isDisabled = false;
 
 
         }else{
           alert("Edit Category Failed. Please try again.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
           $scope.isDisabled = false;
         }
 
@@ -54,6 +63,8 @@ function detailCategoryController($scope, $http, $window) {
 
       },function (error){
            alert("Please ensure You are connected to Internet.");
+           document.getElementById("checkOnline").style.color = "red";
+           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
            $scope.isDisabled = false;
       });
 
@@ -61,6 +72,10 @@ function detailCategoryController($scope, $http, $window) {
   };
 
   $scope.deleteCategorySubmit = function() {
+
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Deleting...";
 
     $scope.isDisabled = true;
 
@@ -74,13 +89,14 @@ function detailCategoryController($scope, $http, $window) {
       }).then(function (response){
 
         if(response.data[0]=="DONE"){
-
           alert("Successful Delete Category.");
           window.localStorage.removeItem('cateogryDetails');
           $window.location.href = '../categoryMaintenance/viewCategory.html';
 
         }else{
           alert("Delete Category Failed. Please try again.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
           $scope.isDisabled = false;
         }
 
@@ -88,6 +104,8 @@ function detailCategoryController($scope, $http, $window) {
 
       },function (error){
            alert("Please ensure You are connected to Internet.");
+           document.getElementById("checkOnline").style.color = "red";
+           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Delete Again)";
            $scope.isDisabled = false;
       });
 
@@ -99,6 +117,32 @@ function detailCategoryController($scope, $http, $window) {
 
     window.localStorage.removeItem('cateogryDetails');
     window.location.href='../categoryMaintenance/viewCategory.html';
+  }
+
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../categoryMaintenance/detailCategory.html';
+    }
+
+  }
+
+  $scope.checkOnline = function() {
+
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
+
+    if(!window.navigator.onLine){
+      alert("Please ensure You are connected to Internet.");
+      $scope.isOnline = false;
+      document.getElementById("checkOnline").style.color = "red";
+      document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+    }else{
+      $scope.isOnline = true;
+      document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Edit)";
+    }
+
   }
 
 }

@@ -1,3 +1,15 @@
+var createFeedbackControl3 = angular.module('createFeedbackScreen3',[]);
+
+createFeedbackControl3.controller('createFeedbackController3', createFeedbackController3);
+
+
+function createFeedbackController3($scope, $http, $window) {
+
+  var personalData = JSON.parse(localStorage.getItem("personalData"));
+  $scope.name = personalData.Name;
+
+}
+
 
 var app = {
 

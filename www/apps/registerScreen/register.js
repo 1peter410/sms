@@ -10,10 +10,14 @@ function registerController($scope, $http, $window) {
   $scope.mobileInput ='';
   $scope.socialInput ='';
 
+  $scope.isOnline = false;
 
   $scope.registerSubmit = function() {
 
+    $scope.isOnline = true;
     $scope.isDisabled = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Registering...";
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
@@ -41,24 +45,61 @@ function registerController($scope, $http, $window) {
 
         }else if(response.data[0]=="EMAIL"){
           alert("Email is Used.");
+          $scope.isOnline = true;
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Email is Used)";
           $scope.isDisabled = false;
 
 
         }else if(response.data[0]=="MOBILE"){
           alert("Mobile Number is Used.");
+          $scope.isOnline = true;
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Mobile Number is Used)";
           $scope.isDisabled = false;
 
 
         }else{
           alert("Register Failed. Please try again.");
+          $scope.isOnline = true;
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          $scope.isOnline = true;
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Register Again)";
           $scope.isDisabled = false;
      });
+
+  }
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../registerScreen/register.html';
+    }
+
+  }
+
+  $scope.checkOnline = function() {
+
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
+
+    if(!window.navigator.onLine){
+      alert("Please ensure You are connected to Internet.");
+      $scope.isOnline = false;
+      document.getElementById("checkOnline").style.color = "red";
+      document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+    }else{
+      $scope.isOnline = true;
+      document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Enter Data)";
+    }
 
   }
 

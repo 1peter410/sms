@@ -6,19 +6,27 @@ submitOptionControl.controller('submitOptionController', submitOptionController)
 function submitOptionController($scope, $http, $window) {
 
 
+  $scope.isDisabled = true;
+  $scope.isOnline = false;
+
+
     $scope.checkOnline = function() {
+
+      $scope.isOnline = true;
+      document.getElementById("checkOnline").innerHTML = "Loading...";
 
       if(!window.navigator.onLine){
         alert("Please ensure You are connected to Internet.");
-
+        $scope.isOnline = false;
         $scope.isDisabled = true;
 
-        document.getElementById("goOnline").disabled=false;
-        document.getElementById('goOnline').value = "Click to Go Online";
+        document.getElementById("checkOnline").style.color = "red";
+        document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
       }else{
-        $scope.isDisabled = false;
+        $scope.isOnline = true;
+          $scope.isDisabled = false;
+        document.getElementById("checkOnline").innerHTML = "(Record Selection)";
       }
-
 
     }
 
@@ -46,6 +54,14 @@ function submitOptionController($scope, $http, $window) {
 
 
       window.location.href='../statisticRecordMaintenance/viewFeedback.html';
+
+
+    }
+
+    $scope.viewInfo = function() {
+
+
+      window.location.href='../infoHelpScreen/categoryInfo.html';
 
 
     }

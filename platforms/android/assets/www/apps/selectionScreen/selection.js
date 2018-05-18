@@ -7,8 +7,12 @@ function selectionController($scope, $http, $window) {
 
   $scope.orgSelection;
   $scope.teamSelection;
+  $scope.isOnline = false;
 
   $scope.getOrganization = function() {
+
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
@@ -18,21 +22,25 @@ function selectionController($scope, $http, $window) {
      }).then(function (response){
 
         if(response.data[0]!="GG"){
-
+          document.getElementById("checkOnline").innerHTML = "(Please Select your Organization)";
           $scope.orgList=response.data;
           $scope.isDisabled = false;
+          $scope.isOnline = true;
 
 
         }else{
           alert("No Registered Organization.");
           $scope.isDisabled = false;
+          $scope.isOnline = true;
+
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
-          document.getElementById("goOnline").disabled=false;
-          document.getElementById('goOnline').value = "Click to Go Online";
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+          $scope.isOnline = false;
           $scope.isDisabled = false;
      });
 
@@ -41,6 +49,8 @@ function selectionController($scope, $http, $window) {
 
   $scope.getTeam = function() {
 
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
     $scope.isDisabled = true;
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
@@ -54,12 +64,13 @@ function selectionController($scope, $http, $window) {
      }).then(function (response){
 
         if(response.data[0]!="GG"){
+          document.getElementById("checkOnline").innerHTML = "(Please Select your Team)";
 
           document.getElementById("teamSelection").disabled=false;
 
           $scope.teamList=response.data;
           $scope.isDisabled = false;
-
+          $scope.isOnline = true;
 
         }else{
           alert("No Registered Team.");
@@ -69,6 +80,9 @@ function selectionController($scope, $http, $window) {
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          $scope.isOnline = false;
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
           $scope.isDisabled = false;
 
      });
@@ -84,11 +98,15 @@ function selectionController($scope, $http, $window) {
 
   }
 
-  $scope.goOnline = function() {
+  $scope.goOnline = function(){
 
-    window.location.href='../selectionScreen/selection.html';
+    if(!$scope.isOnline){
+      window.location.href='../selectionScreen/selection.html';
+
+    }
 
   }
+
 
 
 

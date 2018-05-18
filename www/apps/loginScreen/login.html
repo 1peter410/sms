@@ -22,7 +22,7 @@
 </head>
 
 
-<body ng-controller="loginController" onload="displaySelectionInfo();">
+<body ng-controller="loginController" onload="displaySelectionInfo();" ng-init="checkOnline()">
 
 
   <div class="pos-f-t">
@@ -51,7 +51,9 @@
 
   </div>
 
-  <br>
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
 
   <form name="loginForm" class="container" align="center" novalidate>
 

@@ -24,6 +24,8 @@ function submissionController($scope, $http, $window) {
 
   $scope.getCategory = function() {
 
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
     $scope.isDisabled = true;
 
     $http({
@@ -39,17 +41,24 @@ function submissionController($scope, $http, $window) {
 
           $scope.categoryList=response.data;
 
-          $scope.isDisabled = false;
+          document.getElementById("checkOnline").innerHTML = "(Please Select Category and Partner)";
+          $scope.isOnline = true;
 
 
         }else{
           alert("No Category is Created.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Category Created)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          $scope.isOnline = false;
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
           $scope.isDisabled = false;
 
      });
@@ -58,6 +67,8 @@ function submissionController($scope, $http, $window) {
 
   $scope.getUser = function() {
 
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
     $scope.isDisabled = true;
 
     $http({
@@ -75,16 +86,21 @@ function submissionController($scope, $http, $window) {
           $scope.partnerList=response.data;
 
           $scope.isDisabled = false;
+          $scope.isOnline = true;
 
 
         }else{
-          alert("No User from Database.");
           $scope.isDisabled = false;
+          $scope.isOnline = true;
+
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          $scope.isOnline = false;
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
           $scope.isDisabled = false;
 
      });
@@ -104,7 +120,9 @@ function submissionController($scope, $http, $window) {
       $scope.partnerWith='Holy Spirit';
     }
 
-
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Submitting...";
 
     $http({
         method: 'POST',
@@ -137,17 +155,32 @@ function submissionController($scope, $http, $window) {
 
         }else{
           alert("Create Feedback failed. Please Try Again.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Submit Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
 
      });
 
 
+
+  }
+
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../statisticRecordMaintenance/createFeedback4.html';
+    }
 
   }
 

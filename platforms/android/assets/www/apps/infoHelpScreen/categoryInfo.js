@@ -1,16 +1,16 @@
-var detailTargetControl = angular.module('detailTargetScreen',[]);
+var cateogryInfoControl = angular.module('cateogryInfoScreen',[]);
 
-detailTargetControl.controller('detailTargetController', detailTargetController);
+cateogryInfoControl.controller('cateogryInfoController', cateogryInfoController);
 
 
-function detailTargetController($scope, $http, $window) {
+function cateogryInfoController($scope, $http, $window) {
 
   var selectionData = JSON.parse(localStorage.getItem("selectionData"));
   var targetData = JSON.parse(localStorage.getItem("targetDetails"));
 
-  $scope.nameInput=targetData.UserName;
-  $scope.targetInput=targetData.TargetCount;
   $scope.categorySelection;
+  $scope.descInput="";
+
   $scope.isDisabled = false;
 
 
@@ -36,20 +36,10 @@ function detailTargetController($scope, $http, $window) {
 
           $scope.categoryList=response.data;
 
-          if(targetData.CategoryID!=''){
-
-            for (var go in $scope.categoryList){
-
-              if(targetData.CategoryID==$scope.categoryList[go].CategoryID){
-                $scope.categorySelection=$scope.categoryList[go];
-              }
-            }
-
-          }
 
           $scope.isDisabled = false;
           $scope.isOnline = true;
-          document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Enter Data)";
+          document.getElementById("checkOnline").innerHTML = "(Please Select a Category)";
 
 
         }else{
@@ -72,34 +62,30 @@ function detailTargetController($scope, $http, $window) {
   };
 
 
-  $scope.editTarget = function() {
+  $scope.categoryChange = function() {
 
     $scope.isOnline = true;
     $scope.isDisabled = true;
     document.getElementById("checkOnline").style.color = "black";
-    document.getElementById("checkOnline").innerHTML = "Editing...";
+    document.getElementById("checkOnline").innerHTML = "Loading...";
 
 
     $http({
         method: 'POST',
         data: {
-          'targetID' : targetData.TargetID,
-          'targetCount' : $scope.targetInput,
           'categoryID' : $scope.categorySelection.CategoryID
-
          },
-        url: 'https://flash-schedules.000webhostapp.com/editTarget.php'
+        url: 'https://flash-schedules.000webhostapp.com/getCategoryByID.php'
      }).then(function (response){
 
-        if(response.data[0]=="DONE"){
+        if(response.data[0]!="GG"){
 
-          alert("Successful Edit Target.");
-          window.localStorage.removeItem('targetDetails');
-          $window.location.href = '../targetMaintenance/viewTarget.html';
-
+          $scope.descInput=response.data[0].CategoryDesc;
+          document.getElementById("checkOnline").innerHTML = "(Please Select a Category)";
+          $scope.isDisabled = false;
 
         }else{
-          alert("Failed to Edit Target.");
+          alert("Failed to Get info.");
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
           $scope.isOnline = true;
@@ -110,7 +96,7 @@ function detailTargetController($scope, $http, $window) {
      },function (error){
           alert("Please ensure You are connected to Internet.");
           document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Select Again)";
           $scope.isOnline = true;
           $scope.isDisabled = false;
 
@@ -121,17 +107,11 @@ function detailTargetController($scope, $http, $window) {
   };
 
 
-  $scope.backToView = function(){
-
-    window.localStorage.removeItem('targetDetails');
-    window.location.href='../targetMaintenance/viewTarget.html';
-  }
-
 
   $scope.goOnline = function(){
 
     if(!$scope.isOnline){
-      window.location.href='../targetMaintenance/detailTarget.html';
+      window.location.href='../infoHelpScreen/categoryInfo.html';
     }
 
   }

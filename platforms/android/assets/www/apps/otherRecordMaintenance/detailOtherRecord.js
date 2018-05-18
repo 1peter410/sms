@@ -20,7 +20,10 @@ function detailOtherRecordController($scope, $http, $window) {
 
   $scope.getCategory = function() {
 
+    $scope.isOnline = true;
     $scope.isDisabled = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
+
 
     $http({
         method: 'POST',
@@ -42,17 +45,27 @@ function detailOtherRecordController($scope, $http, $window) {
             }
 
 
+          $scope.isOnline = true;
+          document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Enter Data)";
           $scope.isDisabled = false;
 
 
         }else{
           alert("No Category is Created.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Category Created)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
+
+
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+          $scope.isOnline = false;
           $scope.isDisabled = false;
 
      });
@@ -62,7 +75,10 @@ function detailOtherRecordController($scope, $http, $window) {
 
   $scope.editOtherRecordSubmit = function() {
 
+    $scope.isOnline = true;
     $scope.isDisabled = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Editing...";
 
     $http({
         method: 'POST',
@@ -89,17 +105,26 @@ function detailOtherRecordController($scope, $http, $window) {
         }else if(response.data[0]=="DUPLICATED"){
 
           alert("This Record Details is already Created (Same Name and Same Category is already Exist).");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Event with Same Category Existed)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
 
 
         }else{
           alert("Failed to Edit Record.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
 
      });
@@ -110,7 +135,10 @@ function detailOtherRecordController($scope, $http, $window) {
 
   $scope.deleteOtherRecordSubmit = function() {
 
+    $scope.isOnline = true;
     $scope.isDisabled = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Deleting...";
 
      $http({
          method: 'POST',
@@ -129,6 +157,9 @@ function detailOtherRecordController($scope, $http, $window) {
 
         }else{
           alert("Delete Record Failed. Please try again.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
         }
 
@@ -136,6 +167,9 @@ function detailOtherRecordController($scope, $http, $window) {
 
       },function (error){
            alert("Please ensure You are connected to Internet.");
+           $scope.isOnline = true;
+           document.getElementById("checkOnline").style.color = "red";
+           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Delete Again)";
            $scope.isDisabled = false;
       });
 
@@ -147,6 +181,14 @@ function detailOtherRecordController($scope, $http, $window) {
 
     window.localStorage.removeItem('otherRecordDetails');
     window.location.href='../otherRecordMaintenance/viewOtherRecord.html';
+  }
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../otherRecordMaintenance/detailOtherRecord.html';
+    }
+
   }
 
 

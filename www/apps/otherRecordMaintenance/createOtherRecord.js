@@ -20,8 +20,11 @@ function createOtherRecordController($scope, $http, $window) {
 
   $scope.createOtherRecordSubmit = function() {
 
-    $scope.isDisabled = true;
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Creating...";
 
+    $scope.isDisabled = true;
 
     $http({
         method: 'POST',
@@ -47,17 +50,25 @@ function createOtherRecordController($scope, $http, $window) {
         }else if(response.data[0]=="DUPLICATED"){
 
           alert("This Record Details is already Created. (Same Name and Same Category is already Exist)");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Event with Same Category Existed)";
           $scope.isDisabled = false;
-
+          $scope.isOnline = true;
 
         }else{
           alert("Create Record Failed. Please try again.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Create Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
      });
 
@@ -65,6 +76,9 @@ function createOtherRecordController($scope, $http, $window) {
 
 
   $scope.getCategory = function() {
+
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
 
     $scope.isDisabled = true;
 
@@ -79,23 +93,40 @@ function createOtherRecordController($scope, $http, $window) {
         if(response.data[0]!="GG"){
 
           $scope.categoryList=response.data;
-
+          $scope.isOnline = true;
+          document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Enter Data)";
           $scope.isDisabled = false;
 
 
         }else{
           alert("No Category is Created.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Category Created)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          $scope.isOnline = false;
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
           $scope.isDisabled = false;
 
      });
 
   };
+
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../otherRecordMaintenance/createOtherRecord.html';
+    }
+
+  }
+
 
 
 }

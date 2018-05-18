@@ -15,7 +15,9 @@ function viewTargetController($scope, $http, $window) {
 
   $scope.getTarget = function() {
 
+    $scope.isOnline = true;
     $scope.isDisabled = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
@@ -30,10 +32,15 @@ function viewTargetController($scope, $http, $window) {
      }).then(function (response){
 
         $scope.testing=response.data;
+        document.getElementById("checkOnline").innerHTML = "(Click on List to View Details)";
+        $scope.isOnline = true;
         $scope.isDisabled = false;
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+          $scope.isOnline = false;
           $scope.isDisabled = false;
      });
 
@@ -50,7 +57,13 @@ function viewTargetController($scope, $http, $window) {
   }
 
 
+  $scope.goOnline = function(){
 
+    if(!$scope.isOnline){
+      window.location.href='../targetMaintenance/viewTarget.html';
+    }
+
+  }
 
 }
 

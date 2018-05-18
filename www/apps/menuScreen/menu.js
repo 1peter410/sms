@@ -5,27 +5,41 @@ menuControl.controller('menuController', menuController);
 
 function menuController($scope, $http, $window) {
 
+  $scope.isOnline = false;
+  $scope.isDisabled = true;
 
-    $scope.checkOnline = function() {
 
-      if(!window.navigator.onLine){
-        alert("Please ensure You are connected to Internet.");
+    $scope.goOnline = function(){
 
-        $scope.isDisabled = true;
-
-        document.getElementById("goOnline").disabled=false;
-        document.getElementById('goOnline').value = "Click to Go Online";
-      }else{
-        $scope.isDisabled = false;
+      if(!$scope.isOnline){
+        window.location.href='../menuScreen/menu.html';
       }
-
 
     }
 
-    $scope.goOnline = function() {
+    $scope.checkOnline = function() {
 
-      window.location.href='../menuScreen/menu.html';
+      $scope.isOnline = true;
+      document.getElementById("checkOnline").innerHTML = "Loading...";
 
+      if(!window.navigator.onLine){
+        alert("Please ensure You are connected to Internet.");
+        $scope.isOnline = false;
+        $scope.isDisabled = true;
+
+        document.getElementById("checkOnline").style.color = "red";
+        document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+      }else{
+        $scope.isOnline = true;
+          $scope.isDisabled = false;
+        document.getElementById("checkOnline").innerHTML = "(Menu Selection)";
+      }
+
+    }
+
+
+    $scope.editProfile = function() {
+      window.location.href='../editProfileScreen/editProfile.html';
     }
 
     $scope.option = function() {
@@ -34,6 +48,21 @@ function menuController($scope, $http, $window) {
       window.location.href='../menuScreen/submitOption.html';
     }
 
+    $scope.report = function() {
+
+    }
+
+    $scope.member = function() {
+      window.location.href='../targetMaintenance/viewTarget.html';
+    }
+
+    $scope.other = function() {
+      window.location.href='../otherRecordMaintenance/viewOtherRecord.html';
+    }
+
+    $scope.category = function() {
+      window.location.href='../categoryMaintenance/viewCategory.html';
+    }
 
 
 }

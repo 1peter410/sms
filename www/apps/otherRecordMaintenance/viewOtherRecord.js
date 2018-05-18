@@ -20,7 +20,9 @@ function viewOtherRecordController($scope, $http, $window) {
 
   $scope.getOtherRecord = function() {
 
+    $scope.isOnline = true;
     $scope.isDisabled = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
 
     if($scope.dateInput!=null){
       $scope.monthInput= $scope.dateInput.getMonth()+1;
@@ -43,12 +45,17 @@ function viewOtherRecordController($scope, $http, $window) {
 
 
           $scope.testing=response.data;
+          document.getElementById("checkOnline").innerHTML = "(Click on List to View Details)";
+          $scope.isOnline = true;
 
           $scope.isDisabled = false;
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+          $scope.isOnline = false;
           $scope.isDisabled = false;
 
      });
@@ -63,6 +70,13 @@ function viewOtherRecordController($scope, $http, $window) {
 
   }
 
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../otherRecordMaintenance/viewOtherRecord.html';
+    }
+
+  }
 
 
 

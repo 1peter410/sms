@@ -22,7 +22,7 @@
 </head>
 
 
-<body ng-controller="detailFeedbackController">
+<body ng-controller="detailFeedbackController" ng-init="getCategory()">
 
   <div class="pos-f-t">
 
@@ -36,18 +36,19 @@
 
   </div>
 
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
 
-  <form name="detailFeedbackForm" class="container" align="center" novalidate>
-
-    <br>
+  <form name="detailFeedbackForm" class="container" align="center" novalidate ng-init="getUser()">
 
     <div class="form-group">
       <label for="nameInput" class="text-dark"><b>Full Name:</b></label>
       <input ng-disabled="isDisabled" required ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" style="text-align: center">
 
-      <div ng-show="!selfSubmitForm.nameInput.$pristine" >
-        <span ng-show="selfSubmitForm.nameInput.$error.required" style="color:red">Please enter your name.</span>
-        <span ng-show="selfSubmitForm.nameInput.$error.pattern" style="color:red">This is not a valid name.</span>
+      <div ng-show="!detailFeedbackForm.nameInput.$pristine" >
+        <span ng-show="detailFeedbackForm.nameInput.$error.required" style="color:red">Please enter your name.</span>
+        <span ng-show="detailFeedbackForm.nameInput.$error.pattern" style="color:red">This is not a valid name.</span>
       </div>
 
     </div>
@@ -56,8 +57,8 @@
       <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
       <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
 
-      <div ng-show="!selfSubmitForm.mobileInput.$pristine" >
-      <span ng-show="selfSubmitForm.mobileInput.$error.pattern" style="color:red">This is not a valid mobile number.</span>
+      <div ng-show="!detailFeedbackForm.mobileInput.$pristine" >
+      <span ng-show="detailFeedbackForm.mobileInput.$error.pattern" style="color:red">This is not a valid mobile number.</span>
       </div>
 
     </div>
@@ -97,7 +98,7 @@
 
     <select ng-disabled="isDisabled" class="custom-select" name="Q1" id="Q1"
        ng-options="option.value for option in Q1.availableOptions track by option.value"
-       ng-model="Q1.selectedOption" style="text-align-last: center; color:blue" required>
+       ng-model="Q1.selectedOption" style="text-align-last: center; color:blue">
 
        <option value="" disabled selected>No Feedback</option>
 
@@ -111,7 +112,7 @@
 
     <select ng-disabled="isDisabled" class="custom-select" name="Q2" id="Q2"
        ng-options="option.value for option in Q2.availableOptions track by option.value"
-       ng-model="Q2.selectedOption" style="text-align-last: center; color:blue" required>
+       ng-model="Q2.selectedOption" style="text-align-last: center; color:blue">
 
        <option value="" disabled selected>No Feedback</option>
 
@@ -124,7 +125,7 @@
 
     <select ng-disabled="isDisabled" class="custom-select" name="Q3" id="Q3"
        ng-options="option.value for option in Q3.availableOptions track by option.value"
-       ng-model="Q3.selectedOption" style="text-align-last: center; color:blue" required>
+       ng-model="Q3.selectedOption" style="text-align-last: center; color:blue">
 
        <option value="" disabled selected>No Feedback</option>
 
@@ -138,7 +139,7 @@
 
     <select ng-disabled="isDisabled" class="custom-select" name="Q4" id="Q4"
        ng-options="option.value for option in Q4.availableOptions track by option.value"
-       ng-model="Q4.selectedOption" style="text-align-last: center; color:blue" required>
+       ng-model="Q4.selectedOption" style="text-align-last: center; color:blue">
 
        <option value="" disabled selected>No Feedback</option>
 
@@ -155,8 +156,8 @@
 
 
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editTarget()" ng-disabled="detailFeedbackForm.$invalid || isDisabled">Edit</button>
-    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-click="editTarget()">Delete</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editFeedback()" ng-disabled="detailFeedbackForm.$invalid || isDisabled">Edit Record</button>
+    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-click="deleteFeedback()">Delete Record</button>
 
 
   </form>

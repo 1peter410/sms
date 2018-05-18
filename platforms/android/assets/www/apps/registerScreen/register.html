@@ -21,7 +21,7 @@
 </head>
 
 
-<body ng-controller="registerController">
+<body ng-controller="registerController" ng-init="checkOnline()">
 
   <div class="pos-f-t">
 
@@ -35,8 +35,12 @@
 
   </div>
 
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
+
   <form name="registerForm" class="container" align="center" novalidate>
-<br>
+
     <img src="../../img/register.png" srcset="../../img/register.png 500w, ../../img/register.png 1000w">
 <br><br>
     <div class="form-group">

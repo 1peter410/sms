@@ -35,17 +35,18 @@
   <nav class="navbar navbar-dark bg-dark">
 
       <span class="text-muted">Record Maintenance</span>
-      <button ng-disabled="isDisabled" type="button" class="btn btn-info" ng-click="backToMenu()">Back to Menu</button>
+      <button type="button" class="btn btn-info" ng-click="backToMenu()">Back to Menu</button>
 
   </nav>
 
 </div>
 
+<div>
+  <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+</div>
 
 
 <div class="container" align="center">
-
-  <input disabled class="navbar-toggler" type="button" id="goOnline" value="Selection Option" ng-click="goOnline();"/>
 
   <table class="table" >
     <tr scope="row">
@@ -55,7 +56,7 @@
 
     <tr scope="row">
       <th scope="col" style="text-align: center;"> <img src="../../img/viewRecord.png" class="img-thumbnail btn btn-outline-primary" ng-click="isDisabled || viewRecord()">View Record</th>
-      <th scope="col" style="text-align: center;"> <img src="../../img/info.png" class="img-thumbnail btn btn-outline-primary" ng-click="isDisabled || viewInfo()">Info/Help</th>
+      <th scope="col" style="text-align: center;"> <img src="../../img/info.png" class="img-thumbnail btn btn-outline-primary" ng-click="isDisabled || viewInfo()">Category Info</th>
 
     </tr>
 

@@ -27,7 +27,7 @@
   <div class="pos-f-t">
 
   <nav class="navbar navbar-dark bg-dark">
-      <span class="text-muted">View Faith Goal</span>
+      <span class="text-muted">Edit Faith Goal</span>
 
 
     <button ng-disabled="isDisabled" type="button" class="btn btn-info" ng-click='backToView()'>Back to View</button>
@@ -36,10 +36,11 @@
 
   </div>
 
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
 
   <form name="editTargetForm" class="container" align="center" novalidate>
-
-    <br>
 
     <div class="form-group">
       <label for="nameInput" class="text-dark"><b>Member Name:</b></label>

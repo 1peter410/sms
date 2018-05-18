@@ -48,8 +48,11 @@
 
   </ul>
 
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
+
   <form name="viewOtherRecordForm" class="container" align="center" novalidate>
-<br>
 
 <div class="form-group">
  <label for="dateInput" class="text-dark"><b>Year/Month:</b></label>
@@ -67,11 +70,9 @@
 
     <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="getOtherRecord()" ng-disabled="viewOtherRecordForm.$invalid || isDisabled">Filter</button>
 
-
   </form>
 
-  <br>
-
+<br>
   <div class="container">
 
      <div class="list-group">

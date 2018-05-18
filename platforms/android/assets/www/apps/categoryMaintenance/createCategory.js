@@ -8,11 +8,14 @@ function createCategoryController($scope, $http, $window) {
   $scope.nameInput='';
   $scope.descInput='';
   $scope.isDisabled = false;
-
+  $scope.isOnline = false;
 
   $scope.createCategorySubmit = function() {
 
     $scope.isDisabled = true;
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Creating...";
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
@@ -37,6 +40,8 @@ function createCategoryController($scope, $http, $window) {
         }else if(response.data[0]=="NAME"){
 
           alert("Category Name is already used.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Category Name is Used)";
           $scope.isDisabled = false;
 
 
@@ -48,11 +53,38 @@ function createCategoryController($scope, $http, $window) {
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Create Again)";
           $scope.isDisabled = false;
      });
 
   };
 
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../categoryMaintenance/createCategory.html';
+    }
+
+  }
+
+  $scope.checkOnline = function() {
+
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
+
+    if(!window.navigator.onLine){
+      alert("Please ensure You are connected to Internet.");
+      $scope.isOnline = false;
+      document.getElementById("checkOnline").style.color = "red";
+      document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+    }else{
+      $scope.isOnline = true;
+      document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Enter Data)";
+    }
+
+  }
 
 }
 

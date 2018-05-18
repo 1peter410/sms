@@ -18,6 +18,10 @@ function detailTargetController($scope, $http, $window) {
 
   $scope.getCategory = function() {
 
+    $scope.isOnline = true;
+    $scope.isDisabled = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
+
     $http({
         method: 'POST',
         data: {
@@ -44,16 +48,23 @@ function detailTargetController($scope, $http, $window) {
           }
 
           $scope.isDisabled = false;
+          $scope.isOnline = true;
+          document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Enter Data)";
 
 
         }else{
           alert("No Category is Created.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Category Created)";
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+          $scope.isOnline = false;
           $scope.isDisabled = false;
 
      });
@@ -63,7 +74,11 @@ function detailTargetController($scope, $http, $window) {
 
   $scope.editTarget = function() {
 
+    $scope.isOnline = true;
     $scope.isDisabled = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Editing...";
+
 
     $http({
         method: 'POST',
@@ -85,12 +100,18 @@ function detailTargetController($scope, $http, $window) {
 
         }else{
           alert("Failed to Edit Target.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
 
      });
@@ -106,6 +127,14 @@ function detailTargetController($scope, $http, $window) {
     window.location.href='../targetMaintenance/viewTarget.html';
   }
 
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../targetMaintenance/detailTarget.html';
+    }
+
+  }
 
 }
 

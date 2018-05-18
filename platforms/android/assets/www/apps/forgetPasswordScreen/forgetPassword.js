@@ -12,10 +12,15 @@ function forgetPasswordController($scope, $http, $window) {
   $scope.isDisabled = false;
   $scope.emailInput = '';
   $scope.mobileInput = '';
+  $scope.isOnline = false;
+
 
   $scope.forgetPasswordSubmit = function() {
 
     $scope.isDisabled = true;
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Recovering...";
 
 
     $http({
@@ -40,15 +45,46 @@ function forgetPasswordController($scope, $http, $window) {
              }else{
 
                alert("Recover Password Failed. Email or Mobile Number is Not Registered. Please Try Again.");
+               $scope.isOnline = true;
+               document.getElementById("checkOnline").style.color = "red";
+               document.getElementById("checkOnline").innerHTML = "(Email or Mobile Number is Not Registered.)";
                $scope.isDisabled = false;
 
              }
 
           },function (error){
                alert("Please ensure You are connected to Internet.");
+               $scope.isOnline = true;
+               document.getElementById("checkOnline").style.color = "red";
+               document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Recover Again)";
                $scope.isDisabled = false;
           });
 
+
+  }
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../forgetPasswordScreen/forgetPassword.html';
+    }
+
+  }
+
+  $scope.checkOnline = function() {
+
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
+
+    if(!window.navigator.onLine){
+      alert("Please ensure You are connected to Internet.");
+      $scope.isOnline = false;
+      document.getElementById("checkOnline").style.color = "red";
+      document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+    }else{
+      $scope.isOnline = true;
+      document.getElementById("checkOnline").innerHTML = "(Enter Registered Email and Mobile Number)";
+    }
 
   }
 

@@ -9,9 +9,14 @@ function loginController($scope, $http, $window) {
   $scope.passwordInput = '';
   $scope.isDisabled = false;
 
+  $scope.isOnline = false;
+
   $scope.loginSubmit = function() {
 
+    $scope.isOnline = true;
     $scope.isDisabled = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Logining...";
 
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
@@ -36,17 +41,48 @@ function loginController($scope, $http, $window) {
           $window.location.href = '../menuScreen/menu.html';
 
         }else{
+          $scope.isOnline = true;
           alert("Login Failed. Incorrect Email or Password.");
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Incorrect Login Email or Password)";
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
+          $scope.isOnline = true;
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Login Again)";
           $scope.isDisabled = false;
      });
 
   };
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../loginScreen/login.html';
+    }
+
+  }
+
+  $scope.checkOnline = function() {
+
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
+
+    if(!window.navigator.onLine){
+      alert("Please ensure You are connected to Internet.");
+      $scope.isOnline = false;
+      document.getElementById("checkOnline").style.color = "red";
+      document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+    }else{
+      $scope.isOnline = true;
+      document.getElementById("checkOnline").innerHTML = "(Enter Email and Password to Login)";
+    }
+
+  }
 
 
 }

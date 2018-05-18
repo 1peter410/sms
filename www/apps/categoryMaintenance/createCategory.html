@@ -22,7 +22,7 @@
 </head>
 
 
-<body ng-controller='createCategoryController'>
+<body ng-controller='createCategoryController' ng-init="checkOnline()">
 
   <div class="pos-f-t">
 
@@ -48,8 +48,12 @@
 
   </ul>
 
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
+
   <form name="createCategoryForm" class="container" align="center" novalidate>
-<br>
+
     <div class="form-group">
       <label for="nameInput" class="text-dark"><b>Category Name:</b></label>
       <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" required style="text-align: center">

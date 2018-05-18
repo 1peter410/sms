@@ -19,6 +19,11 @@ function editProfileController($scope, $http, $window) {
 
   $scope.getProfileInfo = function(){
 
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").innerHTML = "Loading...";
+    document.getElementById("passwordSection").innerHTML = "Loading...";
+
+
     $scope.isDisabled = true;
 
     $http({
@@ -34,9 +39,20 @@ function editProfileController($scope, $http, $window) {
              $scope.mobileInput = response.data[0].UserMobile;
 
              $scope.isDisabled = false;
+             $scope.isOnline = true;
+
+             document.getElementById("checkOnline").innerHTML = "(Edit Information Section)";
+             document.getElementById("passwordSection").innerHTML = "(Edit Password Section)";
+
 
           },function (error){
                alert("Please ensure You are connected to Internet.");
+               $scope.isOnline = false;
+               document.getElementById("checkOnline").style.color = "red";
+               document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+
+               document.getElementById("passwordSection").style.color = "red";
+               document.getElementById("passwordSection").innerHTML = "(No Internet Connection - Click Me to Refresh)";
                $scope.isDisabled = false;
           });
 
@@ -46,6 +62,9 @@ function editProfileController($scope, $http, $window) {
   $scope.editInfoSubmit = function() {
 
     $scope.isDisabled = true;
+    $scope.isOnline = true;
+    document.getElementById("checkOnline").style.color = "black";
+    document.getElementById("checkOnline").innerHTML = "Editting Info...";
 
     $http({
              method: 'POST',
@@ -63,27 +82,38 @@ function editProfileController($scope, $http, $window) {
 
                alert("Edit Profile Info Successful.");
                $scope.getProfileInfo();
-               $scope.isDisabled = false;
 
              }else if(response.data[0]=="EMAIL"){
 
                alert("Email Have Been Used. Please Try Again.");
+               $scope.isOnline = true;
+               document.getElementById("checkOnline").style.color = "red";
+               document.getElementById("checkOnline").innerHTML = "(Email is Used)";
                $scope.isDisabled = false;
 
              }else if(response.data[0]=="MOBILE"){
 
                alert("Mobile Number Have Been Used. Please Try Again.");
+               $scope.isOnline = true;
+               document.getElementById("checkOnline").style.color = "red";
+               document.getElementById("checkOnline").innerHTML = "(Mobile Number is Used)";
                $scope.isDisabled = false;
 
              }else{
 
                alert("Edit Profile Info Failed. Please Try Again.");
+               $scope.isOnline = true;
+               document.getElementById("checkOnline").style.color = "red";
+               document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
                $scope.isDisabled = false;
 
              }
 
           },function (error){
                alert("Please ensure You are connected to Internet.");
+               $scope.isOnline = true;
+               document.getElementById("checkOnline").style.color = "red";
+               document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
                $scope.isDisabled = false;
           });
 
@@ -93,6 +123,9 @@ function editProfileController($scope, $http, $window) {
   $scope.editPasswordSubmit = function() {
 
     $scope.isDisabled = true;
+    $scope.isOnline = true;
+    document.getElementById("passwordSection").style.color = "black";
+    document.getElementById("passwordSection").innerHTML = "Changing Password...";
 
     $http({
              method: 'POST',
@@ -108,32 +141,47 @@ function editProfileController($scope, $http, $window) {
              if(response.data[0]=="DONE"){
 
                alert("Change Password Successful.");
-               $scope.oldPasswordInput = '';
-               $scope.newPasswordInput = '';
-               $scope.retypePasswordInput ='';
-               $scope.editProfilePassword.$setPristine();
-               $scope.isDisabled = false;
+               $scope.getProfileInfo();
 
 
              }else if(response.data[0]=="WRONG"){
 
                alert("Old Password Incorrect. Please Try Again.");
+               $scope.isOnline = true;
+                document.getElementById("passwordSection").style.color = "red";
+                document.getElementById("passwordSection").innerHTML = "(Old Password Incorrect)";
                $scope.isDisabled = false;
 
              }else{
 
                alert("Change Password Failed. Please Try Again.");
+               $scope.isOnline = true;
+                document.getElementById("passwordSection").style.color = "red";
+                document.getElementById("passwordSection").innerHTML = "(Something Went Wrong - Try Again)";
                $scope.isDisabled = false;
 
              }
 
           },function (error){
                alert("Please ensure You are connected to Internet.");
+               $scope.isOnline = true;
+               document.getElementById("passwordSection").style.color = "red";
+               document.getElementById("passwordSection").innerHTML = "(No Internet Connection - Try Edit Again)";
                $scope.isDisabled = false;
           });
 
 
   }
+
+  $scope.goOnline = function(){
+
+    if(!$scope.isOnline){
+      window.location.href='../editProfileScreen/editProfile.html';
+    }
+
+  }
+
+
 
 
 
