@@ -20,10 +20,10 @@
 <body>
   <!-- -----------navigation---------------------------------------------------------------------------------------------->
   <nav class="navbar navbar-dark bg-dark">
-    <a href="viewEditMember.html">
-      <button class="btn btn-dark btn-outline-light">BACK</button></a>
-      <span style="color: white">View/Edit Member Details</span>
-    </nav>
+    <span class="text-muted">View/Edit Member Details</span>
+    <button ng-disabled="isDisabled" type="button" class="btn btn-info"
+    onclick="window.location.href='viewEditMember.html';">BACK</button>
+  </nav>
 
     <!-- -----------member form--------------------------------------------------------------------------------------------->
     <div class="container">
