@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html ng-app='createMemberScreen'>
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <script src="../../js/Angular/angular.min.js"></script>
+  <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
+  <script src="../../js/Bootstrap/bootstrap.min.js"></script>
+
+    <script src="./createMember.js"></script>
+
+    <script type="text/javascript" src="../../cordova.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+    <title>Create Member</title>
+</head>
+
+
+<body ng-controller='createMemberController' ng-init="checkOnline()">
+
+  <div class="pos-f-t">
+
+  <nav class="navbar navbar-dark bg-dark">
+      <span class="text-muted">Member Maintenance</span>
+
+
+    <button ng-disabled="isDisabled" type="button" class="btn btn-info" onclick="window.location.href='../menuScreen/menu.html';">Back to Menu</button>
+
+  </nav>
+
+  </div>
+
+  <ul class="nav nav-tabs navbar-light" style="text-align: center;background-color: #e3f2fd">
+              <li class="nav-item nav-link active"><a href="../memberMaintenance/createMember.html">
+                      <span><input type="image" src="../../img/create.png" style="height: 25px; width: 25px"></span>
+                      Create</a>
+              </li>
+              <li class="nav-item nav-link"><a href="../memberMaintenance/viewMember.html">
+                      <span><input type="image" src="../../img/edit.png" style="height: 25px; width: 25px"></span>
+                      View/Edit</a>
+              </li>
+              <li class="nav-item nav-link"><a href="../memberMaintenance/approvalMember.html">
+                      <span><input type="image" src="../../img/approve.png" style="height: 25px; width: 25px"></span>
+                      Approval</a>
+              </li>
+
+  </ul>
+
+  <div>
+    <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+  </div>
+
+
+
+  <form name="createMemberForm" class="container" align="center" novalidate>
+
+    <div class="form-group">
+      <label for="nameInput" class="text-dark"><b>Full Name:</b></label>
+      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" required style="text-align: center">
+
+      <div ng-show="!createMemberForm.nameInput.$pristine" >
+      <span ng-show="createMemberForm.nameInput.$error.required" style="color:red">Please enter your full name.</span>
+      <span ng-show="createMemberForm.nameInput.$error.pattern" style="color:red">This is not a valid name.</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="emailInput" class="text-dark"><b>Email:</b></label>
+      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" required class="form-control" id="emailInput" name="emailInput" ng-pattern="/\S+@\S+\.\S+/" style="text-align: center">
+
+      <div ng-show="!createMemberForm.emailInput.$pristine" >
+      <span ng-show="createMemberForm.emailInput.$error.required" style="color:red">Please enter your email.</span>
+      <span ng-show="createMemberForm.emailInput.$error.pattern" style="color:red">This is not a valid email.</span>
+      </div>
+
+    </div>
+
+
+    <div class="form-group">
+      <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
+      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
+
+      <div ng-show="!createMemberForm.mobileInput.$pristine" >
+      <span ng-show="createMemberForm.mobileInput.$error.required" style="color:red">Please enter your mobile number.</span>
+      <span ng-show="createMemberForm.mobileInput.$error.pattern" style="color:red">This is not a valid mobile number.</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
+      <input ng-disabled="isDisabled" ng-model="socialInput" required type="text" id="socialInput" name="socialInput" class="form-control" style="text-align: center">
+
+      <div ng-show="!createMemberForm.socialInput.$pristine" >
+      <span ng-show="createMemberForm.socialInput.$error.required" style="color:red">Please enter your social media.</span>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="roleInput" class="text-dark"><b>User Type:</b></label>
+
+      <select id='roleInput' ng-disabled="isDisabled" class="custom-select" ng-model="roleInput" style="text-align-last: center; color:blue">
+                <option value="Member">Member</option>
+                <option value="Leader">Leader</option>
+      </select>
+
+    </div>
+
+
+    <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
+
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createMemberSubmit()" ng-disabled="createMemberForm.$invalid || isDisabled">Create Member</button>
+
+
+  </form>
+
+
+</body>
+
+
+
+
+
+</html>
