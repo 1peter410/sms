@@ -5,9 +5,11 @@ menuControl.controller('menuController', menuController);
 
 function menuController($scope, $http, $window) {
 
-  $scope.isOnline = false;
-  $scope.isDisabled = true;
 
+  $scope.isOnline = false;
+  var loginData = JSON.parse(localStorage.getItem("loginData"));
+
+  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
     $scope.goOnline = function(){
 
@@ -19,23 +21,55 @@ function menuController($scope, $http, $window) {
 
     $scope.checkOnline = function() {
 
+      $scope.isDisabled = true;
       $scope.isOnline = true;
       document.getElementById("checkOnline").innerHTML = "Loading...";
 
-      if(!window.navigator.onLine){
-        alert("Please ensure You are connected to Internet.");
-        $scope.isOnline = false;
-        $scope.isDisabled = true;
+        $http({
+            method: 'POST',
+            data: {
+                'userID' : loginData.UserID,
+                'userName' : loginData.UserName,
+                'userStatus' : loginData.UserStatus,
+                'userRole' : loginData.UserRole,
+                'userPassword' : loginData.UserPassword,
+                'userEmail' : loginData.UserEmail
+            },
+            url: 'https://flash-schedules.000webhostapp.com/checkAccount.php'
+         }).then(function (response){
 
-        document.getElementById("checkOnline").style.color = "red";
-        document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
-      }else{
-        $scope.isOnline = true;
-          $scope.isDisabled = false;
-        document.getElementById("checkOnline").innerHTML = "(Menu Selection)";
+            if(response.data[0]!='GG'){
+              $scope.isDisabled = false;
+              $scope.isOnline = true;
+              document.getElementById("checkOnline").innerHTML = "(Menu Selection)";
+
+            }else{
+              window.localStorage.removeItem('approvalDetails');
+              window.localStorage.removeItem('memberDetails');
+              window.localStorage.removeItem('feedbackData');
+              window.localStorage.removeItem('personalData');
+              window.localStorage.removeItem('targetDetails');
+              window.localStorage.removeItem('otherRecordDetails');
+              window.localStorage.removeItem('recordDetails');
+              window.localStorage.removeItem('cateogryDetails');
+              window.localStorage.removeItem('selectionData');
+              window.localStorage.removeItem('loginData');
+              alert("Account Details Have Been Changed. Please Re-login.");
+              window.location.href='../selectionScreen/selection.html';
+            }
+
+
+         },function (error){
+              alert("Please ensure You are connected to Internet.");
+              $scope.isOnline = false;
+              $scope.isDisabled = true;
+              document.getElementById("checkOnline").style.color = "red";
+              document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
+         });
+
+
+
       }
-
-    }
 
 
     $scope.editProfile = function() {
@@ -53,6 +87,10 @@ function menuController($scope, $http, $window) {
     }
 
     $scope.member = function() {
+      window.location.href='../memberMaintenance/viewMember.html';
+    }
+
+    $scope.target = function() {
       window.location.href='../targetMaintenance/viewTarget.html';
     }
 

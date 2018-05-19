@@ -1,63 +1,75 @@
-var createCategoryControl = angular.module('createCategoryScreen',[]);
+var createMemberControl = angular.module('createMemberScreen',[]);
 
-createCategoryControl.controller('createCategoryController', createCategoryController);
+createMemberControl.controller('createMemberController', createMemberController);
 
 
-function createCategoryController($scope, $http, $window) {
+function createMemberController($scope, $http, $window) {
 
-  $scope.nameInput='';
-  $scope.descInput='';
-  $scope.isDisabled = false;
-  $scope.isOnline = false;
+  $scope.nameInput="";
+  $scope.emailInput="";
+  $scope.mobileInput="";
+  $scope.socialInput="";
+  $scope.roleInput="Member";
 
-  $scope.createCategorySubmit = function() {
+  var selectionData = JSON.parse(localStorage.getItem("selectionData"));
+
+  $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+
+
+  $scope.createMemberSubmit = function() {
 
     $scope.isDisabled = true;
     $scope.isOnline = true;
     document.getElementById("checkOnline").style.color = "black";
     document.getElementById("checkOnline").innerHTML = "Creating...";
 
-    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-
-    var selectionData = JSON.parse(localStorage.getItem("selectionData"));
 
     $http({
         method: 'POST',
         data: {
-            'categoryName' : $scope.nameInput,
-            'categoryDesc' : $scope.descInput,
+            'userName' : $scope.nameInput,
+            'userEmail' : $scope.emailInput,
+            'userMobile' : $scope.mobileInput,
+            'userSocial' : $scope.socialInput,
+            'userRole' : $scope.roleInput,
             'teamID' : selectionData.TeamID
         },
-        url: 'https://flash-schedules.000webhostapp.com/createCategory.php'
+        url: 'https://flash-schedules.000webhostapp.com/createMember.php'
      }).then(function (response){
 
         if(response.data[0]=="DONE"){
 
-          alert("Successful Create Category.");
+          alert("Successful Create Member.");
 
-          $window.location.href = '../categoryMaintenance/createCategory.html';
+          $window.location.href = '../memberMaintenance/createMember.html';
 
-        }else if(response.data[0]=="NAME"){
-
-          alert("Category Name is already used.");
+        }else if(response.data[0]=="EMAIL"){
+          alert("Email is Used.");
           $scope.isOnline = true;
           document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(Category Name is Used)";
+          document.getElementById("checkOnline").innerHTML = "(Email is Used)";
+          $scope.isDisabled = false;
+
+
+        }else if(response.data[0]=="MOBILE"){
+          alert("Mobile Number is Used.");
+          $scope.isOnline = true;
+          document.getElementById("checkOnline").style.color = "red";
+          document.getElementById("checkOnline").innerHTML = "(Mobile Number is Used)";
           $scope.isDisabled = false;
 
 
         }else{
-          alert("Create Category Failed. Please try again.");
-          $scope.isOnline = true;
+          alert("Create Member Failed. Please try again.");
           document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong -Try Again)";
+          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
+          $scope.isOnline = true;
           $scope.isDisabled = false;
         }
 
 
      },function (error){
           alert("Please ensure You are connected to Internet.");
-          $scope.isOnline = true;
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Create Again)";
           $scope.isDisabled = false;
@@ -69,7 +81,7 @@ function createCategoryController($scope, $http, $window) {
   $scope.goOnline = function(){
 
     if(!$scope.isOnline){
-      window.location.href='../categoryMaintenance/createCategory.html';
+      window.location.href='../memberMaintenance/createMember.html';
     }
 
   }
@@ -90,6 +102,7 @@ function createCategoryController($scope, $http, $window) {
     }
 
   }
+
 
 }
 

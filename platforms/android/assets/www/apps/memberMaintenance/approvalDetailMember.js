@@ -1,114 +1,97 @@
-var detailCategoryControl = angular.module('detailCategoryScreen',[]);
+var approvalDetailMemberControl = angular.module('approvalDetailMemberScreen',[]);
 
-detailCategoryControl.controller('detailCategoryController', detailCategoryController);
+approvalDetailMemberControl.controller('approvalDetailMemberController', approvalDetailMemberController);
 
 
-function detailCategoryController($scope, $http, $window) {
+function approvalDetailMemberController($scope, $http, $window) {
 
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
-  var detailData = JSON.parse(localStorage.getItem("cateogryDetails"));
+  var approvalData = JSON.parse(localStorage.getItem("approvalDetails"));
+
+  $scope.nameInput = approvalData.UserName;
+  $scope.emailInput = approvalData.UserEmail;
+  $scope.mobileInput = approvalData.UserMobile;
+  $scope.socialInput = approvalData.UserSocial;
+
 
   $scope.isDisabled = false;
-  $scope.CategoryID = detailData.CategoryID;
-  $scope.nameInput = detailData.CategoryName;
-  $scope.descInput = detailData.CategoryDesc;
-  $scope.TeamID = detailData.TeamID;
-
   $scope.isOnline = false;
 
-  $scope.editCategorySubmit = function() {
+
+  $scope.rejectMemberSubmit = function() {
 
     $scope.isOnline = true;
     document.getElementById("checkOnline").style.color = "black";
-    document.getElementById("checkOnline").innerHTML = "Editing...";
+    document.getElementById("checkOnline").innerHTML = "Rejecting...";
 
     $scope.isDisabled = true;
 
      $http({
          method: 'POST',
          data: {
-           'categoryID' : $scope.CategoryID,
-           'categoryName' : $scope.nameInput,
-           'categoryDesc' : $scope.descInput,
-           'teamID': $scope.TeamID
+           'userID': approvalData.UserID
          },
-         url: 'https://flash-schedules.000webhostapp.com/editCategory.php'
+         url: 'https://flash-schedules.000webhostapp.com/rejectMember.php'
       }).then(function (response){
 
-
         if(response.data[0]=="DONE"){
-
-          alert("Successful Edit Category.");
-          window.localStorage.removeItem('cateogryDetails');
-          $window.location.href = '../categoryMaintenance/viewCategory.html';
-
-        }else if(response.data[0]=="NAME"){
-
-          alert("Category Name is already used.");
-          document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(Category Name is Used)";
-          $scope.isOnline = true;
-          $scope.isDisabled = false;
-
+          alert("Successful Reject Member.");
+          window.localStorage.removeItem('approvalDetails');
+          $window.location.href = '../memberMaintenance/approvalMember.html';
 
         }else{
-          alert("Edit Category Failed. Please try again.");
+          alert("Reject Member Failed. Please try again.");
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
-          $scope.isOnline = true;
           $scope.isDisabled = false;
         }
-
-
 
 
       },function (error){
            alert("Please ensure You are connected to Internet.");
            document.getElementById("checkOnline").style.color = "red";
-           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
-           $scope.isOnline = false;
+           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Reject Again)";
+           $scope.isOnline = true;
            $scope.isDisabled = false;
       });
 
 
   };
 
-  $scope.deleteCategorySubmit = function() {
+  $scope.approveMemberSubmit = function() {
 
     $scope.isOnline = true;
     document.getElementById("checkOnline").style.color = "black";
-    document.getElementById("checkOnline").innerHTML = "Deleting...";
+    document.getElementById("checkOnline").innerHTML = "Approving...";
 
     $scope.isDisabled = true;
 
      $http({
          method: 'POST',
          data: {
-           'categoryID' : $scope.CategoryID,
-           'teamID': $scope.TeamID
+           'userID': approvalData.UserID
          },
-         url: 'https://flash-schedules.000webhostapp.com/deleteCategory.php'
+         url: 'https://flash-schedules.000webhostapp.com/activeMember.php'
       }).then(function (response){
 
         if(response.data[0]=="DONE"){
-          alert("Successful Delete Category.");
-          window.localStorage.removeItem('cateogryDetails');
-          $window.location.href = '../categoryMaintenance/viewCategory.html';
+          alert("Successful Approve Member.");
+          window.localStorage.removeItem('approvalDetails');
+          $window.location.href = '../memberMaintenance/approvalMember.html';
 
         }else{
-          alert("Delete Category Failed. Please try again.");
+          alert("Approve Member Failed. Please try again.");
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
           $scope.isDisabled = false;
         }
 
 
-
       },function (error){
            alert("Please ensure You are connected to Internet.");
            document.getElementById("checkOnline").style.color = "red";
-           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Delete Again)";
+           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Approve Again)";
            $scope.isOnline = true;
            $scope.isDisabled = false;
       });
@@ -117,17 +100,18 @@ function detailCategoryController($scope, $http, $window) {
   };
 
 
+
   $scope.backToView = function(){
 
-    window.localStorage.removeItem('cateogryDetails');
-    window.location.href='../categoryMaintenance/viewCategory.html';
+    window.localStorage.removeItem('memberDetails');
+    window.location.href='../memberMaintenance/approvalMember.html';
   }
 
 
   $scope.goOnline = function(){
 
     if(!$scope.isOnline){
-      window.location.href='../categoryMaintenance/detailCategory.html';
+      window.location.href='../memberMaintenance/approvalDetailMember.html';
     }
 
   }
@@ -145,9 +129,11 @@ function detailCategoryController($scope, $http, $window) {
     }else{
       $scope.isOnline = true;
       document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Edit)";
+
     }
 
   }
+
 
 }
 
