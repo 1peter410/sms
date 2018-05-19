@@ -2,6 +2,24 @@ var editProfileControl = angular.module('profileScreen',[]);
 
 editProfileControl.controller('editProfileController', editProfileController);
 
+editProfileControl.directive("ngConfirmClick", [
+  function() {
+   return {
+     priority: -1,
+      restrict: "A",
+      link: function(scope, element, attrs) {
+        element.bind("click", function(e) {
+          var message;
+          message = attrs.ngConfirmClick;
+          if (message && !confirm(message)) {
+           e.stopImmediatePropagation();
+           e.preventDefault();
+          }
+        });
+      }
+    };
+  }
+]);
 
 function editProfileController($scope, $http, $window) {
 
@@ -141,6 +159,10 @@ function editProfileController($scope, $http, $window) {
              if(response.data[0]=="DONE"){
 
                alert("Change Password Successful.");
+               $scope.oldPasswordInput = '';
+               $scope.newPasswordInput = '';
+               $scope.retypePasswordInput ='';
+               $scope.editProfilePassword.$setPristine();
                $scope.getProfileInfo();
 
 

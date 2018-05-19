@@ -119,7 +119,7 @@
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createOtherRecordSubmit()" ng-disabled="createOtherRecordForm.$invalid || isDisabled">Submit Record</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block"  ng-confirm-click="Confirm Submit Record?" ng-click="createOtherRecordSubmit()" ng-disabled="createOtherRecordForm.$invalid || isDisabled">Submit Record</button>
 
 
   </form>

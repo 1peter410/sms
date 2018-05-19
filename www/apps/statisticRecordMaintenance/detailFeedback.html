@@ -156,8 +156,8 @@
 
 
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editFeedback()" ng-disabled="detailFeedbackForm.$invalid || isDisabled">Edit Record</button>
-    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-click="deleteFeedback()">Delete Record</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block"  ng-confirm-click="Confirm Edit Record?" ng-click="editFeedback()" ng-disabled="detailFeedbackForm.$invalid || isDisabled">Edit Record</button>
+    <button type="submit" class="btn btn-danger btn-lg btn-block"  ng-confirm-click="Confirm Delete Record?" ng-click="deleteFeedback()">Delete Record</button>
 
 
   </form>

@@ -66,8 +66,8 @@
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editCategorySubmit()" ng-disabled="editCategoryForm.$invalid || isDisabled">Edit Category</button>
-    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-click="deleteCategorySubmit()" ng-disabled="editCategoryForm.$invalid || isDisabled">Delete Category</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-confirm-click="Confirm Edit Category?" ng-click="editCategorySubmit()" ng-disabled="editCategoryForm.$invalid || isDisabled">Edit Category</button>
+    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-confirm-click="Confirm Delete Category?" ng-click="deleteCategorySubmit()" ng-disabled="editCategoryForm.$invalid || isDisabled">Delete Category</button>
 
 
   </form>
