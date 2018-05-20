@@ -79,7 +79,7 @@
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createCategorySubmit()" ng-disabled="createCategoryForm.$invalid || isDisabled">Create Category</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-confirm-click="Confirm Create Category?" ng-click="createCategorySubmit()" ng-disabled="createCategoryForm.$invalid || isDisabled">Create Category</button>
 
 
   </form>

@@ -108,9 +108,9 @@
 
     </div>
 
-    <button id="activeBtn" type="submit" class="btn btn-success btn-lg btn-block" ng-click="activeMemberSubmit()">Activate Member</button>
-    <button id="editBtn" type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editMemberSubmit()" ng-disabled="editMemberForm.$invalid || isDisabled">Edit Member</button>
-    <button id="deactiveBtn" type="submit" class="btn btn-danger btn-lg btn-block" ng-click="deactiveMemberSubmit()">Deactive Member</button>
+    <button id="activeBtn" type="submit" class="btn btn-success btn-lg btn-block"  ng-confirm-click="Confirm Activate Member?" ng-click="activeMemberSubmit()">Activate Member</button>
+    <button id="editBtn" type="submit" class="btn btn-primary btn-lg btn-block"  ng-confirm-click="Confirm Edit  Member?" ng-click="editMemberSubmit()" ng-disabled="editMemberForm.$invalid || isDisabled">Edit Member</button>
+    <button id="deactiveBtn" type="submit" class="btn btn-danger btn-lg btn-block"  ng-confirm-click="Confirm Deactive Member?" ng-click="deactiveMemberSubmit()">Deactive Member</button>
 
 
   </form>

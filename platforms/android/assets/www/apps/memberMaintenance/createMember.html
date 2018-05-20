@@ -117,7 +117,7 @@
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createMemberSubmit()" ng-disabled="createMemberForm.$invalid || isDisabled">Create Member</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block"  ng-confirm-click="Confirm Create Member?" ng-click="createMemberSubmit()" ng-disabled="createMemberForm.$invalid || isDisabled">Create Member</button>
 
 
   </form>

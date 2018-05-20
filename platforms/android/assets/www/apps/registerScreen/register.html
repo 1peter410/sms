@@ -90,7 +90,7 @@
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="registerSubmit()" ng-disabled="registerForm.$invalid || isDisabled">Submit Register</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block"  ng-confirm-click="Confirm Register Account?" ng-click="registerSubmit()" ng-disabled="registerForm.$invalid || isDisabled">Submit Register</button>
 
 
   </form>

@@ -2,6 +2,24 @@ var selfSubmitControl = angular.module('selfSubmitScreen',[]);
 
 selfSubmitControl.controller('selfSubmitController', selfSubmitController);
 
+selfSubmitControl.directive("ngConfirmClick", [
+  function() {
+   return {
+     priority: -1,
+      restrict: "A",
+      link: function(scope, element, attrs) {
+        element.bind("click", function(e) {
+          var message;
+          message = attrs.ngConfirmClick;
+          if (message && !confirm(message)) {
+           e.stopImmediatePropagation();
+           e.preventDefault();
+          }
+        });
+      }
+    };
+  }
+]);
 
 function selfSubmitController($scope, $http, $window) {
 

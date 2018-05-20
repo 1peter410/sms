@@ -2,6 +2,7 @@ var approvalMemberControl = angular.module('approvalMemberScreen',[]);
 
 approvalMemberControl.controller('approvalMemberController', approvalMemberController);
 
+
 function approvalMemberController($scope, $http, $window) {
 
   var selectionData = JSON.parse(localStorage.getItem("selectionData"));

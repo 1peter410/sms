@@ -107,9 +107,9 @@
 
     <p>Notice: Please make sure all field are Filled In. If Button is unclickable, certain field is Empty.</p>
 
-    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editOtherRecordSubmit()" ng-disabled="detailOtherRecordForm.$invalid || isDisabled">Edit Record</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block"  ng-confirm-click="Confirm Edit Record?" ng-click="editOtherRecordSubmit()" ng-disabled="detailOtherRecordForm.$invalid || isDisabled">Edit Record</button>
 
-    <button type="submit" class="btn btn-danger btn-lg btn-block" ng-click="deleteOtherRecordSubmit()" ng-disabled="detailOtherRecordForm.$invalid || isDisabled">Delete Record</button>
+    <button type="submit" class="btn btn-danger btn-lg btn-block"  ng-confirm-click="Confirm Delete Record?" ng-click="deleteOtherRecordSubmit()" ng-disabled="detailOtherRecordForm.$invalid || isDisabled">Delete Record</button>
 
 
   </form>
