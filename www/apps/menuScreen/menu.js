@@ -25,6 +25,9 @@ function menuController($scope, $http, $window) {
       $scope.isOnline = true;
       document.getElementById("checkOnline").innerHTML = "Loading...";
 
+      document.getElementById("myDIV").style.opacity = "0.5";
+
+
         $http({
             method: 'POST',
             data: {
@@ -41,6 +44,7 @@ function menuController($scope, $http, $window) {
             if(response.data[0]!='GG'){
               $scope.isDisabled = false;
               $scope.isOnline = true;
+              document.getElementById("myDIV").style.opacity = "1";
               document.getElementById("checkOnline").innerHTML = "(Menu Selection)";
 
             }else{
