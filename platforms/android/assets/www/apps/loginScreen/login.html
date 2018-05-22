@@ -67,7 +67,7 @@
 
     <div class="form-group">
       <label for="emailInput" class="text-dark"><b>Email:</b></label>
-      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" class="form-control" id="emailInput" name="emailInput" required style="text-align: center" ng-pattern="/\S+@\S+\.\S+/">
+      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" class="form-control" id="emailInput" name="emailInput" placeholder="eg. email@hotmail.com" maxlength="35" required style="text-align: center" ng-pattern="/\S+@\S+\.\S+/">
 
       <div ng-show="!loginForm.emailInput.$pristine" >
       <span ng-show="loginForm.emailInput.$error.required" style="color:red">Please enter your email.</span>
@@ -78,7 +78,7 @@
 
     <div class="form-group">
       <label for="passwordInput" class="text-dark"><b>Password:</b></label>
-      <input ng-disabled="isDisabled" ng-model="passwordInput" type="password" class="form-control" id="passwordInput" name="passwordInput" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" required style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="passwordInput" type="password" class="form-control" id="passwordInput" name="passwordInput" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" placeholder="********" maxlength="35"  required style="text-align: center">
 
       <div ng-show="!loginForm.passwordInput.$pristine" >
       <span ng-show="loginForm.passwordInput.$error.required" style="color:red">Please enter your password.</span>

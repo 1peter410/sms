@@ -45,7 +45,7 @@
 
     <div class="form-group">
       <label for="nameInput" class="text-dark"><b>Name:</b></label>
-      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" required style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" placeholder="eg. Mark Zuckerberg" maxlength="35" required style="text-align: center">
 
       <div ng-show="!editMemberForm.nameInput.$pristine" >
       <span ng-show="editMemberForm.nameInput.$error.required" style="color:red">Please enter your full name.</span>
@@ -56,7 +56,7 @@
 
     <div class="form-group">
       <label for="emailInput" class="text-dark"><b>Email:</b></label>
-      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" required class="form-control" id="emailInput" name="emailInput" ng-pattern="/\S+@\S+\.\S+/" style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" required class="form-control" id="emailInput" name="emailInput" ng-pattern="/\S+@\S+\.\S+/" placeholder="eg. email@hotmail.com" maxlength="35" style="text-align: center">
 
       <div ng-show="!editMemberForm.emailInput.$pristine" >
       <span ng-show="editMemberForm.emailInput.$error.required" style="color:red">Please enter your email.</span>
@@ -68,7 +68,7 @@
 
     <div class="form-group">
       <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
-      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" placeholder="eg. 0106885555" maxlength="12" style="text-align: center">
 
       <div ng-show="!editMemberForm.mobileInput.$pristine" >
       <span ng-show="editMemberForm.mobileInput.$error.required" style="color:red">Please enter your mobile number.</span>
@@ -79,7 +79,7 @@
 
     <div class="form-group">
       <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
-      <input ng-disabled="isDisabled" ng-model="socialInput" required type="text" id="socialInput" name="socialInput" class="form-control" style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="socialInput" required type="text" id="socialInput" name="socialInput" class="form-control" placeholder="eg. fb.com/mySocial" maxlength="35" style="text-align: center">
 
       <div ng-show="!editMemberForm.socialInput.$pristine" >
       <span ng-show="editMemberForm.socialInput.$error.required" style="color:red">Please enter your social media.</span>
@@ -99,7 +99,7 @@
 
     <div class="form-group">
       <label for="passwordInput" class="text-dark"><b>Password:</b></label>
-      <input ng-disabled="isDisabled" ng-model="passwordInput" type="password" class="form-control" id="passwordInput" name="passwordInput" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" required style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="passwordInput" type="password" class="form-control" id="passwordInput" name="passwordInput" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/" placeholder="********" maxlength="35" required style="text-align: center">
 
       <div ng-show="!editMemberForm.passwordInput.$pristine" >
       <span ng-show="editMemberForm.passwordInput.$error.required" style="color:red">Please enter the password.</span>

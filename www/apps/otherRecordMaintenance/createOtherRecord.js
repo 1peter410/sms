@@ -56,7 +56,8 @@ function createOtherRecordController($scope, $http, $window) {
             'teamID' : selectionData.TeamID,
 
         },
-        url: 'https://flash-schedules.000webhostapp.com/createOtherRecord.php'
+        url: 'https://flash-schedules.000webhostapp.com/createOtherRecord.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]=="DONE"){
@@ -83,7 +84,7 @@ function createOtherRecordController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Create Again)";
           $scope.isOnline = true;
@@ -105,7 +106,8 @@ function createOtherRecordController($scope, $http, $window) {
         data: {
           'teamID' : selectionData.TeamID
          },
-        url: 'https://flash-schedules.000webhostapp.com/getCategory.php'
+        url: 'https://flash-schedules.000webhostapp.com/getCategory.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]!="GG"){
@@ -126,7 +128,7 @@ function createOtherRecordController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           $scope.isOnline = false;
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";

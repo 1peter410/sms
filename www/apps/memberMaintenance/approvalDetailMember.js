@@ -50,7 +50,8 @@ function approvalDetailMemberController($scope, $http, $window) {
          data: {
            'userID': approvalData.UserID
          },
-         url: 'https://flash-schedules.000webhostapp.com/rejectMember.php'
+         url: 'https://flash-schedules.000webhostapp.com/rejectMember.php',
+         timeout : 10000,
       }).then(function (response){
 
         if(response.data[0]=="DONE"){
@@ -67,7 +68,7 @@ function approvalDetailMemberController($scope, $http, $window) {
 
 
       },function (error){
-           alert("Please ensure You are connected to Internet.");
+        alert("Please ensure You are connected to a Good Internet Connection.");
            document.getElementById("checkOnline").style.color = "red";
            document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Reject Again)";
            $scope.isOnline = true;
@@ -90,7 +91,8 @@ function approvalDetailMemberController($scope, $http, $window) {
          data: {
            'userID': approvalData.UserID
          },
-         url: 'https://flash-schedules.000webhostapp.com/activeMember.php'
+         url: 'https://flash-schedules.000webhostapp.com/activeMember.php',
+         timeout : 10000,
       }).then(function (response){
 
         if(response.data[0]=="DONE"){
@@ -107,7 +109,7 @@ function approvalDetailMemberController($scope, $http, $window) {
 
 
       },function (error){
-           alert("Please ensure You are connected to Internet.");
+        alert("Please ensure You are connected to a Good Internet Connection.");
            document.getElementById("checkOnline").style.color = "red";
            document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Approve Again)";
            $scope.isOnline = true;

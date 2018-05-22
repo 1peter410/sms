@@ -45,7 +45,8 @@ function viewFeedbackController($scope, $http, $window) {
 
           'teamID' : selectionData.TeamID
          },
-        url: 'https://flash-schedules.000webhostapp.com/getCategory.php'
+        url: 'https://flash-schedules.000webhostapp.com/getCategory.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]!="GG"){
@@ -62,7 +63,7 @@ function viewFeedbackController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           $scope.isDisabled = false;
 
      });
@@ -111,7 +112,8 @@ function viewFeedbackController($scope, $http, $window) {
             'yearInput' : $scope.yearInput,
             'userID' : loginData.UserID
           },
-          url: 'https://flash-schedules.000webhostapp.com/getRecord.php'
+          url: 'https://flash-schedules.000webhostapp.com/getRecord.php',
+          timeout : 10000,
        }).then(function (response){
 
           $scope.testing=response.data;
@@ -120,7 +122,7 @@ function viewFeedbackController($scope, $http, $window) {
           $scope.isOnline = true;
 
        },function (error){
-            alert("Please ensure You are connected to Internet.");
+         alert("Please ensure You are connected to a Good Internet Connection.");
             document.getElementById("checkOnline").style.color = "red";
             document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
             $scope.isOnline = false;

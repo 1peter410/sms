@@ -38,7 +38,8 @@ function menuController($scope, $http, $window) {
                 'userPassword' : loginData.UserPassword,
                 'userEmail' : loginData.UserEmail
             },
-            url: 'https://flash-schedules.000webhostapp.com/checkAccount.php'
+            url: 'https://flash-schedules.000webhostapp.com/checkAccount.php',
+            timeout : 10000,
          }).then(function (response){
 
             if(response.data[0]!='GG'){
@@ -64,7 +65,7 @@ function menuController($scope, $http, $window) {
 
 
          },function (error){
-              alert("Please ensure You are connected to Internet.");
+           alert("Please ensure You are connected to a Good Internet Connection.");
               $scope.isOnline = false;
               $scope.isDisabled = true;
               document.getElementById("checkOnline").style.color = "red";

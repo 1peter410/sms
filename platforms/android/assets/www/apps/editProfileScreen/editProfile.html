@@ -47,7 +47,7 @@
 
     <div class="form-group">
       <label for="emailInput" class="text-dark"><b>Email:</b></label>
-      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" required class="form-control" id="emailInput" name="emailInput" style="text-align: center" ng-pattern="/\S+@\S+\.\S+/">
+      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" required class="form-control" id="emailInput" name="emailInput" placeholder="eg. email@hotmail.com" maxlength="35" style="text-align: center" ng-pattern="/\S+@\S+\.\S+/">
 
       <div ng-show="!editProfileInfo.emailInput.$pristine" >
       <span ng-show="editProfileInfo.emailInput.$error.required" style="color:red">Please enter your email.</span>
@@ -58,7 +58,7 @@
 
     <div class="form-group">
       <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
-      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" placeholder="eg. 0106885555" maxlength="12" style="text-align: center">
 
       <div ng-show="!editProfileInfo.mobileInput.$pristine" >
       <span ng-show="editProfileInfo.mobileInput.$error.required" style="color:red">Please enter your Mobile Number.</span>
@@ -69,8 +69,8 @@
 
 
     <div class="form-group" name="editProfileInfo">
-      <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
-      <input ng-disabled="isDisabled" ng-model="socialInput" type="text" class="form-control" id="socialInput" name="socialInput" required style="text-align: center">
+      <label for="socialInput" class="text-dark"><b>Social Media (ID/Link/Name):</b></label>
+      <input ng-disabled="isDisabled" ng-model="socialInput" type="text" class="form-control" id="socialInput" name="socialInput" placeholder="eg. fb.com/mySocial" maxlength="35" required style="text-align: center">
 
       <div ng-show="!editProfileInfo.socialInput.$pristine" >
       <span ng-show="editProfileInfo.socialInput.$error.required" style="color:red">Please enter your Social Media.</span>

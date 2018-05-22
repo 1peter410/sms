@@ -48,7 +48,8 @@ function detailOtherRecordController($scope, $http, $window) {
         data: {
           'teamID' : selectionData.TeamID
          },
-        url: 'https://flash-schedules.000webhostapp.com/getCategory.php'
+        url: 'https://flash-schedules.000webhostapp.com/getCategory.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]!="GG"){
@@ -80,7 +81,7 @@ function detailOtherRecordController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
           $scope.isOnline = false;
@@ -110,7 +111,8 @@ function detailOtherRecordController($scope, $http, $window) {
           'otherRemark' : $scope.remarkInput,
           'teamID' : selectionData.TeamID,
          },
-        url: 'https://flash-schedules.000webhostapp.com/editOtherRecord.php'
+        url: 'https://flash-schedules.000webhostapp.com/editOtherRecord.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]=="DONE"){
@@ -139,7 +141,7 @@ function detailOtherRecordController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
           $scope.isOnline = true;
@@ -164,7 +166,8 @@ function detailOtherRecordController($scope, $http, $window) {
            'otherID' : otherRecordData.OtherID,
            'teamID': selectionData.TeamID
          },
-         url: 'https://flash-schedules.000webhostapp.com/deleteOtherRecord.php'
+         url: 'https://flash-schedules.000webhostapp.com/deleteOtherRecord.php',
+         timeout : 10000,
       }).then(function (response){
 
         if(response.data[0]=="DONE"){
@@ -184,7 +187,7 @@ function detailOtherRecordController($scope, $http, $window) {
 
 
       },function (error){
-           alert("Please ensure You are connected to Internet.");
+        alert("Please ensure You are connected to a Good Internet Connection.");
            $scope.isOnline = true;
            document.getElementById("checkOnline").style.color = "red";
            document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Delete Again)";

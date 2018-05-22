@@ -52,7 +52,8 @@ function createMemberController($scope, $http, $window) {
             'userRole' : $scope.roleInput,
             'teamID' : selectionData.TeamID
         },
-        url: 'https://flash-schedules.000webhostapp.com/createMember.php'
+        url: 'https://flash-schedules.000webhostapp.com/createMember.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]=="DONE"){
@@ -87,7 +88,7 @@ function createMemberController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Create Again)";
           $scope.isDisabled = false;

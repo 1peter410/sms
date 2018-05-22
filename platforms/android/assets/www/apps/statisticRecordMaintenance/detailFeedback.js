@@ -126,7 +126,8 @@ function detailFeedbackController($scope, $http, $window) {
         data: {
           'teamID' : selectionData.TeamID
          },
-        url: 'https://flash-schedules.000webhostapp.com/getCategory.php'
+        url: 'https://flash-schedules.000webhostapp.com/getCategory.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]!="GG"){
@@ -151,7 +152,7 @@ function detailFeedbackController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           $scope.isDisabled = false;
 
      });
@@ -173,7 +174,8 @@ function detailFeedbackController($scope, $http, $window) {
           'userID' : loginData.UserID
 
          },
-        url: 'https://flash-schedules.000webhostapp.com/getUser.php'
+        url: 'https://flash-schedules.000webhostapp.com/getUser.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]!="GG"){
@@ -200,7 +202,7 @@ function detailFeedbackController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
           $scope.isOnline = false;
@@ -265,7 +267,8 @@ function detailFeedbackController($scope, $http, $window) {
             'categoryID': $scope.selectCategory
 
            },
-          url: 'https://flash-schedules.000webhostapp.com/editFeedback.php'
+          url: 'https://flash-schedules.000webhostapp.com/editFeedback.php',
+          timeout : 10000,
        }).then(function (response){
 
           if(response.data[0]=="DONE"){
@@ -286,7 +289,7 @@ function detailFeedbackController($scope, $http, $window) {
 
 
        },function (error){
-            alert("Please ensure You are connected to Internet.");
+         alert("Please ensure You are connected to a Good Internet Connection.");
             document.getElementById("checkOnline").style.color = "red";
             document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
             $scope.isDisabled = false;
@@ -312,7 +315,8 @@ function detailFeedbackController($scope, $http, $window) {
             'evangelismID' : recordData.EvangelismID,
 
            },
-          url: 'https://flash-schedules.000webhostapp.com/deleteFeedback.php'
+          url: 'https://flash-schedules.000webhostapp.com/deleteFeedback.php',
+          timeout : 10000,
        }).then(function (response){
 
           if(response.data[0]=="DONE"){
@@ -333,7 +337,7 @@ function detailFeedbackController($scope, $http, $window) {
 
 
        },function (error){
-            alert("Please ensure You are connected to Internet.");
+         alert("Please ensure You are connected to a Good Internet Connection.");
             $scope.isOnline = false;
             document.getElementById("checkOnline").style.color = "red";
             document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Delete Again)";

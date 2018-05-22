@@ -81,7 +81,7 @@
 
     <div class="form-group">
       <label for="nameInput" class="text-dark"><b>Event/Campaign Name:</b></label>
-      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" required style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" placeholder="eg. Christmas Outreach Event" maxlength="35" required style="text-align: center">
 
       <div ng-show="!createOtherRecordForm.nameInput.$pristine" >
       <span ng-show="createOtherRecordForm.nameInput.$error.required" style="color:red">Please enter Event/Campaign Name.</span>
@@ -100,7 +100,7 @@
 
     <div class="form-group">
       <label for="reachOutInput" class="text-dark"><b>Reach Out Number:</b></label>
-      <input ng-disabled="isDisabled" required ng-model="reachOutInput" type="text" class="form-control" ng-pattern="/^[0-9]\d*$/" id="reachOutInput" name="reachOutInput" style="text-align: center">
+      <input ng-disabled="isDisabled" required ng-model="reachOutInput" type="text" class="form-control" ng-pattern="/^[0-9]\d*$/" id="reachOutInput" name="reachOutInput" placeholder="eg. 123" maxlength="3" style="text-align: center">
 
       <div ng-show="!createOtherRecordForm.reachOutInput.$pristine" >
       <span ng-show="createOtherRecordForm.reachOutInput.$error.required" style="color:red">Please enter Reach Out Number.</span>
@@ -111,7 +111,7 @@
 
     <div class="form-group">
       <label for="remarkInput" class="text-dark"><b>Remark:</b></label>
-      <textarea ng-disabled="isDisabled" ng-model="remarkInput" type="text" class="form-control" id="remarkInput" name="remarkInput" style="text-align: center" rows="4" ></textarea>
+      <textarea ng-disabled="isDisabled" ng-model="remarkInput" type="text" class="form-control" id="remarkInput" name="remarkInput" placeholder="eg. Christmas Mass Evangelism in Campus" maxlength="500" style="text-align: center" rows="4" ></textarea>
 
     </div>
 

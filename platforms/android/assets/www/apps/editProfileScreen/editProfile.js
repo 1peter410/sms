@@ -2,6 +2,7 @@ var editProfileControl = angular.module('profileScreen',[]);
 
 editProfileControl.controller('editProfileController', editProfileController);
 
+
 editProfileControl.directive("ngConfirmClick", [
   function() {
    return {
@@ -44,12 +45,15 @@ function editProfileController($scope, $http, $window) {
 
     $scope.isDisabled = true;
 
+
+
     $http({
              method: 'POST',
              data: {
                  'userID' : loginData.UserID
              },
-             url: 'https://flash-schedules.000webhostapp.com/getProfileInfo.php'
+             url: 'https://flash-schedules.000webhostapp.com/getProfileInfo.php',
+             timeout : 10000,
           }).then(function (response){
 
              $scope.socialInput = response.data[0].UserSocial;
@@ -64,7 +68,7 @@ function editProfileController($scope, $http, $window) {
 
 
           },function (error){
-               alert("Please ensure You are connected to Internet.");
+            alert("Please ensure You are connected to a Good Internet Connection.");
                $scope.isOnline = false;
                document.getElementById("checkOnline").style.color = "red";
                document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
@@ -93,7 +97,8 @@ function editProfileController($scope, $http, $window) {
                  'userMobile' : $scope.mobileInput
 
              },
-             url: 'https://flash-schedules.000webhostapp.com/editProfileInfo.php'
+             url: 'https://flash-schedules.000webhostapp.com/editProfileInfo.php',
+             timeout : 10000,
           }).then(function (response){
 
              if(response.data[0]=="DONE"){
@@ -128,7 +133,7 @@ function editProfileController($scope, $http, $window) {
              }
 
           },function (error){
-               alert("Please ensure You are connected to Internet.");
+            alert("Please ensure You are connected to a Good Internet Connection.");
                $scope.isOnline = true;
                document.getElementById("checkOnline").style.color = "red";
                document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
@@ -153,7 +158,8 @@ function editProfileController($scope, $http, $window) {
                  'newPassword' : $scope.newPasswordInput,
 
              },
-             url: 'https://flash-schedules.000webhostapp.com/editProfilePassword.php'
+             url: 'https://flash-schedules.000webhostapp.com/editProfilePassword.php',
+             timeout : 10000,
           }).then(function (response){
 
              if(response.data[0]=="DONE"){
@@ -185,7 +191,7 @@ function editProfileController($scope, $http, $window) {
              }
 
           },function (error){
-               alert("Please ensure You are connected to Internet.");
+            alert("Please ensure You are connected to a Good Internet Connection.");
                $scope.isOnline = true;
                document.getElementById("passwordSection").style.color = "red";
                document.getElementById("passwordSection").innerHTML = "(No Internet Connection - Try Edit Again)";

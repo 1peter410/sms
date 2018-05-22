@@ -56,7 +56,7 @@
 
     <div class="form-group">
       <label for="nameInput" class="text-dark"><b>Category Name:</b></label>
-      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" required style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" placeholder="eg. 4 Spiritual Laws" maxlength="35" required style="text-align: center">
 
       <div ng-show="!createCategoryForm.nameInput.$pristine" >
       <span ng-show="createCategoryForm.nameInput.$error.required" style="color:red">Please enter Category Name.</span>
@@ -65,8 +65,8 @@
     </div>
 
     <div class="form-group">
-      <label for="descInput" class="text-dark"><b>Description:</b></label>
-      <textarea ng-disabled="isDisabled" ng-model="descInput" type="text" class="form-control" id="descInput" name="descInput" required style="text-align: center" rows="4" ></textarea>
+      <label for="descInput" class="text-dark"><b>Category Description:</b></label>
+      <textarea ng-disabled="isDisabled" ng-model="descInput" type="text" class="form-control" id="descInput" name="descInput" placeholder="eg. Using 4 Spritual Laws Booklet to perform a full Gospel Presentation" maxlength="500" required style="text-align: center" rows="4" ></textarea>
 
       <div ng-show="!createCategoryForm.descInput.$pristine" >
       <span ng-show="createCategoryForm.descInput.$error.required" style="color:red">Please enter Category Description.</span>

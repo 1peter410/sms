@@ -18,7 +18,8 @@ function selectionController($scope, $http, $window) {
 
     $http({
         method: 'GET',
-        url: 'https://flash-schedules.000webhostapp.com/getOrganization.php'
+        url: 'https://flash-schedules.000webhostapp.com/getOrganization.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]!="GG"){
@@ -37,7 +38,7 @@ function selectionController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
           $scope.isOnline = false;
@@ -60,7 +61,8 @@ function selectionController($scope, $http, $window) {
         data: {
              'orgID' : $scope.orgSelection.OrgID
          },
-        url: 'https://flash-schedules.000webhostapp.com/getTeam.php'
+        url: 'https://flash-schedules.000webhostapp.com/getTeam.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]!="GG"){
@@ -79,7 +81,7 @@ function selectionController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           document.getElementById("checkOnline").style.color = "red";
           $scope.isOnline = false;
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";

@@ -59,7 +59,7 @@
 
         <div class="form-group">
           <label for="targetInput" class="text-dark"><b>Faith Goal:</b></label>
-          <input ng-disabled="isDisabled" required ng-model="targetInput" type="text" class="form-control" ng-pattern="/^[0-9]\d*$/" id="targetInput" name="targetInput" style="text-align: center">
+          <input ng-disabled="isDisabled" required ng-model="targetInput" type="text" class="form-control" ng-pattern="/^[0-9]\d*$/" id="targetInput" name="targetInput" placeholder="eg. 123" maxlength="3" style="text-align: center">
 
           <div ng-show="!editTargetForm.targetInput.$pristine" >
           <span ng-show="editTargetForm.targetInput.$error.required" style="color:red">Please enter Target.</span>

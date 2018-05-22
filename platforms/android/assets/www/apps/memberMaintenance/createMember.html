@@ -62,7 +62,7 @@
 
     <div class="form-group">
       <label for="nameInput" class="text-dark"><b>Full Name:</b></label>
-      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" required style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" placeholder="eg. Mark Zuckerberg" maxlength="35" required style="text-align: center">
 
       <div ng-show="!createMemberForm.nameInput.$pristine" >
       <span ng-show="createMemberForm.nameInput.$error.required" style="color:red">Please enter your full name.</span>
@@ -73,7 +73,7 @@
 
     <div class="form-group">
       <label for="emailInput" class="text-dark"><b>Email:</b></label>
-      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" required class="form-control" id="emailInput" name="emailInput" ng-pattern="/\S+@\S+\.\S+/" style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="emailInput" type="text" required class="form-control" id="emailInput" name="emailInput" ng-pattern="/\S+@\S+\.\S+/" placeholder="eg. email@hotmail.com" maxlength="35" style="text-align: center">
 
       <div ng-show="!createMemberForm.emailInput.$pristine" >
       <span ng-show="createMemberForm.emailInput.$error.required" style="color:red">Please enter your email.</span>
@@ -85,7 +85,7 @@
 
     <div class="form-group">
       <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
-      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" required type="text" id="mobileInput" name="mobileInput" class="form-control" placeholder="eg. 0106885555" maxlength="12" style="text-align: center">
 
       <div ng-show="!createMemberForm.mobileInput.$pristine" >
       <span ng-show="createMemberForm.mobileInput.$error.required" style="color:red">Please enter your mobile number.</span>
@@ -95,8 +95,8 @@
     </div>
 
     <div class="form-group">
-      <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
-      <input ng-disabled="isDisabled" ng-model="socialInput" required type="text" id="socialInput" name="socialInput" class="form-control" style="text-align: center">
+      <label for="socialInput" class="text-dark"><b>Social Media (ID/Link/Name):</b></label>
+      <input ng-disabled="isDisabled" ng-model="socialInput" required type="text" id="socialInput" name="socialInput" class="form-control" placeholder="eg. fb.com/mySocial" maxlength="35" style="text-align: center">
 
       <div ng-show="!createMemberForm.socialInput.$pristine" >
       <span ng-show="createMemberForm.socialInput.$error.required" style="color:red">Please enter your social media.</span>

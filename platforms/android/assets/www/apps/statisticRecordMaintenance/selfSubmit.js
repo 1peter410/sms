@@ -53,7 +53,8 @@ function selfSubmitController($scope, $http, $window) {
         data: {
           'teamID' : selectionData.TeamID
          },
-        url: 'https://flash-schedules.000webhostapp.com/getCategory.php'
+        url: 'https://flash-schedules.000webhostapp.com/getCategory.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]!="GG"){
@@ -75,7 +76,7 @@ function selfSubmitController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           $scope.isOnline = false;
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Click Me to Refresh)";
@@ -99,7 +100,8 @@ function selfSubmitController($scope, $http, $window) {
           'userID' : loginData.UserID
 
          },
-        url: 'https://flash-schedules.000webhostapp.com/getUser.php'
+        url: 'https://flash-schedules.000webhostapp.com/getUser.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]!="GG"){
@@ -117,7 +119,7 @@ function selfSubmitController($scope, $http, $window) {
         $scope.isOnline = true;
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           $scope.isDisabled = false;
           $scope.isOnline = false;
           document.getElementById("checkOnline").style.color = "red";
@@ -159,7 +161,8 @@ function selfSubmitController($scope, $http, $window) {
           'teamID' : selectionData.TeamID
 
          },
-        url: 'https://flash-schedules.000webhostapp.com/createFeedback.php'
+        url: 'https://flash-schedules.000webhostapp.com/createFeedback.php',
+        timeout : 10000,
      }).then(function (response){
 
         if(response.data[0]=="DONE"){
@@ -179,7 +182,7 @@ function selfSubmitController($scope, $http, $window) {
 
 
      },function (error){
-          alert("Please ensure You are connected to Internet.");
+       alert("Please ensure You are connected to a Good Internet Connection.");
           $scope.isDisabled = false;
           document.getElementById("checkOnline").style.color = "red";
           document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Submit Again)";

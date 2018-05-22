@@ -44,7 +44,7 @@
 
     <div class="form-group">
       <label for="nameInput" class="text-dark"><b>Full Name (Must Enter):</b></label>
-      <input ng-disabled="isDisabled" required ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" style="text-align: center">
+      <input ng-disabled="isDisabled" required ng-model="nameInput" type="text" class="form-control" id="nameInput" name="nameInput" ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" placeholder="eg. Mark Zuckerberg" maxlength="35" style="text-align: center">
 
       <div ng-show="!selfSubmitForm.nameInput.$pristine" >
         <span ng-show="selfSubmitForm.nameInput.$error.required" style="color:red">Please enter your name.</span>
@@ -55,7 +55,7 @@
 
     <div class="form-group">
       <label for="mobileInput" class="text-dark"><b>Mobile Number:</b></label>
-      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" type="text" id="mobileInput" name="mobileInput" class="form-control" style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="mobileInput" ng-pattern="/^(0)(((?!0)(?!2)(?!80)(?!81)\d{1,2})[1]?)?\d{4}?\d{5}$/" type="text" id="mobileInput" name="mobileInput" class="form-control" placeholder="eg. 0106885555" maxlength="12" style="text-align: center">
 
       <div ng-show="!selfSubmitForm.mobileInput.$pristine" >
       <span ng-show="selfSubmitForm.mobileInput.$error.pattern" style="color:red">This is not a valid mobile number.</span>
@@ -65,7 +65,7 @@
 
     <div class="form-group">
       <label for="socialInput" class="text-dark"><b>Social Media:</b></label>
-      <input ng-disabled="isDisabled" ng-model="socialInput"  type="text" id="socialInput" name="socialInput" class="form-control" style="text-align: center">
+      <input ng-disabled="isDisabled" ng-model="socialInput"  type="text" id="socialInput" name="socialInput" class="form-control" placeholder="eg. fb.com/mySocial" maxlength="35" style="text-align: center">
 
     </div>
 
@@ -89,7 +89,7 @@
 
   <div class="form-group">
     <label for="remarkInput" class="text-dark"><b>Remarks</b></label>
-    <textarea ng-disabled="isDisabled" ng-model="remarkInput" type="text" class="form-control" id="remarkInput" name="remarkInput" style="text-align: center" rows="4" ></textarea>
+    <textarea ng-disabled="isDisabled" ng-model="remarkInput" type="text" class="form-control" id="remarkInput" name="remarkInput" maxlength="500" style="text-align: center" rows="4" ></textarea>
 
   </div>
 
