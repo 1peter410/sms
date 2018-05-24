@@ -52,31 +52,32 @@
  <tbody ng-if="isDisabled==false">
 
       <tr class="info" ng-if="targetList.CategoryName!=null">
-        <td>Faith Goal Category: {{targetList.CategoryName}}</td>
-        <td>Faith Goal Target:  {{targetList.TargetCount}}</td>
+        <td>Faith Goal Category </td>
+        <td>{{targetList.CategoryName}}</td>
       </tr>
+
+
+      <tr class="info" ng-if="targetList.CategoryName!=null">
+        <td>Faith Goal Target  </td>
+        <td>{{targetList.TargetCount}}</td>
+      </tr>
+
 
       <tr class="info" ng-if="targetList.CategoryName==null">
         <td>No Set Faith Goal yet Contact your Leader</td>
       </tr>
 
+      <tr class="info" ng-if="archievedList.Archieved!=null">
+        <td>Have Achieved </td>
+        <td>{{archievedList.Archieved}}</td>
+      </tr>
 
  </tbody>
 
 
 </table>
 
-<table class="table table-bordered">
 
-<tbody ng-if="isDisabled==false" >
-     <tr class="info" ng-if="archievedList.Archieved!=null">
-       <td>Have Achieved: {{archievedList.Archieved}} </td>
-     </tr>
-
-
-</tbody>
-
-</table>
 
 <div ng-if="isDisabled==false && archievedList.Archieved!=null">
   <h4 ng-if="(targetList.TargetCount-archievedList.Archieved)>1"> {{targetList.TargetCount-archievedList.Archieved}} {{targetList.CategoryName}} left to go!</h4>
