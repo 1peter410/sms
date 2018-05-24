@@ -88,7 +88,7 @@ function menuController($scope, $http, $window) {
     }
 
     $scope.report = function() {
-
+      window.location.href='../menuScreen/reportMenu.html';
     }
 
     $scope.member = function() {

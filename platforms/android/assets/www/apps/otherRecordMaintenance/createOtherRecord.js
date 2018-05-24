@@ -44,52 +44,66 @@ function createOtherRecordController($scope, $http, $window) {
 
     $scope.isDisabled = true;
 
-    $http({
-        method: 'POST',
-        data: {
-            'startDate' : $scope.startDate,
-            'endDate' : $scope.endDate,
-            'otherName' : $scope.nameInput,
-            'categoryID' : $scope.categorySelection.CategoryID,
-            'otherCount' : $scope.reachOutInput,
-            'otherRemark' : $scope.remarkInput,
-            'teamID' : selectionData.TeamID,
+    var curDate = new Date();
 
-        },
-        url: 'https://flash-schedules.000webhostapp.com/createOtherRecord.php',
-        timeout : 10000,
-     }).then(function (response){
+    if(new Date($scope.startDate) >= new Date($scope.endDate)){
+      alert('End Date should be greater than start date.');
+      $scope.isDisabled = false;
+      document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Enter Data)";
 
-        if(response.data[0]=="DONE"){
+    }else{
 
-          alert("Successful Create Record.");
+      $http({
+          method: 'POST',
+          data: {
+              'startDate' : $scope.startDate,
+              'endDate' : $scope.endDate,
+              'otherName' : $scope.nameInput,
+              'categoryID' : $scope.categorySelection.CategoryID,
+              'otherCount' : $scope.reachOutInput,
+              'otherRemark' : $scope.remarkInput,
+              'teamID' : selectionData.TeamID,
 
-          $window.location.href = '../otherRecordMaintenance/createOtherRecord.html';
+          },
+          url: 'https://flash-schedules.000webhostapp.com/createOtherRecord.php',
+          timeout : 10000,
+       }).then(function (response){
 
-        }else if(response.data[0]=="DUPLICATED"){
+          if(response.data[0]=="DONE"){
 
-          alert("This Record Details is already Created. (Same Name and Same Category is already Exist)");
-          document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(Event with Same Category Existed)";
-          $scope.isDisabled = false;
-          $scope.isOnline = true;
+            alert("Successful Create Record.");
 
-        }else{
-          alert("Create Record Failed. Please try again.");
-          document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
-          $scope.isOnline = true;
-          $scope.isDisabled = false;
-        }
+            $window.location.href = '../otherRecordMaintenance/createOtherRecord.html';
+
+          }else if(response.data[0]=="DUPLICATED"){
+
+            alert("This Record Details is already Created. (Same Name and Same Category is already Exist)");
+            document.getElementById("checkOnline").style.color = "red";
+            document.getElementById("checkOnline").innerHTML = "(Event with Same Category Existed)";
+            $scope.isDisabled = false;
+            $scope.isOnline = true;
+
+          }else{
+            alert("Create Record Failed. Please try again.");
+            document.getElementById("checkOnline").style.color = "red";
+            document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
+            $scope.isOnline = true;
+            $scope.isDisabled = false;
+          }
 
 
-     },function (error){
-       alert("Please ensure You are connected to a Good Internet Connection.");
-          document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Create Again)";
-          $scope.isOnline = true;
-          $scope.isDisabled = false;
-     });
+       },function (error){
+         alert("Please ensure You are connected to a Good Internet Connection.");
+            document.getElementById("checkOnline").style.color = "red";
+            document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Create Again)";
+            $scope.isOnline = true;
+            $scope.isDisabled = false;
+       });
+
+
+    }
+
+
 
   };
 

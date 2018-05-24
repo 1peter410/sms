@@ -32,6 +32,16 @@ function detailTargetController($scope, $http, $window) {
   $scope.categorySelection;
   $scope.isDisabled = false;
 
+  if(targetData.TargetStartDate){
+    $scope.startDate = new Date(targetData.TargetStartDate);
+    $scope.endDate = new Date(targetData.TargetEndDate);
+  }else{
+    $scope.startDate = "";
+    $scope.endDate = "";
+  }
+
+
+
 
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
@@ -99,43 +109,58 @@ function detailTargetController($scope, $http, $window) {
     document.getElementById("checkOnline").style.color = "black";
     document.getElementById("checkOnline").innerHTML = "Editing...";
 
+    var curDate = new Date();
 
-    $http({
-        method: 'POST',
-        data: {
-          'targetID' : targetData.TargetID,
-          'targetCount' : $scope.targetInput,
-          'categoryID' : $scope.categorySelection.CategoryID
+    if(new Date($scope.startDate) >= new Date($scope.endDate)){
+      alert('End Date should be greater than start date.');
+      $scope.isDisabled = false;
+      document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Enter Data)";
 
-         },
-        url: 'https://flash-schedules.000webhostapp.com/editTarget.php',
-        timeout : 10000,
-     }).then(function (response){
+    }else{
 
-        if(response.data[0]=="DONE"){
+      $http({
+          method: 'POST',
+          data: {
+            'targetID' : targetData.TargetID,
+            'targetCount' : $scope.targetInput,
+            'categoryID' : $scope.categorySelection.CategoryID,
+            'startDate' : $scope.startDate,
+            'endDate' : $scope.endDate,
 
-          alert("Successful Edit Target.");
-          window.localStorage.removeItem('targetDetails');
-          $window.location.href = '../targetMaintenance/viewTarget.html';
+           },
+          url: 'https://flash-schedules.000webhostapp.com/editTarget.php',
+          timeout : 10000,
+       }).then(function (response){
+
+          if(response.data[0]=="DONE"){
+
+            alert("Successful Edit Target.");
+            window.localStorage.removeItem('targetDetails');
+            $window.location.href = '../targetMaintenance/viewTarget.html';
 
 
-        }else{
-          alert("Failed to Edit Target.");
-          document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
-          $scope.isOnline = true;
-          $scope.isDisabled = false;
-        }
+          }else{
+            alert("Failed to Edit Target.");
+            document.getElementById("checkOnline").style.color = "red";
+            document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
+            $scope.isOnline = true;
+            $scope.isDisabled = false;
+          }
 
 
-     },function (error){
-       alert("Please ensure You are connected to a Good Internet Connection.");
-          document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
-          $scope.isOnline = true;
-          $scope.isDisabled = false;
+       },function (error){
+         alert("Please ensure You are connected to a Good Internet Connection.");
+            document.getElementById("checkOnline").style.color = "red";
+            document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
+            $scope.isOnline = true;
+            $scope.isDisabled = false;
 
-     });
+       });
+
+
+    }
+
+
 
 
 

@@ -99,56 +99,66 @@ function detailOtherRecordController($scope, $http, $window) {
     document.getElementById("checkOnline").style.color = "black";
     document.getElementById("checkOnline").innerHTML = "Editing...";
 
-    $http({
-        method: 'POST',
-        data: {
-          'otherID' : otherRecordData.OtherID,
-          'startDate' : $scope.startDate,
-          'endDate' : $scope.endDate,
-          'otherName' : $scope.nameInput,
-          'categoryID' : $scope.categorySelection.CategoryID,
-          'otherCount' : $scope.reachOutInput,
-          'otherRemark' : $scope.remarkInput,
-          'teamID' : selectionData.TeamID,
-         },
-        url: 'https://flash-schedules.000webhostapp.com/editOtherRecord.php',
-        timeout : 10000,
-     }).then(function (response){
+    var curDate = new Date();
 
-        if(response.data[0]=="DONE"){
+    if(new Date($scope.startDate) >= new Date($scope.endDate)){
+      alert('End Date should be greater than start date.');
+      $scope.isDisabled = false;
+      document.getElementById("checkOnline").innerHTML = "(Click on Text Box to Enter Data)";
 
-          alert("Successful Edit Record.");
-          window.localStorage.removeItem('otherRecordDetails');
-          $window.location.href = '../otherRecordMaintenance/viewOtherRecord.html';
+    }else{
 
+      $http({
+          method: 'POST',
+          data: {
+            'otherID' : otherRecordData.OtherID,
+            'startDate' : $scope.startDate,
+            'endDate' : $scope.endDate,
+            'otherName' : $scope.nameInput,
+            'categoryID' : $scope.categorySelection.CategoryID,
+            'otherCount' : $scope.reachOutInput,
+            'otherRemark' : $scope.remarkInput,
+            'teamID' : selectionData.TeamID,
+           },
+          url: 'https://flash-schedules.000webhostapp.com/editOtherRecord.php',
+          timeout : 10000,
+       }).then(function (response){
 
-        }else if(response.data[0]=="DUPLICATED"){
+          if(response.data[0]=="DONE"){
 
-          alert("This Record Details is already Created (Same Name and Same Category is already Exist).");
-          document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(Event with Same Category Existed)";
-          $scope.isOnline = true;
-          $scope.isDisabled = false;
-
-
-        }else{
-          alert("Failed to Edit Record.");
-          document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
-          $scope.isOnline = true;
-          $scope.isDisabled = false;
-        }
+            alert("Successful Edit Record.");
+            window.localStorage.removeItem('otherRecordDetails');
+            $window.location.href = '../otherRecordMaintenance/viewOtherRecord.html';
 
 
-     },function (error){
-       alert("Please ensure You are connected to a Good Internet Connection.");
-          document.getElementById("checkOnline").style.color = "red";
-          document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
-          $scope.isOnline = true;
-          $scope.isDisabled = false;
+          }else if(response.data[0]=="DUPLICATED"){
 
-     });
+            alert("This Record Details is already Created (Same Name and Same Category is already Exist).");
+            document.getElementById("checkOnline").style.color = "red";
+            document.getElementById("checkOnline").innerHTML = "(Event with Same Category Existed)";
+            $scope.isOnline = true;
+            $scope.isDisabled = false;
 
+
+          }else{
+            alert("Failed to Edit Record.");
+            document.getElementById("checkOnline").style.color = "red";
+            document.getElementById("checkOnline").innerHTML = "(Something Went Wrong - Try Again)";
+            $scope.isOnline = true;
+            $scope.isDisabled = false;
+          }
+
+
+       },function (error){
+         alert("Please ensure You are connected to a Good Internet Connection.");
+            document.getElementById("checkOnline").style.color = "red";
+            document.getElementById("checkOnline").innerHTML = "(No Internet Connection - Try Edit Again)";
+            $scope.isOnline = true;
+            $scope.isDisabled = false;
+
+       });
+
+    }
 
 
   };

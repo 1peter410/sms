@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html ng-app="personalTargetScreen">
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="../../css/Bootstrap/bootstrap.min.css" rel="stylesheet">
+
+  <script src="../../js/Angular/angular.min.js"></script>
+  <script src="../../js/JQuery/jquery-3.3.1.slim.js"> </script>
+  <script src="../../js/Bootstrap/bootstrap.min.js"></script>
+
+  <script src="./personalTarget.js"></script>
+
+  <script type="text/javascript" src="../../cordova.js"></script>
+  <script type="text/javascript">
+      app.initialize();
+  </script>
+
+    <title>Personal Faith Goal</title>
+
+
+</head>
+
+<body ng-init="getReport()" ng-controller="personalTargetController">
+
+
+  <nav class="navbar navbar-dark bg-dark">
+
+      <span class="text-muted">Personal Faith Goal</span>
+      <button type="button" class="btn btn-info" ng-click="backToMenu()">Back to Menu</button>
+
+  </nav>
+
+</div>
+
+<div>
+  <p align="center" style="background-color:powderblue;" ng-click="goOnline()"><b><span id="checkOnline"></b></span></p>
+</div>
+
+<div class="container" align="center">
+
+  <div ng-if="targetList.CategoryName!=null">
+    <h6>Period: {{targetList.TargetStartDate}} to {{targetList.TargetEndDate}}</h6>
+  </div>
+
+  <br>
+
+<table class="table table-bordered">
+
+ <tbody ng-if="isDisabled==false">
+
+      <tr class="info" ng-if="targetList.CategoryName!=null">
+        <td>Faith Goal Category: {{targetList.CategoryName}}</td>
+        <td>Faith Goal Target:  {{targetList.TargetCount}}</td>
+      </tr>
+
+      <tr class="info" ng-if="targetList.CategoryName==null">
+        <td>No Set Faith Goal yet Contact your Leader</td>
+      </tr>
+
+
+ </tbody>
+
+
+</table>
+
+<table class="table table-bordered">
+
+<tbody ng-if="isDisabled==false" >
+     <tr class="info" ng-if="archievedList.Archieved!=null">
+       <td>Have Achieved: {{archievedList.Archieved}} </td>
+     </tr>
+
+
+</tbody>
+
+</table>
+
+<div ng-if="isDisabled==false && archievedList.Archieved!=null">
+  <h4 ng-if="(targetList.TargetCount-archievedList.Archieved)>1"> {{targetList.TargetCount-archievedList.Archieved}} {{targetList.CategoryName}} left to go!</h4>
+
+  <h4 ng-if="(targetList.TargetCount-archievedList.Archieved)<1"> You Have Achieved your Faith Goal!</h4>
+
+</div>
+
+
+
+</div>
+
+</body>
+
+</html>
